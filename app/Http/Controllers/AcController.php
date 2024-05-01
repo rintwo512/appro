@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class AcController extends Controller
@@ -332,7 +333,11 @@ class AcController extends Controller
 
     public function exportDataAc()
     {
-        return Excel::download(new exportAc, 'data-ac.xlsx');
+        try {
+            return Excel::download(new ExportAc, 'data-ac.xlsx');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengekspor data.');
+        }
     }
     public function recycelBin()
     {

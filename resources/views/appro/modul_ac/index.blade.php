@@ -1,5 +1,5 @@
 <x-main title="{{ $title }}">     
-      <div class="container-fluid">
+<div class="container-fluid">
             <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
               <div class="card-body px-4 py-3">
                 <div class="row align-items-center">
@@ -76,90 +76,92 @@
               </div>
             </div>
              {{-- BTN --}}
-              <div class="table-responsive">
-                  <table id="myTable" class="table table-striped table-bordered display text-nowrap">
-                  <thead>
-                    <!-- start row -->
-                    <tr>
-                      <th>ID</th>
-                      <th>Wing</th>
-                      <th>Lantai</th>
-                      <th>Ruangan</th>
-                      <th>Tgl Mainten</th>
-                      <th>Status</th>
-                      <th>Opsi</th>
-                    </tr>
-                    <!-- end row -->
-                  </thead>
-                  <tbody>
-                        @foreach ( $datas as $ac)
-                              <!-- start row -->
-                              <tr>
-                              <td>{{ $ac->id_ac }}</td>
-                              <td>{{ $ac->wing }}</td>
-                              <td>{{ $ac->lantai }}</td>
-                              <td>{{ $ac->ruangan }}</td>
-                              <td>{{ $ac->tgl_maintenance ? Illuminate\Support\Carbon::parse($ac->tgl_maintenance)->locale('id')->diffForHumans() : '' }}</td>
-                              <td>
-                                @if ($ac->status == "Normal")
-                                    <span class="badge bg-success">{{ $ac->status }}</span>
-                               @elseif ($ac->status == "Progres")
-                                    <span class="badge bg-warning">{{ $ac->status }}</span>
-                               @elseif ($ac->status == "Rusak")
-                                    <span class="badge bg-danger">{{ $ac->status }}</span>
-                               @endif
-                              </td>
-                              <td>
+             <x-table id="myTable" class="table table-striped table-bordered display text-nowrap">
+              <x-thead>
+                <!-- start row -->
+                <tr>
+                  <th>ID</th>
+                  <th>Wing</th>
+                  <th>Lantai</th>
+                  <th>Ruangan</th>
+                  <th>Tgl Mainten</th>
+                  <th>Status</th>
+                  <th>Opsi</th>
+                </tr>
+                <!-- end row -->
+              </x-thead>
+              <x-tbody>
+                    @foreach ( $datas as $ac)
+                          <!-- start row -->
+                          <tr>
+                          <td>{{ $ac->id_ac }}</td>
+                          <td>{{ $ac->wing }}</td>
+                          <td>{{ $ac->lantai }}</td>
+                          <td>{{ $ac->ruangan }}</td>
+                          <td>{{ $ac->tgl_maintenance ? Illuminate\Support\Carbon::parse($ac->tgl_maintenance)->locale('id')->diffForHumans() : '' }}</td>
+                          <td>
+                            @if ($ac->status == "Normal")
+                                <span class="badge bg-success">{{ $ac->status }}</span>
+                           @elseif ($ac->status == "Progres")
+                                <span class="badge bg-warning">{{ $ac->status }}</span>
+                           @elseif ($ac->status == "Rusak")
+                                <span class="badge bg-danger">{{ $ac->status }}</span>
+                           @endif
+                          </td>
+                          <td>
 
-                                <div class="btn-group">
-                                  <button type="button" class="btn bg-info-subtle text-danger dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="bx bx-dots-vertical-rounded fs-4"></i>
-                                  </button>
-                                  <ul class="dropdown-menu animated flipInX" style="">
-                                    <li>
-                                      @if ($btnEdit)
-                                      <a class="dropdown-item" href="{{ route('ac.edit', ['ac' => $ac->id]) }}" id="btnEditAC"><i class="bx bx-edit"></i> Update</a>
-                                      @endif
-                                    </li>
-                                    <li>
-                                      @if ($btnDetail)
-                                      <button class="dropdown-item" id="btnDetailAC" data-bs-toggle="modal" data-bs-target="#modalDetailAC" data-id="{{ $ac->id }}" data-idac="{{ $ac->id_ac }}" data-assetac="{{ $ac->asset }}" data-wingac="{{ $ac->wing }}" data-lantaiac="{{ $ac->lantai }}" data-ruanganac="{{ $ac->ruangan }}" data-merkac="{{ $ac->merk }}" data-typeac="{{ $ac->type }}" data-jenisac="{{ $ac->jenis }}" data-dayapkac="{{ $ac->datasheetAc->daya_pk }}" data-dayalistrikac="{{ $ac->datasheetAc->daya_listrik }}" data-refrigerantac="{{ $ac->datasheetAc->refrigerant }}" data-productac="{{ $ac->datasheetAc->product }}" data-currentac="{{ $ac->datasheetAc->current }}" data-phaseac="{{ $ac->datasheetAc->phase }}" data-dayapendinginac="{{ $ac->datasheetAc->daya_pendingin }}" data-pipaac="{{ $ac->datasheetAc->pipa }}" data-statusac="{{ $ac->status }}" data-seriindoorac="{{ $ac->datasheetAc->seri_indoor }}" data-beratindoorac="{{ $ac->datasheetAc->berat_indoor }}" data-dimensiindoorac="{{ $ac->datasheetAc->dimensi_indoor }}" data-kebisinganindoorac="{{ $ac->datasheetAc->kebisingan_indoor }}" data-serioutdoorac="{{ $ac->datasheetAc->seri_outdoor }}" data-beratoutdoorac="{{ $ac->datasheetAc->berat_outdoor }}" data-dimensioutdoorac="{{ $ac->datasheetAc->dimensi_outdoor }}" data-kebisinganoutdoorac="{{ $ac->datasheetAc->kebisingan_outdoor }}" data-catatanac="{{ $ac->catatan }}" data-keteranganac="{{ $ac->keterangan }}" data-kerusakanac="{{ $ac->kerusakan }}" data-tglpemasanganac="{{ $ac->tgl_pemasangan}}" data-petugasmaintac="{{ str_replace(',', "<br>", $ac->petugas_maint) }}" data-petugaspemasanganac="{{ str_replace(',', "<br>",$ac->petugas_pemasangan) }}" data-tanggalmaintenanceac="{{ $ac->tgl_maintenance ? Illuminate\Support\Carbon::parse($ac->tgl_maintenance)->locale('id')->diffForHumans() : '' }}" data-updatedtimeac="{{ $ac->user_updated ? $ac->user_updated.'/'.Illuminate\Support\Carbon::parse($ac->user_updated_time)->diffForHumans() : '' }}"><i class="bx bx-low-vision"></i> Detail</button>
-                                      @endif
-                                    </li>
-                                    <li>
-                                      @if ($btnDelete)
-                                      <a class="dropdown-item" id="btnDeleteAC" href="{{ route('ac.delete', ['id' => $ac->id])}}"><i class="bx bx-trash"></i> Delete</a>
-                                      @endif
-                                    </li>
-                                    <li>
-                                      <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                      <a class="dropdown-item" href="{{ route('ac.export.pdf', ['id' => $ac->id]) }}"><i class='bx bxs-file-export'></i> Export PDF</a>
-                                    </li>
-                                  </ul>
-                                </div>
-                              </td>
-                              </tr>
-                              <!-- end row -->
-                        @endforeach                   
-                       
-                  </tbody>
-                  <tfoot>
-                    <!-- start row -->
-                    <tr>
-                      <th>ID</th>
-                      <th>Wing</th>
-                      <th>Lantai</th>
-                      <th>Ruangan</th>
-                      <th>Tgl Mainten</th>
-                      <th>Status</th>
-                      <th>Opsi</th>
-                    </tr>
-                    <!-- end row -->
-                  </tfoot>
+                            <div class="btn-group">
+                              <button type="button" class="btn bg-info-subtle text-danger dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded fs-4"></i>
+                              </button>
+                              <ul class="dropdown-menu animated flipInX" style="">
+                                <li>
+                                  @if ($btnEdit)
+                                  <a class="dropdown-item" href="{{ route('ac.edit', ['ac' => $ac->id]) }}" id="btnEditAC"><i class="bx bx-edit"></i> Update</a>
+                                  @endif
+                                </li>
+                                <li>
+                                  @if ($btnDetail)
+                                  <button class="dropdown-item" id="btnDetailAC" data-bs-toggle="modal" data-bs-target="#modalDetailAC" data-id="{{ $ac->id }}" data-idac="{{ $ac->id_ac }}" data-assetac="{{ $ac->asset }}" data-wingac="{{ $ac->wing }}" data-lantaiac="{{ $ac->lantai }}" data-ruanganac="{{ $ac->ruangan }}" data-merkac="{{ $ac->merk }}" data-typeac="{{ $ac->type }}" data-jenisac="{{ $ac->jenis }}" data-dayapkac="{{ $ac->datasheetAc->daya_pk }}" data-dayalistrikac="{{ $ac->datasheetAc->daya_listrik }}" data-refrigerantac="{{ $ac->datasheetAc->refrigerant }}" data-productac="{{ $ac->datasheetAc->product }}" data-currentac="{{ $ac->datasheetAc->current }}" data-phaseac="{{ $ac->datasheetAc->phase }}" data-dayapendinginac="{{ $ac->datasheetAc->daya_pendingin }}" data-pipaac="{{ $ac->datasheetAc->pipa }}" data-statusac="{{ $ac->status }}" data-seriindoorac="{{ $ac->datasheetAc->seri_indoor }}" data-beratindoorac="{{ $ac->datasheetAc->berat_indoor }}" data-dimensiindoorac="{{ $ac->datasheetAc->dimensi_indoor }}" data-kebisinganindoorac="{{ $ac->datasheetAc->kebisingan_indoor }}" data-serioutdoorac="{{ $ac->datasheetAc->seri_outdoor }}" data-beratoutdoorac="{{ $ac->datasheetAc->berat_outdoor }}" data-dimensioutdoorac="{{ $ac->datasheetAc->dimensi_outdoor }}" data-kebisinganoutdoorac="{{ $ac->datasheetAc->kebisingan_outdoor }}" data-catatanac="{{ $ac->catatan }}" data-keteranganac="{{ $ac->keterangan }}" data-kerusakanac="{{ $ac->kerusakan }}" data-tglpemasanganac="{{ $ac->tgl_pemasangan}}" data-petugasmaintac="{{ str_replace(',', "<br>", $ac->petugas_maint) }}" data-petugaspemasanganac="{{ str_replace(',', "<br>",$ac->petugas_pemasangan) }}" data-tanggalmaintenanceac="{{ $ac->tgl_maintenance ? Illuminate\Support\Carbon::parse($ac->tgl_maintenance)->locale('id')->diffForHumans() : '' }}" data-updatedtimeac="{{ $ac->user_updated ? $ac->user_updated.'/'.Illuminate\Support\Carbon::parse($ac->user_updated_time)->diffForHumans() : '' }}"><i class="bx bx-low-vision"></i> Detail</button>
+                                  @endif
+                                </li>
+                                <li>
+                                  @if ($btnDelete)
+                                  <a class="dropdown-item" id="btnDeleteAC" href="{{ route('ac.delete', ['id' => $ac->id])}}"><i class="bx bx-trash"></i> Delete</a>
+                                  @endif
+                                </li>
+                                <li>
+                                  <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                  <a class="dropdown-item" href="{{ route('ac.export.pdf', ['id' => $ac->id]) }}"><i class='bx bxs-file-export'></i> Export PDF</a>
+                                </li>
+                              </ul>
+                            </div>
+                          </td>
+                          </tr>
+                          <!-- end row -->
+                    @endforeach
+              </x-tbody>
+              <x-tfoot>
+                <!-- start row -->
+                <tr>
+                  <th>ID</th>
+                  <th>Wing</th>
+                  <th>Lantai</th>
+                  <th>Ruangan</th>
+                  <th>Tgl Mainten</th>
+                  <th>Status</th>
+                  <th>Opsi</th>
+                </tr>
+                <!-- end row -->
+              </x-tfoot>
+             </x-table>
+              {{-- <div class="table-responsive">
+                  <table id="myTable" class="table table-striped table-bordered display text-nowrap">
+                  
                 </table>
-              </div>
+              </div> --}}
             </div>
           </div>
           <!-- end Row selection and deletion (single row) -->
@@ -167,7 +169,7 @@
       </div>
       
       @include('components.AC.ac-modal')
-      @include('components.AC.ac-modal-range-ac-baru')
       @include('components.AC.ac-modal-filter')
+      @include('components.AC.ac-modal-range-ac-baru')
 
 </x-main>

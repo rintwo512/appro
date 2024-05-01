@@ -42,6 +42,7 @@ $(document).on('click', '#recycleBin', function () {
 
       $('#detailTglMaintenanceAC').html(tanggalmaint == '1 detik yang lalu' ? '' : tanggalmaint);
 
+      $('#modalDetailsRecycle').text('Detail Data');
 
       $('#detailTanggaPemasanganAC').html(tanggalpemasanganac);
       $('#detailPetugasMaintAC').html(petugasmaintac);

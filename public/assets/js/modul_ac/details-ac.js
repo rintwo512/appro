@@ -40,20 +40,21 @@ $(document).on('click', '#btnDetailAC', function () {
       var dateString = tanggalpemasanganac;
       var parts = dateString.split('-');
       var date = new Date(parts[0], parts[1] - 1, parts[2]); // Tanggal diatur sebagai (tahun, bulan, tanggal)
-      
+
       // Periksa apakah tanggal adalah tanggal yang valid
       if (!isNaN(date.getTime())) {
-          // Lakukan formatting jika tanggal valid
-          var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-          var formattedDate = date.toLocaleDateString('id-ID', options);
-          $('#detailTanggaPemasanganAC').html(formattedDate);
+            // Lakukan formatting jika tanggal valid
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            var formattedDate = date.toLocaleDateString('id-ID', options);
+            $('#detailTanggaPemasanganAC').html(formattedDate);
       } else {
-          // Tanggal tidak valid, lakukan sesuatu, misalnya tidak menampilkan apa-apa
-          console.log("Tanggal tidak valid.");
-          $('#detailTanggaPemasanganAC').html(""); // Mengosongkan isi elemen
+            // Tanggal tidak valid, lakukan sesuatu, misalnya tidak menampilkan apa-apa
+            console.log("Tanggal tidak valid.");
+            $('#detailTanggaPemasanganAC').html(""); // Mengosongkan isi elemen
       }
-      
-      
+
+      $('#modalDetailsTitle').text('Detail Data');
+
       $('#detailTglMaintenanceAC').html(tanggalmaint);
       $('#detailPetugasMaintAC').html(petugasmaintac);
       $('#detailPetugasPemasanganAC').html(petugaspemsanganac);
