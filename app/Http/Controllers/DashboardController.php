@@ -8,11 +8,24 @@ use App\Models\ChartAc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+
+        // Mendapatkan daftar menu yang dimiliki oleh pengguna
+        $userMenus = Auth::user()->menus;
+
+        // Periksa apakah pengguna memiliki akses ke menu 'Dashboard'
+        $dashboardMenu = $userMenus->where('menu_label', 'Dashboard')->first();
+
+        if (!$dashboardMenu) {
+            // Jika tidak memiliki akses, alihkan ke halaman lain atau tampilkan pesan kesalahan
+            return back()->with('error', 'Anda tidak memiliki akses ke menu ini.');
+        }
+
         $totalAc = Ac::count();
         $AcRusak = Ac::where('status', 'Rusak')->count();
 

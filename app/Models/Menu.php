@@ -10,10 +10,12 @@ class Menu extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'menu_label',
         'menu_url',
         'menu_icon',
         'menu_location',
+        'is_active',
     ];
 
     public function users()
@@ -26,8 +28,19 @@ class Menu extends Model
         return $this->belongsToMany(SubMenu::class, 'menu_submenu', 'menu_id', 'submenu_id');
     }
 
+
     // public function features()
     // {
     //     return $this->belongsToMany(Feature::class, 'pivot_feature');
     // }
+
+    public function submenus1()
+    {
+        return $this->hasMany(Submenu::class);
+    }
+
+    public function users1()
+    {
+        return $this->belongsToMany(User::class, 'user_menu');
+    }
 }

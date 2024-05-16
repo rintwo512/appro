@@ -2,7 +2,7 @@
 let chart = null;
 
 function chartAc(year, title) {
-    const url = "/chart-ac";
+    const url = "/grafik-ac";
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -13,9 +13,9 @@ function chartAc(year, title) {
         url: url,
         data: {
             tahun: year,
-          _token: $('meta[name="csrf-token"]').attr('content')
-      },
-      method: 'GET',     
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'GET',
         success: result => {
             const tahun = result.data;
             if (chart) {
@@ -30,7 +30,7 @@ function chartAc(year, title) {
     });
 }
 
-function drawChart(valTahun, title, year, valBulan){
+function drawChart(valTahun, title, year, valBulan) {
     document.querySelector("#yearly-salary").innerHTML = ""; // Menghapus elemen HTML chart sebelumnya
 
     var options = {
@@ -40,7 +40,7 @@ function drawChart(valTahun, title, year, valBulan){
                 data: valTahun,
             },
         ],
-  
+
         chart: {
             toolbar: {
                 show: false,
@@ -59,7 +59,7 @@ function drawChart(valTahun, title, year, valBulan){
                 endingShape: "rounded",
             },
         },
-  
+
         dataLabels: {
             enabled: false,
         },
@@ -91,7 +91,7 @@ function drawChart(valTahun, title, year, valBulan){
             theme: "dark",
         },
     };
-  
+
 
     var newChart = new ApexCharts(document.querySelector("#yearly-salary"), options);
     newChart.render();
@@ -99,8 +99,8 @@ function drawChart(valTahun, title, year, valBulan){
     return newChart;
 }
 
-$(document).ready(function() {
-    $('#tahun').change(function() {
+$(document).ready(function () {
+    $('#tahun').change(function () {
         var year = $(this).val();
 
         if (year != '') {
@@ -111,6 +111,93 @@ $(document).ready(function() {
     const d = new Date();
     let tahun = d.getFullYear();
     $("#chartTitle").html(`Maintenance AC : Tahun ${tahun}`);
-    chartAc(tahun, `Maintenance AC : Tahun ${tahun}`);    
+    chartAc(tahun, `Maintenance AC : Tahun ${tahun}`);
 
 });
+
+$(document).ready(function () {
+    $('#totalUpdateChart').on('keyup', function () {
+        $("#btnUpdateChart1").removeAttr("disabled");
+    });
+});
+
+$(document).on("click", "#btnEditChart", function (e) {
+    e.preventDefault();
+    const idChart = $(this).data('idchart');
+    const tahunChart = $(this).data('tahunchart');
+    const bulanChart = $(this).data('bulanchart');
+    const totalChart = $(this).data('totalchart');
+
+    var actionUrl = "chart-ac/" + idChart;
+    $("#formUpdateChart").attr('action', actionUrl);
+
+    $("#titleModalEditChart").text("Update Chart");
+
+    $("#modal-body #idChartUpdate").val(idChart);
+    $("#modal-body #tahunUpdateChart").val(tahunChart);
+    $("#modal-body #monthUpdateChart").val(bulanChart);
+    $("#modal-body #totalUpdateChart").val(totalChart);
+});
+
+$("#btnTambahChartAc").on("click", () => {
+    $("#titleModalTambahChart").text("Tambah Data");
+});
+
+
+function delDataChart(id, tahun) {
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: "/chart-ac" + "/" + id + "/" + tahun,
+                type: "DELETE",
+                data: {
+                    _token: $("input[name=_token]").val()
+                },
+                success: function (response) {
+                    $("#idchart" + id).remove();
+                    $("#totalData").html(`Akumulasi : ${response.total} Unit`);
+                }
+            });
+        }
+    })
+}
+
+
+// Menangkap event klik pada tombol "Delete All"
+document.getElementById('btnDeleteAllChart').addEventListener('click', function () {
+    var tahun = document.getElementById('deleteAllChart').value;
+
+    if (!tahun) {
+        Swal.fire({
+            title: 'Oops...',
+            text: 'Anda harus memilih tahun terlebih dahulu!',
+            icon: 'error'
+        });
+        return;
+    }
+
+    Swal.fire({
+        title: `Anda yakin ingin mengapus data tahun ${tahun} ?`,
+        text: 'Data ini tidak dapat dipulihkan.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yakin!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Mengirimkan form saat pengguna mengkonfirmasi
+            document.getElementById('deleteAllChartForm').submit();
+        }
+    })
+});
+

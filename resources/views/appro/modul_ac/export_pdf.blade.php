@@ -1,6 +1,6 @@
 
 
-      <h3 style="text-align: center !important"><a href="">{{ $data->id_ac }}</a></h3>
+      <h3 style="text-align: center !important"><a href="">{{ $data->id_ac ? $data->id_ac : $data->ruangan}}</a></h3>
       <ol>      
             <li>Asset<hr><strong>{{ $data->asset }}</strong></li>
             <li>Wing<hr><strong>{{ $data->wing }}</strong></li>

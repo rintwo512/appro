@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('features', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('submenu_id');
+            $table->foreign('submenu_id')->references('id')->on('submenus')->onDelete('cascade');
             $table->string('name');
             $table->string('type');
             $table->string('action');
             $table->string('btn_id');
-            $table->string('class');
+            $table->string('is_active')->default(true);
             $table->string('icon');
             $table->string('toggle');
             $table->string('target');

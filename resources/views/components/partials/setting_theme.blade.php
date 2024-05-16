@@ -107,7 +107,7 @@
             </label>
           </div> --}}
 
-          <h6 class="fw-semibold fs-4 mb-2 mt-5">Sidebar Type</h6>
+          {{-- <h6 class="fw-semibold fs-4 mb-2 mt-5">Sidebar Type</h6>
           <div class="d-flex flex-row gap-3 customizer-box" role="group">
             <a href="javascript:void(0)" class="fullsidebar">
               <input type="radio" class="btn-check" name="sidebar-type" id="full-sidebar" autocomplete="off" />
@@ -121,7 +121,7 @@
                 <i class="icon ti ti-layout-sidebar fs-7 me-2"></i>Collapse
               </label>
             </div>
-          </div>
+          </div> --}}
 
          
         </div>

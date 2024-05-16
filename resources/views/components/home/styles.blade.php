@@ -12,3 +12,5 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap4-tagsinput@4.1.3/tagsinput.min.css">
 <link rel="stylesheet" href="{{ asset('/assets/libs/select2/dist/css/select2.min.css')}}">
 <link rel="stylesheet" href="{{ asset('/assets/libs/daterangepicker/daterangepicker.css')}}">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">

@@ -18,9 +18,9 @@
       
 
         <div class="d-block d-lg-none py-4">
-          <a href="../main/index.html" class="text-nowrap logo-img">
-            <img src="{{ asset('/assets/images/logos/3.svg') }}" class="dark-logo" alt="Logo-Dark" />
-            <img src="{{ asset('/assets/images/logos/light-logo.svg') }}" class="light-logo" alt="Logo-light" />
+          <a href="{{ route('dashboard.index') }}" class="text-nowrap logo-img">
+            <img src="{{ asset('/assets/images/logos/logo.svg') }}" class="dark-logo" alt="Logo-Dark" />
+            <img src="{{ asset('/assets/images/logos/logo2.svg') }}" class="light-logo" alt="Logo-light" />
           </a>
         </div>
         <a class="navbar-toggler nav-icon-hover-bg rounded-circle p-0 mx-0 border-0" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,11 +34,11 @@
               <!-- start language Dropdown -->
               <!-- ------------------------------- -->
               <li class="nav-item nav-icon-hover-bg rounded-circle">
-                <a class="nav-link moon dark-layout" href="javascript:void(0)">
-                  <i class="ti ti-moon moon"></i>
+                <a class="nav-link moon dark-layout" href="javascript:void(0)" id="moon">
+                  <i class="ti ti-moon gelap"></i>
                 </a>
-                <a class="nav-link sun light-layout" href="javascript:void(0)">
-                  <i class="ti ti-sun sun"></i>
+                <a class="nav-link sun light-layout" href="javascript:void(0)" id="sun">
+                  <i class="ti ti-sun terang"></i>
                 </a>
               </li>
              
@@ -128,17 +128,9 @@
                           <span class="fs-2 d-block text-body-secondary">Messages & Emails</span>
                         </div>
                       </a>
-                      <form action="{{ route('logout', ['id' => auth()->user()->id]) }}" method="post" id="autoLogout2">
-                        @csrf
-                      <a href="javascript:void(0)" class="py-8 px-7 d-flex align-items-center" id="btnLog2">
-                        <span class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
-                          <img src="{{ asset('assets/images/svgs/logout.svg')}}" alt="modernize-img" width="24" height="24" />
-                        </span>
-                        <div class="w-100 ps-3">
-                          <h6 class="mb-1 fs-3 fw-semibold lh-base">Logout</h6>
-                        </div>
-                      </a>
-                      </form>
+                      <x-logout>
+                        Logout
+                      </x-logout>
                     </div>
                   
                   </div>
@@ -163,20 +155,4 @@
 
     
 
-    <script>
-      const formLog2 = document.querySelector('#autoLogout2');
-      document.querySelector("#btnLog2").onclick = function() {
-          Swal.fire({
-              title: "Apakah Anda yakin ingin keluar ?"
-              , icon: "warning"
-              , showCancelButton: true
-              , confirmButtonColor: "#DD6B55"
-              , confirmButtonText: "Yes, logout !!"
-          }).then((result) => {
-              if (result.isConfirmed) {
-                  formLog2.submit();
-              }
-          });
-      };
-  
-  </script>
+    

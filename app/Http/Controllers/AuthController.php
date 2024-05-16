@@ -52,8 +52,12 @@ class AuthController extends Controller
                     $menu = $user->menus()->where('is_active', true)->first();
 
                     if (!$menu) {
-                        
-                        return abort(404);
+
+                        if ($user->id_jabatan == 1) {
+                            return to_route('users.index');
+                        } else {
+                            return to_route('page-not-found');
+                        }
                     } else {
                         // Jika ada menu yang aktif, arahkan ke URL submenu yang pertama
                         $submenu = $menu->submenus()->where('is_active', true)->first();

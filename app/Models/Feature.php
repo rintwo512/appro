@@ -11,14 +11,27 @@ class Feature extends Model
 
     protected $fillable =
     [
+        'submenu_id',
         'name',
         'type',
         'action',
         'btn_id',
-        'class',
+        'is_active',
         'icon',
         'toggle',
         'target',
         'location',
     ];
+
+
+
+    public function submenu1()
+    {
+        return $this->belongsTo(Submenu::class);
+    }
+
+    public function users1()
+    {
+        return $this->belongsToMany(User::class, 'user_feature');
+    }
 }

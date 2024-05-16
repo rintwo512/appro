@@ -128,7 +128,7 @@ class DatabaseSeeder extends Seeder
                     'email' => 'jon@doe.com',
                     'password' => bcrypt('admin123'),
                     'nik' => 15920011,
-                    'image' => 'https://via.placeholder.com/150',
+                    'image' => 'default.jpg',
                     'is_active' => true,
                 ],
                 [
@@ -137,8 +137,8 @@ class DatabaseSeeder extends Seeder
                     'email' => 'jen@doe.com',
                     'password' => bcrypt('admin123'),
                     'nik' => 15920012,
-                    'image' => 'https://via.placeholder.com/150',
-                    'is_active' => true,
+                    'image' => 'default.jpg',
+                    'is_active' => false,
                 ]
             ]
         );
@@ -170,7 +170,7 @@ class DatabaseSeeder extends Seeder
             $menus = [
                 [
                     "menu_label" => "Dashboard",
-                    "menu_url" => "dashboard",
+                    "menu_url" => "/dashboard",
                     "menu_icon" => "bx bx-home-alt",
                     "menu_location" => "mainmenu"
                 ],
@@ -208,14 +208,16 @@ class DatabaseSeeder extends Seeder
         try {
             $submenus = [
                 [
+                    "menu_id" => 2,
                     "submenu_label" => "Data AC",
-                    "submenu_url" => "data-ac",
+                    "submenu_url" => "/data-ac",
                     "submenu_icon" => "ti ti-circle",
                     "submenu_location" => "mainmenu"
                 ],
                 [
-                    "submenu_label" => "Data Apar",
-                    "submenu_url" => "data-apar",
+                    "menu_id" => 2,
+                    "submenu_label" => "Data Logbook",
+                    "submenu_url" => "/data-logbook",
                     "submenu_icon" => "ti ti-circle",
                     "submenu_location" => "mainmenu"
                 ]
@@ -260,44 +262,48 @@ class DatabaseSeeder extends Seeder
         );
         $features = [
             [
+                'submenu_id' => 1,
                 'name' => 'Tambah AC',
                 'type' => 'anchor',
                 'action' => 'ac.create',
                 'btn_id' => 'btnCreateAC',
-                'class' => 'btn',
+                'is_active' => 1,
                 'icon' => 'bx bx-plus',
                 'toggle' => 'modal',
                 'target' => '#modalCreateAC',
                 'location' => 'content'
             ],
             [
+                'submenu_id' => 1,
                 'name' => 'Edit AC',
                 'type' => 'anchor',
                 'action' => 'ac.edit',
                 'btn_id' => 'btnEditAC',
-                'class' => 'btn',
+                'is_active' => 1,
                 'icon' => 'bx bx-edit',
                 'toggle' => 'modal',
                 'target' => '#modalEditAC',
                 'location' => 'content'
             ],
             [
+                'submenu_id' => 1,
                 'name' => 'Detail AC',
                 'type' => 'anchor',
                 'action' => 'ac.detail',
                 'btn_id' => 'btnDetailAC',
-                'class' => 'btn',
+                'is_active' => 1,
                 'icon' => 'bx bx-low-vision',
                 'toggle' => 'modal',
                 'target' => '#modalDetailAC',
                 'location' => 'content'
             ],
             [
+                'submenu_id' => 1,
                 'name' => 'Delete AC',
                 'type' => 'anchor',
                 'action' => 'ac.delete',
                 'btn_id' => 'btnDeleteAC',
-                'class' => 'btn',
+                'is_active' => 1,
                 'icon' => 'bx bx-trash',
                 'toggle' => 'modal',
                 'target' => '#modalDeleteAC',
@@ -314,6 +320,7 @@ class DatabaseSeeder extends Seeder
                 'feature_id' => $feature->id
             ];
             DB::table('pivot_feature')->insert($pivotData);
+            DB::table('user_feature')->insert($pivotData);
         }
     }
 }

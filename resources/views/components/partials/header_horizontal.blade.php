@@ -7,9 +7,9 @@
             </a>
           </li>
           <li class="nav-item d-none d-xl-block">
-            <a href="../main/index.html" class="text-nowrap nav-link">
-              <img src="{{asset('/assets/images/logos/dark-logo.svg')}}" class="dark-logo" width="180" alt="modernize-img" />
-              <img src="{{asset('/assets/images/logos/light-logo.svg')}}" class="light-logo" width="180" alt="modernize-img" />
+            <a href="{{ route('dashboard.index') }}" class="text-nowrap nav-link">
+              <img src="{{ asset('/assets/images/logos/logo.svg') }}" class="dark-logo" alt="Logo-Dark" />
+              <img src="{{ asset('/assets/images/logos/logo2.svg') }}" class="light-logo" alt="Logo-light" />
             </a>
           </li>
           <li class="nav-item nav-icon-hover-bg rounded-circle d-none d-xl-flex">
@@ -20,8 +20,8 @@
         </ul>
        
         <div class="d-block d-xl-none">
-          <a href="../main/index.html" class="text-nowrap nav-link">
-            <img src="{{ asset('assets/images/logos/dark-logo.svg')}}" width="180" alt="modernize-img" />
+          <a href="{{ route('dashboard.index') }}" class="text-nowrap nav-link">
+            <img src="{{ asset('assets/images/logos/logo.svg')}}" width="180" alt="modernize-img" />
           </a>
         </div>
         <a class="navbar-toggler nav-icon-hover-bg rounded-circle p-0 mx-0 border-0" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +98,7 @@
                 <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" aria-expanded="false">
                   <div class="d-flex align-items-center">
                     <div class="user-profile-img">
-                      <img src="{{ asset('assets/images/profile/user-1.jpg') }}" class="rounded-circle" width="35" height="35" alt="modernize-img" />
+                      <img src="{{ asset('assets/images/profile/'. auth()->user()->image) }}" class="rounded-circle" width="35" height="35" alt="modernize-img" />
                     </div>
                   </div>
                 </a>
@@ -108,17 +108,17 @@
                       <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
                     </div>
                     <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                      <img src="{{ asset('assets/images/profile/user-1.jpg')}}" class="rounded-circle" width="80" height="80" alt="modernize-img" />
+                      <img src="{{ asset('assets/images/profile/'. auth()->user()->image) }}" class="rounded-circle" width="80" height="80" alt="modernize-img" />
                       <div class="ms-3">
-                        <h5 class="mb-1 fs-3">Mathew Anderson</h5>
-                        <span class="mb-1 d-block">Designer</span>
+                        <h5 class="mb-1 fs-3">{{ auth()->user()->name }}</h5>
+                        <span class="mb-1 d-block">{{ auth()->user()->jabatan->nama_jabatan }}</span>
                         <p class="mb-0 d-flex align-items-center gap-2">
-                          <i class="ti ti-mail fs-4"></i> info@modernize.com
+                          <i class="ti ti-mail fs-4"></i> {{ auth()->user()->email }}
                         </p>
                       </div>
                     </div>
                     <div class="message-body">
-                      <a href="../main/page-user-profile.html" class="py-8 px-7 mt-8 d-flex align-items-center">
+                      <a href="#" class="py-8 px-7 mt-8 d-flex align-items-center">
                         <span class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
                           <img src="{{ asset('assets/images/svgs/icon-account.svg')}}" alt="modernize-img" width="24" height="24" />
                         </span>
@@ -127,7 +127,7 @@
                           <span class="fs-2 d-block text-body-secondary">Account Settings</span>
                         </div>
                       </a>
-                      <a href="../main/app-email.html" class="py-8 px-7 d-flex align-items-center">
+                      <a href="#" class="py-8 px-7 d-flex align-items-center">
                         <span class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
                           <img src="{{ asset('assets/images/svgs/icon-inbox.svg')}}" alt="modernize-img" width="24" height="24" />
                         </span>
@@ -136,15 +136,20 @@
                           <span class="fs-2 d-block text-body-secondary">Messages & Emails</span>
                         </div>
                       </a>
-                      <a href="../main/app-notes.html" class="py-8 px-7 d-flex align-items-center">
+                      <x-logout>
+                        Logout
+                      </x-logout>
+                      {{-- <form action="{{ route('logout', ['id' => auth()->user()->id]) }}" method="post" id="autoLogoutHeaderHori">
+                        @csrf
+                      <a href="javascript:void(0)" class="py-8 px-7 d-flex align-items-center" id="btnLogHeaderHori">
                         <span class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
                           <img src="{{ asset('assets/images/svgs/logout.svg')}}" alt="modernize-img" width="24" height="24" />
                         </span>
                         <div class="w-100 ps-3">
-                          <h6 class="mb-1 fs-3 fw-semibold lh-base">My Task</h6>
-                          <span class="fs-2 d-block text-body-secondary">To-do and Daily Tasks</span>
+                          <h6 class="mb-1 fs-3 fw-semibold lh-base">Logout</h6>
                         </div>
                       </a>
+                      </form> --}}
                     </div>
                   
                   </div>
@@ -158,3 +163,5 @@
         </div>
       </nav>
     </div>
+
+   

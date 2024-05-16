@@ -17,8 +17,9 @@ const successMessage = flashSuccess.dataset.success;
 if (successMessage) {
       Swal.fire({
             icon: 'success',
-            title: "Good job!",
-            html: successMessage
+            title: "Success!",
+            html: successMessage,
+            footer: '<a href="">www.appro.co.id</a>'
       })
 }
 
@@ -33,7 +34,21 @@ if (message) {
       Swal.fire({
             icon: 'error',
             title: "Oops...",
-            html: message
+            html: message,
+            footer: '<a href="">www.appro.co.id</a>'
       })
 }
 // LOGIN NOTIF
+
+// TOAST
+const flashTo = document.querySelector('#toasted');
+const messageTo = flashTo.dataset.successtoast;
+if (messageTo) {
+
+      toastr.success(
+            messageTo,
+            "Success!",
+            { showMethod: "slideDown", hideMethod: "slideUp", timeOut: 2000 }
+      );
+}
+// TOAST

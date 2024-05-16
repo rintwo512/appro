@@ -12,13 +12,20 @@ class SubMenu extends Model
     protected $table = 'submenus';
 
     protected $fillable = [
+        'menu_id',
         'submenu_label',
         'submenu_url',
         'submenu_icon',
         'submenu_location',
+        'is_active',
     ];
 
     public function menus()
+    {
+        return $this->belongsToMany(Menu::class, 'menu_submenu');
+    }
+
+    public function users()
     {
         return $this->belongsToMany(Menu::class, 'menu_submenu');
     }
@@ -27,4 +34,21 @@ class SubMenu extends Model
     // {
     //     return $this->belongsToMany(Feature::class, 'submenu_feature', 'submenu_id', 'feature_id');
     // }
+
+
+
+    public function menu1()
+    {
+        return $this->belongsTo(Menu::class);
+    }
+
+    public function features1()
+    {
+        return $this->hasMany(Feature::class);
+    }
+
+    public function users1()
+    {
+        return $this->belongsToMany(User::class, 'user_submenu');
+    }
 }

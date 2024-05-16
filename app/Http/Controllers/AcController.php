@@ -7,7 +7,6 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Models\User;
 use App\Models\ChartAc;
-use App\Models\Feature;
 use App\Exports\exportAc;
 use App\Models\DatasheetAc;
 use Illuminate\Http\Request;
@@ -15,7 +14,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class AcController extends Controller
@@ -32,10 +30,10 @@ class AcController extends Controller
         $ac = Ac::with('datasheetAc')->get();
         $id = Auth::id(); // Mendapatkan ID pengguna yang sedang login
         $user = User::find($id);
-        $btnCreateAc = $user->features()->where('name', 'Tambah AC')->first();
-        $btnEditAc = $user->features()->where('name', 'Edit AC')->first();
-        $btnDetailAc = $user->features()->where('name', 'Detail AC')->first();
-        $btnDeleteAc = $user->features()->where('name', 'Delete AC')->first();
+        $btnCreateAc = $user->features1()->where('name', 'Tambah AC')->first();
+        $btnEditAc = $user->features1()->where('name', 'Edit AC')->first();
+        $btnDetailAc = $user->features1()->where('name', 'Detail AC')->first();
+        $btnDeleteAc = $user->features1()->where('name', 'Delete AC')->first();
         return view('appro.modul_ac.index', [
             'title' => 'APPRO - Data AC',
             'datas' => $ac,
@@ -203,6 +201,7 @@ class AcController extends Controller
 
     public function update(Request $request, Ac $ac)
     {
+
         $errorForm = [
             'required' => 'Kolom ini tidak boleh kosong!'
         ];
@@ -400,7 +399,7 @@ class AcController extends Controller
         $dompdf->render();
 
         // Output PDF to browser
-        return $dompdf->stream($data->id_ac . '.pdf');
+        return $dompdf->stream($data->id_ac ? $data->id_ac : $data->ruangan . '.pdf');
     }
 
     public function queryDataAcBaru(Request $request)
@@ -431,9 +430,27 @@ class AcController extends Controller
     public function getChart(Request $request)
     {
         $tahun = $request->tahun;
+        // $data = ChartAc::where('tahun', $tahun)
+        //     ->orderBy('tahun', 'ASC')
+        //     ->get()->toArray();
+
         $data = ChartAc::where('tahun', $tahun)
-            ->orderBy('tahun', 'ASC')
-            ->get()->toArray();
+            ->orderByRaw("CASE
+                                WHEN bulan = 'January' THEN 1
+                                WHEN bulan = 'February' THEN 2
+                                WHEN bulan = 'March' THEN 3
+                                WHEN bulan = 'April' THEN 4
+                                WHEN bulan = 'May' THEN 5
+                                WHEN bulan = 'June' THEN 6
+                                WHEN bulan = 'July' THEN 7
+                                WHEN bulan = 'August' THEN 8
+                                WHEN bulan = 'September' THEN 9
+                                WHEN bulan = 'October' THEN 10
+                                WHEN bulan = 'November' THEN 11
+                                WHEN bulan = 'Desember' THEN 12
+                                ELSE 99
+                            END")
+            ->get();
 
         $result = [
 

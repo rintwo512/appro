@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('submenus', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('menu_id');
+            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
             $table->string('submenu_label');
             $table->string('submenu_url');
             $table->text('submenu_icon');
