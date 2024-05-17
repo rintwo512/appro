@@ -1,16 +1,16 @@
 @php
-  use \App\Models\User;
-  use \App\Models\Menu;
-  $id = auth()->user()->id;
-  $user = User::find($id);
-  $menus = $user->menus;
+    use App\Models\User;
+    use App\Models\Menu;
+    $id = auth()->user()->id;
+    $user = User::find($id);
+    $menus = $user->menus;
 
 @endphp
 <aside class="left-sidebar with-horizontal">
-  <!-- Sidebar scroll-->
-  <div>
-    <!-- Sidebar navigation-->
-    <nav id="sidebarnavh" class="sidebar-nav scroll-sidebar container-fluid">
+    <!-- Sidebar scroll-->
+    <div>
+        <!-- Sidebar navigation-->
+        {{-- <nav id="sidebarnavh" class="sidebar-nav scroll-sidebar container-fluid">
       <ul id="sidebarnav">
         <!-- ============================= -->
         <!-- Home -->
@@ -70,9 +70,9 @@
         </li>
         @endcan
       </ul>
-    </nav>
-    <!-- End Sidebar navigation -->
-  </div>
-  <!-- End Sidebar scroll-->
+    </nav> --}}
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
 
 </aside>

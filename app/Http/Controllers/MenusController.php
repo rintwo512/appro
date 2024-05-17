@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use App\Models\User;
+use App\Models\Feature;
 use App\Models\SubMenu;
 use Illuminate\Http\Request;
+use App\Models\FeatureLogbook;
 use Illuminate\Support\Facades\Validator;
 
 class MenusController extends Controller
@@ -18,7 +20,9 @@ class MenusController extends Controller
         return view('appro.admin.manajemen-menus.index', [
             'title' => 'APPRO - Manajemen Menus',
             'menus' => Menu::with("submenus")->orderBy('menu_location')->get(),
-            'submenus' => SubMenu::orderBy('submenu_location')->get(),
+            'submenus' => SubMenu::with("features1")->orderBy('submenu_location')->get(),
+            'featuresAC' => Feature::orderBy('location')->get(),
+            'featuresLogbook' => FeatureLogbook::orderBy('location')->get(),
         ]);
     }
 
@@ -71,7 +75,7 @@ class MenusController extends Controller
                 "menu_label" => $request->menu_label,
                 "menu_url" => $request->menu_url,
                 "menu_icon" => $request->menu_icon,
-                "menu_location" => "mainmenu",
+                "menu_location" => $request->menu_location,
                 "is_active" => $request->is_active ? 1 : 0,
             ];
 

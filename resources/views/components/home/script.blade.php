@@ -73,7 +73,60 @@
 <script src="{{ asset('assets/js/modul_submenus/delete-submenus.js') }}"></script>
 <script src="{{ asset('assets/js/modul_submenus/edit-submenus.js') }}"></script>
 
+<script src="{{ asset('assets/js/modul_fitur/delete-fitur-ac.js') }}"></script>
+<script src="{{ asset('assets/js/modul_fitur/edit-fitur-ac.js') }}"></script>
+<script src="{{ asset('assets/js/modul_fitur/add-fitur-ac.js') }}"></script>
+
+<script src="{{ asset('assets/js/modul_fitur_logbook/add-fitur-logbook.js') }}"></script>
+<script src="{{ asset('assets/js/modul_fitur_logbook/edit-fitur-logbook.js') }}"></script>
+<script src="{{ asset('assets/js/modul_fitur_logbook/delete-fitur-logbook.js') }}"></script>
+
 
 <script src="{{ asset('assets/js/my-script/alert.js') }}"></script>
 <script src="{{ asset('assets/js/settings-theme.js') }}"></script>
 <script src="{{ asset('assets/js/logout.js') }}"></script>
+
+
+<script>
+    $(document).ready(function() {
+        fetchOnlineUsers();
+
+        function fetchOnlineUsers() {
+            $.ajax({
+                url: "{{ url('/get-online-users') }}",
+                type: "GET",
+                dataType: "json",
+                success: function(response) {
+                    $("#JumlahOnline").html(response.jumlah)
+                    // Proses data pengguna yang online
+                    displayOnlineUsers(response.data);
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function displayOnlineUsers(users) {
+            $('#online-users-list').empty(); // Kosongkan daftar pengguna online sebelum menambahkan yang baru
+
+            users.forEach(function(user) {
+                var userHtml = `
+                  <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
+                      <span class="me-3">
+                          <img src="{{ asset('assets/images/profile/user-2.jpg') }}" alt="user" class="rounded-circle" width="48" height="48" />
+                      </span>
+                      <div class="w-100">
+                          <h6 class="mb-1 fw-semibold lh-base">${user.name}</h6>
+                          <span class="fs-2 d-block text-body-secondary">${user.user_time_online ? moment(user.user_time_online).locale('id').fromNow() : ''}</span>
+                      </div>
+                  </a>
+              `;
+                $('#online-users-list').append(userHtml);
+            });
+        }
+
+        // Perbarui daftar pengguna online setiap 10 detik
+        setInterval(fetchOnlineUsers, 10000);
+    });
+</script>

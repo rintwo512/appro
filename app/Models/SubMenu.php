@@ -44,11 +44,16 @@ class SubMenu extends Model
 
     public function features1()
     {
-        return $this->hasMany(Feature::class);
+        return $this->hasMany(Feature::class, 'submenu_id');
     }
 
     public function users1()
     {
         return $this->belongsToMany(User::class, 'user_submenu');
+    }
+
+    public function featuresLogbook()
+    {
+        return $this->hasMany(FeatureLogbook::class, 'submenu_id');
     }
 }

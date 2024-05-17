@@ -2,14 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AcController;
-use App\Http\Controllers\AksesController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AksesController;
 use App\Http\Controllers\MenusController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ChartAcController;
 use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\SubmenusController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FeaturesAcController;
+use App\Http\Controllers\FeatureLogbookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,7 @@ Route::post('/logout/{id}', [AuthController::class, 'logout'])->name('logout');
 
 // DASHBOARD
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
+Route::get('/get-online-users', [DashboardController::class, 'getOnlineUsers'])->name('get.Online.Users');
 
 
 // AC
@@ -113,3 +116,13 @@ Route::get('manajemen-akses-submenu/{id}', [AksesController::class, 'submenu'])-
 Route::post('manajemen-akses-submenu-update/{id}', [AksesController::class, 'updateSubmenu'])->name('akses.submenu.update');
 Route::get('manajemen-akses-fitur/{id}', [AksesController::class, 'fitur'])->name('akses.fitur.edit');
 Route::post('manajemen-akses-fitur-update/{id}', [AksesController::class, 'updateFitur'])->name('akses.fitur.update');
+Route::post('manajemen-akses-fitur-logbook-update/{id}', [AksesController::class, 'updateFiturLogbook'])->name('akses.fitur.logbook.update');
+
+Route::post('manajemen-fitur-ac-add', [FeaturesAcController::class, 'store'])->name('fitur.ac.store');
+Route::get('manajemen-fitur-ac-delete/{id}', [FeaturesAcController::class, 'destroy'])->name('fitur.ac.delete');
+Route::post('manajemen-fitur-ac-update', [FeaturesAcController::class, 'update'])->name('fitur.ac.update');
+
+
+Route::post('manajemen-fitur-logbook-add', [FeatureLogbookController::class, 'store'])->name('fitur.logbook.store');
+Route::get('manajemen-fitur-logbook-delete/{id}', [FeatureLogbookController::class, 'destroy'])->name('fiturlog.delete');
+Route::post('manajemen-fitur-logbook-update', [FeatureLogbookController::class, 'update'])->name('fitur.logbook.update');

@@ -1,13 +1,16 @@
 $(document).ready(function () {
       const submenuOptions = {
             "Data AC": {
-                  url: "/data-ac"
+                  url: "/data-ac",
+                  location: "1"
             },
             "Data Logbook": {
-                  url: "/data-logbook"
+                  url: "/data-logbook",
+                  location: "2"
             },
             "Data Apar": {
-                  url: "/data-apar"
+                  url: "/data-apar",
+                  location: "3"
             },
 
 
@@ -17,17 +20,30 @@ $(document).ready(function () {
       $("#submenu_label").on("change", function () {
             const namaSubmenu = $(this).val();
             let templ = '';
+            let tempSubLocation = '';
 
             if (submenuOptions[namaSubmenu]) {
                   templ += funcSubmenu(submenuOptions[namaSubmenu].url);
                   $("#submenuUrl").html(templ);
             }
+
+            if (submenuOptions[namaSubmenu]) {
+                  tempSubLocation += funcSubenuLoca(submenuOptions[namaSubmenu].location);
+                  $("#submenuLocation").html(tempSubLocation);
+            }
       });
 
       function funcSubmenu(subUrl) {
-            return `<label for="submenu_url">Slug <span class="text-danger">*</span></label>
-            <input class="form-control" id="submenu_url" name="submenu_url"
+            return `
+            <input hidden class="form-control" id="submenu_url" name="submenu_url"
                 value="${subUrl}" readonly>
+           `;
+      }
+
+      function funcSubenuLoca(location) {
+            return `
+            <input hidden class="form-control" id="submenu_location" name="submenu_location"
+                value="${location}" readonly>
            `;
       }
 });

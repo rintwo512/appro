@@ -31,7 +31,7 @@
                     {{-- BTN --}}
                     <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group me-2 mb-2" role="group" aria-label="First group">
-                            @if ($btnCreate)
+                            @if ($btnCreate?->is_active == 1)
                                 <a href="{{ route('ac.create') }}" class="btn btn-secondary" id="btnCreateAC"
                                     data-bs-toggle="tooltip" data-bs-placement="top"
                                     data-bs-original-title="Tambah Data">
@@ -146,14 +146,14 @@
                                             </button>
                                             <ul class="dropdown-menu animated flipInX" style="">
                                                 <li>
-                                                    @if ($btnEdit)
+                                                    @if ($btnEdit?->is_active == 1)
                                                         <a class="dropdown-item"
                                                             href="{{ route('ac.edit', ['ac' => $ac->id]) }}"
                                                             id="btnEditAC"><i class="bx bx-edit"></i> Update</a>
                                                     @endif
                                                 </li>
                                                 <li>
-                                                    @if ($btnDetail)
+                                                    @if ($btnDetail?->is_active == 1)
                                                         <button class="dropdown-item" id="btnDetailAC"
                                                             data-bs-toggle="modal" data-bs-target="#modalDetailAC"
                                                             data-id="{{ $ac->id }}"
@@ -194,7 +194,7 @@
                                                     @endif
                                                 </li>
                                                 <li>
-                                                    @if ($btnDelete)
+                                                    @if ($btnDelete?->is_active == 1)
                                                         <a class="dropdown-item" id="btnDeleteAC"
                                                             href="{{ route('ac.delete', ['id' => $ac->id]) }}"><i
                                                                 class="bx bx-trash"></i> Delete</a>

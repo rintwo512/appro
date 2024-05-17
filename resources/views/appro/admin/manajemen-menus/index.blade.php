@@ -138,9 +138,194 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card w-100 position-relative overflow-hidden">
+                                <div class="px-4 py-3">
+                                    <button class="btn btn-primary float-end btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#modalAddFiturAc"><i class="ti ti-plus"></i></button>
+                                    <h4 class="card-title mb-0">Fitur AC</h4>
+                                </div>
+                                <div class="table-responsive border rounded-4">
+                                    <table class="table text-nowrap mb-0 align-middle">
+                                        <thead class="text-dark fs-4">
+                                            <tr>
+                                                <th>
+                                                    <h6 class="fs-4 fw-semibold mb-0">Fitur</h6>
+                                                </th>
+                                                <th>Opsi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($featuresAC as $featureac)
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="ms-3">
+                                                                <h6 class="fw-semibold mb-1"><i
+                                                                        class="{{ $featureac->icon }} text-primary"></i>&nbsp;
+                                                                    {{ $featureac->name }}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+
+                                                        <div class="d-flex flex-wrap gap-6">
+
+                                                            <a id="btnDeleteFeatureAc"
+                                                                href="{{ route('fitur.ac.delete', ['id' => $featureac->id]) }}"
+                                                                class="text-danger delete ms-2">
+                                                                <i class="ti ti-trash fs-5"></i>
+                                                            </a>
+                                                            <div class="form-check form-switch">
+                                                                <!-- Checkbox untuk status menu -->
+                                                                <input
+                                                                    class="form-check-input secondary checkbox-feature-ac"
+                                                                    type="checkbox"
+                                                                    {{ $featureac->is_active ? 'checked' : '' }}
+                                                                    id="is_active_{{ $featureac->id }}"
+                                                                    name="is_active"
+                                                                    data-idfitac="{{ $featureac->id }}">
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card w-100 position-relative overflow-hidden">
+                                <div class="px-4 py-3">
+                                    <button class="btn btn-primary float-end btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#modalAddFiturLogbook"><i class="ti ti-plus"></i></button>
+                                    <h4 class="card-title mb-0">Fitur Logbook</h4>
+                                </div>
+                                <div class="table-responsive border rounded-4">
+                                    <table class="table text-nowrap mb-0 align-middle">
+                                        <thead class="text-dark fs-4">
+                                            <tr>
+                                                <th>
+                                                    <h6 class="fs-4 fw-semibold mb-0">Fitur</h6>
+                                                </th>
+                                                <th>Opsi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($featuresLogbook as $logFeature)
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="ms-3">
+                                                                <h6 class="fw-semibold mb-1"><i
+                                                                        class="{{ $logFeature->submenu_icon }} text-primary"></i>&nbsp;
+                                                                    {{ $logFeature->name }}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+
+                                                        <div class="d-flex flex-wrap gap-6">
+
+                                                            <a id="btnDeleteFiturLogbook"
+                                                                href="{{ route('fiturlog.delete', ['id' => $logFeature->id]) }}"
+                                                                class="text-danger delete ms-2">
+                                                                <i class="ti ti-trash fs-5"></i>
+                                                            </a>
+                                                            <div class="form-check form-switch">
+                                                                <!-- Checkbox untuk status menu -->
+                                                                <input
+                                                                    class="form-check-input secondary checkbox-fitur-logbook"
+                                                                    type="checkbox"
+                                                                    {{ $logFeature->is_active ? 'checked' : '' }}
+                                                                    id="is_active_{{ $logFeature->id }}"
+                                                                    name="is_active"
+                                                                    data-idfilog="{{ $logFeature->id }}">
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <div class="col-md-4">
+                            <div class="card w-100 position-relative overflow-hidden">
+                                <div class="px-4 py-3">
+                                    <button class="btn btn-primary float-end btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#modalAddFitur"><i class="ti ti-plus"></i></button>
+                                    <h4 class="card-title mb-0">Fitur AC</h4>
+                                </div>
+                                <div class="table-responsive border rounded-4">
+                                    <table class="table text-nowrap mb-0 align-middle">
+                                        <thead class="text-dark fs-4">
+                                            <tr>
+                                                <th>
+                                                    <h6 class="fs-4 fw-semibold mb-0">Nama Submenu</h6>
+                                                </th>
+                                                <th>Opsi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($submenus as $submenu)
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="ms-3">
+                                                                <h6 class="fw-semibold mb-1"><i
+                                                                        class="{{ $submenu->submenu_icon }} text-primary"></i>&nbsp;
+                                                                    {{ $submenu->submenu_label }}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+
+                                                        <div class="d-flex flex-wrap gap-6">
+
+                                                            <a id="btnDeleteSubmenu"
+                                                                href="{{ route('submenus.delete', ['id' => $submenu->id]) }}"
+                                                                class="text-danger delete ms-2">
+                                                                <i class="ti ti-trash fs-5"></i>
+                                                            </a>
+                                                            <div class="form-check form-switch">
+                                                                <!-- Checkbox untuk status menu -->
+                                                                <input
+                                                                    class="form-check-input secondary checkbox-submenus"
+                                                                    type="checkbox"
+                                                                    {{ $submenu->is_active ? 'checked' : '' }}
+                                                                    id="is_active_{{ $submenu->id }}"
+                                                                    name="is_active"
+                                                                    data-idsub="{{ $submenu->id }}">
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
         </div>
         {{-- END CONTENT --}}
     </div>
     @include('components.admin.manajemen-menus.modal-add-menu')
     @include('components.admin.manajemen-menus.modal-add-submenu')
+    @include('components.admin.manajemen-menus.modal-add-fitur')
+    @include('components.admin.manajemen-menus.modal-add-fitur-logbook')
 </x-main>

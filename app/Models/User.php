@@ -70,6 +70,12 @@ class User extends Authenticatable
         return $this->belongsToMany(SubMenu::class, 'menu_submenu', 'menu_id', 'submenu_id', 'user_id');
     }
 
+    public function featuresLogbook()
+    {
+        return $this->belongsToMany(FeatureLogbook::class, 'user_feature_logbook', 'user_id', 'feature_logbook_id')
+            ->withTimestamps();
+    }
+
 
 
 

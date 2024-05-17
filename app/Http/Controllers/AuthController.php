@@ -81,7 +81,7 @@ class AuthController extends Controller
                     return back()->with('errorLogin', 'Something Wrong');
                 }
             } else {
-                return back()->with('errorLogin', 'Something Wrong');
+                return back()->with('errorLogin', 'Maaf <span class="text-danger fw-bold">' .  $user->name . '</span>, akun Anda belum di aktifkan');
             }
         } else {
             return back()->with('errorLogin', '<span class="text-danger">' .  $loginField . '</span>, not found');

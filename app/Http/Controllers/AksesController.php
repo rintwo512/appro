@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Feature;
 use App\Models\Menu;
 use App\Models\User;
+use App\Models\Feature;
 use App\Models\SubMenu;
 use Illuminate\Http\Request;
+use App\Models\FeatureLogbook;
 
 class AksesController extends Controller
 {
@@ -98,12 +99,14 @@ class AksesController extends Controller
         // Dapatkan user berdasarkan ID
         $user = User::find($id);
 
-        // Ambil semua menu
+        // Ambil semua fitur
         $allFitur = Feature::all();
+        $allFiturLogbook = FeatureLogbook::all();
 
         return view('appro.admin.manajemen-akses.user-fitur-view', [
             'title' => 'APPRO - Fitur ' . $user->name,
             'allFitur' => $allFitur,
+            'allFiturLogbook' => $allFiturLogbook,
             'user' => $user,
         ]);
     }
@@ -120,6 +123,20 @@ class AksesController extends Controller
         // Update menu untuk user
         $user->features1()->sync($selectedFitur);
 
-        return back()->with('successtoast', 'Fitur berhasil diperbaruhi');
+        return back()->with('successtoast', 'Fitur AC berhasil diperbaruhi');
+    }
+
+    public function updateFiturLogbook(Request $request, $id)
+    {
+        // Temukan user berdasarkan ID
+        $user = User::find($id);
+
+        // Ambil ID-menu yang dipilih dari form
+        $selectedFitur = $request->input('fiturs_logbook', []);
+
+        // Update menu untuk user
+        $user->featuresLogbook()->sync($selectedFitur);
+
+        return back()->with('successtoast', 'Fitur Logbook berhasil diperbaruhi');
     }
 }

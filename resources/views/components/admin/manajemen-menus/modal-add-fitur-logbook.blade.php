@@ -1,28 +1,32 @@
-<x-modal id="modalAddSubmenu" class="modal-dialog modal-dialog-centered modal-dialog-scrollable" dataFooter="d-none">
-    <form class="ps-3 pr-3" action="{{ route('submenus.store') }}" method="post">
+<x-modal id="modalAddFiturLogbook" class="modal-dialog modal-dialog-centered modal-dialog-scrollable" dataFooter="d-none">
+    <form class="ps-3 pr-3" action="{{ route('fitur.logbook.store') }}" method="post">
         @csrf
         <div class="row">
             <div class="col-md-12 mb-3">
-                <label for="submenu_label">Nama Submenu <span class="text-danger">*</span></label>
-                <select class="form-control @error('submenu_label') is-invalid @enderror" id="submenu_label"
-                    name="submenu_label" value="{{ old('submenu_label') }}">
+                <label for="name_logbook">Nama Fitur <span class="text-danger">*</span></label>
+                <select class="form-control @error('name') is-invalid @enderror" id="name_logbook" name="name"
+                    value="{{ old('name') }}">
                     <option disabled selected value="">-Select-</option>
-                    <option value="Data AC">Data AC</option>
-                    <option value="Data Logbook">Data Logbook</option>
-                    <option value="Data Apar">Data Apar</option>
+                    <option value="Tambah Logbook">Tambah Logbook</option>
+                    <option value="Edit Logbook">Edit Logbook</option>
+                    <option value="Detail Logbook">Detail Logbook</option>
+                    <option value="Delete Logbook">Delete Logbook</option>
                 </select>
-                @error('submenu_label')
+                @error('name')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            <div id="submenuUrl">
+
+            <div id="locationFiturLogbook">
                 {{--  --}}
             </div>
-            <div id="submenuLocation">
+
+            <div id="iconFiturLogbook">
                 {{--  --}}
             </div>
+
             <div class="col-md-2">
                 <div class="form-check form-switch">
                     <input class="form-check-input secondary" type="checkbox" id="is_active" name="is_active">

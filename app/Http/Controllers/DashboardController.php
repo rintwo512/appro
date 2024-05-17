@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ac;
 use App\Models\User;
 use App\Models\ChartAc;
+use App\Models\Logbook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,17 @@ class DashboardController extends Controller
             return back()->with('error', 'Anda tidak memiliki akses ke menu ini.');
         }
 
+        // Mendapatkan tanggal awal dan akhir bulan ini
+        $startOfMonth = Carbon::now()->startOfMonth()->toDateString();
+        $endOfMonth = Carbon::now()->endOfMonth()->toDateString();
+
+        // Menggunakan Eloquent untuk mengambil data bulan ini
+        $dataLogBookBulanIni = Logbook::whereBetween('tanggal', [$startOfMonth, $endOfMonth])->count();
+
+        $dataLogBookDoneBulanIni = Logbook::whereBetween('tanggal', [$startOfMonth, $endOfMonth])
+            ->where('status', 'Done')
+            ->count();
+
         $totalAc = Ac::count();
         $AcRusak = Ac::where('status', 'Rusak')->count();
 
@@ -44,6 +56,28 @@ class DashboardController extends Controller
             'totalAc' => $totalAc,
             'acRusak' => $AcRusak,
             'mainten' => $dataMainten,
+            'totalLogbook' => $dataLogBookBulanIni,
+            'totalLogbookDone' => $dataLogBookDoneBulanIni,
         ]);
+    }
+
+    public function getOnlineUsers()
+    {
+        $onlineUsers = User::where('status_login', 'online')
+            ->where('id_jabatan', '!=', 1)
+            ->where('name', '!=', auth()->user()->name)
+            ->get();
+
+        $onlineUsersCount = User::where('status_login', 'online')
+            ->where('id_jabatan', '!=', 1)
+            ->where('name', '!=', auth()->user()->name)
+            ->count();
+
+        $result =
+            [
+                'jumlah' => $onlineUsersCount,
+                'data' => $onlineUsers
+            ];
+        return response()->json($result);
     }
 }

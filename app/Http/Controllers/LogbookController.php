@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Logbook;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Models\User;
+use App\Models\Logbook;
 use Illuminate\Http\Request;
 use App\Exports\exportLogbook;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
@@ -23,9 +24,19 @@ class LogbookController extends Controller
     {
         $logbooks = Logbook::with('users')->get();
 
+        $id = Auth::id(); // Mendapatkan ID pengguna yang sedang login
+        $user = User::find($id);
+        $btnCreateLogbook = $user->featuresLogbook()->where('name', 'Tambah Logbook')->first();
+        $btnEditLogbook = $user->featuresLogbook()->where('name', 'Edit Logbook')->first();
+        $btnDetailLogbook = $user->featuresLogbook()->where('name', 'Detail Logbook')->first();
+        $btnDeleteLogbook = $user->featuresLogbook()->where('name', 'Delete Logbook')->first();
         return view('appro.modul_logbook.index', [
             'title' => 'APPRO - Data Logbook',
-            'logbooks' => $logbooks
+            'logbooks' => $logbooks,
+            'btnCreateLogbook' => $btnCreateLogbook,
+            'btnEditLogbook' => $btnEditLogbook,
+            'btnDetailLogbook' =>  $btnDetailLogbook,
+            'btnDeleteLogbook' => $btnDeleteLogbook,
         ]);
     }
 
@@ -468,7 +479,7 @@ class LogbookController extends Controller
 
     public function exportDataLogbookPdf($id)
     {
-        
+
         $data = Logbook::find($id); // Ambil data dari model Anda
         // Instantiate Dompdf with options
         $options = new Options();

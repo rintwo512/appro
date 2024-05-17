@@ -48,7 +48,7 @@ class SubmenusController extends Controller
 
         // Ensure the menu is found
         if (!$menu) {
-            return back()->with('error', 'Menu tidak ditemukan!');
+            return back()->with('error', 'Menu databases tidak ditemukan!');
         }
 
         // Create the submenu with associated menu
@@ -56,7 +56,7 @@ class SubmenusController extends Controller
             "submenu_label" => $request->submenu_label,
             "submenu_url" => $request->submenu_url,
             "submenu_icon" => "ti ti-circle",
-            "submenu_location" => "mainmenu",
+            "submenu_location" => $request->submenu_location,
             "is_active" => $request->is_active ? 1 : 0,
             "menu_id" => $menu->id, // Associate with the found menu
         ]);

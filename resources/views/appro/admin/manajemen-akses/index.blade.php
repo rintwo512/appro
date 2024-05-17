@@ -41,7 +41,7 @@
                         </x-thead>
                         <x-tbody>
                             @foreach ($users as $user)
-                                @if ($user->nik != '15920019')
+                                @if ($user->nik != '15920019' && $user->is_active != 0)
                                     <tr class="text-center">
                                         <td class="fs-4 ">{{ $user->name }}</td>
                                         <td><a href="{{ route('akses.menu.edit', ['id' => $user->id]) }}"

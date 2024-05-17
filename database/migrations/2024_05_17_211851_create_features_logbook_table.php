@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('features', function (Blueprint $table) {
+        Schema::create('features_logbook', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('submenu_id');
             $table->foreign('submenu_id')->references('id')->on('submenus')->onDelete('cascade');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('features');
+        Schema::dropIfExists('features_logbook');
     }
 };

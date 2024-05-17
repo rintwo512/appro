@@ -172,13 +172,13 @@ class DatabaseSeeder extends Seeder
                     "menu_label" => "Dashboard",
                     "menu_url" => "/dashboard",
                     "menu_icon" => "bx bx-home-alt",
-                    "menu_location" => "mainmenu"
+                    "menu_location" => "1"
                 ],
                 [
                     "menu_label" => "Databases",
                     "menu_url" => "javascript:void(0)",
                     "menu_icon" => "bx bx-data",
-                    "menu_location" => "mainmenu"
+                    "menu_location" => "2"
                 ]
             ];
 
@@ -212,14 +212,14 @@ class DatabaseSeeder extends Seeder
                     "submenu_label" => "Data AC",
                     "submenu_url" => "/data-ac",
                     "submenu_icon" => "ti ti-circle",
-                    "submenu_location" => "mainmenu"
+                    "submenu_location" => "1"
                 ],
                 [
                     "menu_id" => 2,
                     "submenu_label" => "Data Logbook",
                     "submenu_url" => "/data-logbook",
                     "submenu_icon" => "ti ti-circle",
-                    "submenu_location" => "mainmenu"
+                    "submenu_location" => "2"
                 ]
             ];
 
@@ -264,50 +264,30 @@ class DatabaseSeeder extends Seeder
             [
                 'submenu_id' => 1,
                 'name' => 'Tambah AC',
-                'type' => 'anchor',
-                'action' => 'ac.create',
-                'btn_id' => 'btnCreateAC',
                 'is_active' => 1,
                 'icon' => 'bx bx-plus',
-                'toggle' => 'modal',
-                'target' => '#modalCreateAC',
-                'location' => 'content'
+                'location' => '1'
             ],
             [
                 'submenu_id' => 1,
                 'name' => 'Edit AC',
-                'type' => 'anchor',
-                'action' => 'ac.edit',
-                'btn_id' => 'btnEditAC',
                 'is_active' => 1,
                 'icon' => 'bx bx-edit',
-                'toggle' => 'modal',
-                'target' => '#modalEditAC',
-                'location' => 'content'
+                'location' => '2'
             ],
             [
                 'submenu_id' => 1,
                 'name' => 'Detail AC',
-                'type' => 'anchor',
-                'action' => 'ac.detail',
-                'btn_id' => 'btnDetailAC',
                 'is_active' => 1,
                 'icon' => 'bx bx-low-vision',
-                'toggle' => 'modal',
-                'target' => '#modalDetailAC',
-                'location' => 'content'
+                'location' => '3'
             ],
             [
                 'submenu_id' => 1,
                 'name' => 'Delete AC',
-                'type' => 'anchor',
-                'action' => 'ac.delete',
-                'btn_id' => 'btnDeleteAC',
                 'is_active' => 1,
                 'icon' => 'bx bx-trash',
-                'toggle' => 'modal',
-                'target' => '#modalDeleteAC',
-                'location' => 'content'
+                'location' => '4'
             ],
         ];
 

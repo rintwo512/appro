@@ -13,13 +13,8 @@ class Feature extends Model
     [
         'submenu_id',
         'name',
-        'type',
-        'action',
-        'btn_id',
         'is_active',
         'icon',
-        'toggle',
-        'target',
         'location',
     ];
 
@@ -27,7 +22,7 @@ class Feature extends Model
 
     public function submenu1()
     {
-        return $this->belongsTo(Submenu::class);
+        return $this->belongsTo(SubMenu::class);
     }
 
     public function users1()

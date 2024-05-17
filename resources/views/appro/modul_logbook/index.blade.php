@@ -32,10 +32,13 @@
                     <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group me-2 mb-2" role="group" aria-label="First group">
 
-                            <a href="{{ route('data-logbook.create') }}" class="btn btn-secondary" id="btnCreateAC"
-                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Tambah Data">
-                                <i class="bx bx-plus fs-4"></i>
-                            </a>
+                            @if ($btnCreateLogbook?->is_active == 1)
+                                <a href="{{ route('data-logbook.create') }}" class="btn btn-secondary" id="btnCreateLog"
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Tambah Data">
+                                    <i class="bx bx-plus fs-4"></i>
+                                </a>
+                            @endif
                             <a href="{{ route('data-logbook.export.excel') }}" class="btn btn-secondary"
                                 data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Export Excel">
                                 <i class="bx bx-printer fs-4"></i>
@@ -136,37 +139,44 @@
                                                 <i class="bx bx-dots-vertical-rounded fs-4"></i>
                                             </button>
                                             <ul class="dropdown-menu animated flipInX" style="">
-                                                <li>
-                                                    <a class="dropdown-item"
-                                                        href="{{ route('data-logbook.edit', ['id' => $logbook->id]) }}"
-                                                        id="btnEditLogbook"><i class="bx bx-edit"></i> Update</a>
-                                                </li>
+                                                @if ($btnEditLogbook?->is_active == 1)
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('data-logbook.edit', ['id' => $logbook->id]) }}"
+                                                            id="btnEditLogbook"><i class="bx bx-edit"></i> Update</a>
+                                                    </li>
+                                                @endif
 
-                                                <li>
-                                                    <button class="dropdown-item" id="btnDetailLogbook"
-                                                        data-bs-toggle="modal" data-bs-target="#modalDetailLogbook"
-                                                        data-userupdated="{{ $logbook->user_updated ? $logbook->user_updated . '/' . Illuminate\Support\Carbon::parse($logbook->updated_at)->diffForHumans() : '' }}"
-                                                        data-namatugas="{{ $logbook->nama_tugas }}"
-                                                        data-wing="{{ $logbook->wing }}"
-                                                        data-lantai="{{ $logbook->lantai }}"
-                                                        data-lokasi="{{ $logbook->lokasi }}"
-                                                        data-status="{{ $logbook->status }}"
-                                                        data-tanggal="{{ Illuminate\Support\Carbon::parse($logbook->tanggal)->format('Y-m-d') }}"
-                                                        data-prioritas="{{ $logbook->prioritas }}"
-                                                        data-type="{{ $logbook->type }}"
-                                                        data-keterangan="{{ $logbook->keterangan }}"
-                                                        data-petugas="{{ $logbook->users->implode('name', ', ') }}"
-                                                        data-evidens="{{ $logbook->evidens }}"
-                                                        data-kategori="{{ $logbook->kategori }}"
-                                                        data-jenispekerjaan="{{ $logbook->jenis_pekerjaan }}"><i
-                                                            class="ti ti-eye"></i> Detail</button>
-                                                </li>
+                                                @if ($btnDetailLogbook?->is_active == 1)
+                                                    <li>
+                                                        <button class="dropdown-item" id="btnDetailLogbook"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#modalDetailLogbook"
+                                                            data-userupdated="{{ $logbook->user_updated ? $logbook->user_updated . '/' . Illuminate\Support\Carbon::parse($logbook->updated_at)->diffForHumans() : '' }}"
+                                                            data-namatugas="{{ $logbook->nama_tugas }}"
+                                                            data-wing="{{ $logbook->wing }}"
+                                                            data-lantai="{{ $logbook->lantai }}"
+                                                            data-lokasi="{{ $logbook->lokasi }}"
+                                                            data-status="{{ $logbook->status }}"
+                                                            data-tanggal="{{ Illuminate\Support\Carbon::parse($logbook->tanggal)->format('Y-m-d') }}"
+                                                            data-prioritas="{{ $logbook->prioritas }}"
+                                                            data-type="{{ $logbook->type }}"
+                                                            data-keterangan="{{ $logbook->keterangan }}"
+                                                            data-petugas="{{ $logbook->users->implode('name', ', ') }}"
+                                                            data-evidens="{{ $logbook->evidens }}"
+                                                            data-kategori="{{ $logbook->kategori }}"
+                                                            data-jenispekerjaan="{{ $logbook->jenis_pekerjaan }}"><i
+                                                                class="ti ti-eye"></i> Detail</button>
+                                                    </li>
+                                                @endif
 
-                                                <li>
-                                                    <a href="{{ url('logbook', ['id' => $logbook->id]) }}"
-                                                        class="dropdown-item" id="btnDeleteLogbook"><i
-                                                            class="bx bx-trash"></i> Delete</a>
-                                                </li>
+                                                @if ($btnDeleteLogbook?->is_active == 1)
+                                                    <li>
+                                                        <a href="{{ url('logbook', ['id' => $logbook->id]) }}"
+                                                            class="dropdown-item" id="btnDeleteLogbook"><i
+                                                                class="bx bx-trash"></i> Delete</a>
+                                                    </li>
+                                                @endif
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
