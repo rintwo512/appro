@@ -6,6 +6,7 @@ use App\Models\Menu;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,6 +17,12 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+
+        // Jika user tidak ditemukan (null), redirect ke halaman login
+        if (!$user) {
+            return redirect()->route('login');
+        }
         return view('appro.admin.manajemen-user.index', [
             'title' => 'Appro - Manajemen Users',
             'users' => User::with('jabatan')->get()

@@ -36,8 +36,9 @@
 
 <script src="{{ asset('/assets/js/plugins/toastr-init.js') }}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+<script src="{{ asset('/assets/libs/dropzone/dist/min/dropzone.min.js') }}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
 <!-- solar icons -->
 <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 <script src="{{ asset('assets/libs/owl.carousel/dist/owl.carousel.min.js') }}"></script>
@@ -99,7 +100,7 @@
                 success: function(response) {
                     $("#JumlahOnline").html(response.jumlah)
                     // Proses data pengguna yang online
-                    displayOnlineUsers(response.data);
+                    displayOnlineUsers(response.data ? response.data : response);
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
@@ -108,22 +109,38 @@
         }
 
         function displayOnlineUsers(users) {
-            $('#online-users-list').empty(); // Kosongkan daftar pengguna online sebelum menambahkan yang baru
+            if (users != 0) {
+                $('#online-users-list')
+                    .empty(); // Kosongkan daftar pengguna online sebelum menambahkan yang baru
 
-            users.forEach(function(user) {
-                var userHtml = `
-                  <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                      <span class="me-3">
-                          <img src="{{ asset('assets/images/profile/user-2.jpg') }}" alt="user" class="rounded-circle" width="48" height="48" />
-                      </span>
-                      <div class="w-100">
-                          <h6 class="mb-1 fw-semibold lh-base">${user.name}</h6>
-                          <span class="fs-2 d-block text-body-secondary">${user.user_time_online ? moment(user.user_time_online).locale('id').fromNow() : ''}</span>
-                      </div>
-                  </a>
-              `;
-                $('#online-users-list').append(userHtml);
-            });
+                users.forEach(function(user) {
+
+                    var userHtml = `
+                        <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
+                            <span class="me-3">
+                                <img src="{{ asset('assets/images/profile/user-2.jpg') }}" alt="user" class="rounded-circle" width="48" height="48" />
+                            </span>
+                            <div class="w-100">
+                                <h6 class="mb-1 fw-semibold lh-base">${user.name}</h6>
+                                <span class="fs-2 d-block text-body-secondary">${user.user_time_online ? moment(user.user_time_online).locale('id').fromNow() : ''}</span>
+                            </div>
+                        </a>
+                    `;
+                    $('#online-users-list').append(userHtml);
+
+                });
+            } else {
+                $('#online-users-list')
+                    .empty();
+                var userHtmlOff = `
+                        <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">                            
+                            <div class="w-100">
+                                <span class="fs-4 d-block text-primary">Tidak ada user yang online!</span>
+                            </div>
+                        </a>
+                    `;
+                $('#online-users-list').append(userHtmlOff);
+            }
         }
 
         // Perbarui daftar pengguna online setiap 10 detik

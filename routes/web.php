@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AcController;
+use App\Http\Controllers\Admin\SignupAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AksesController;
 use App\Http\Controllers\MenusController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ChartAcController;
 use App\Http\Controllers\LogbookController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubmenusController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeaturesAcController;
@@ -37,11 +39,16 @@ Route::get('/manajemen-akses', function () {
 });
 
 
+Route::get('/admin-sign-up', [SignupAdminController::class, 'index'])->name('signup.admin')->middleware('guest');
+Route::post('/admin-sign-up', [SignupAdminController::class, 'signup'])->name('signup.admin.post')->middleware('guest');
+
+
 Route::get('/data-apar', fn () => 'data apar');
 
 
+
 // LOGIN
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
 Route::post('/logout/{id}', [AuthController::class, 'logout'])->name('logout');
 
@@ -126,3 +133,10 @@ Route::post('manajemen-fitur-ac-update', [FeaturesAcController::class, 'update']
 Route::post('manajemen-fitur-logbook-add', [FeatureLogbookController::class, 'store'])->name('fitur.logbook.store');
 Route::get('manajemen-fitur-logbook-delete/{id}', [FeatureLogbookController::class, 'destroy'])->name('fiturlog.delete');
 Route::post('manajemen-fitur-logbook-update', [FeatureLogbookController::class, 'update'])->name('fitur.logbook.update');
+
+
+// SETTIINGS
+Route::get('/settings/edit-profile', [SettingsController::class, 'index'])->name('edit.profile');
+Route::post('/settings/edit-profile', [SettingsController::class, 'editProfile'])->name('edit.profile.post');
+Route::get('/settings/ubah-password', [SettingsController::class, 'ubahPass'])->name('ubah.pass');
+Route::post('/settings/ubah-password', [SettingsController::class, 'ubahPassPost'])->name('ubah.pass.post');

@@ -108,8 +108,13 @@
         <div class="fixed-profile p-3 mx-4 mb-2 bg-secondary-subtle rounded mt-3">
             <div class="hstack gap-3">
                 <div class="john-img">
-                    <img src="{{ asset('assets/images/profile/user-1.jpg') }}" class="rounded-circle" width="40"
-                        height="40" alt="{{ auth()->user()->name }}" />
+                    @if (auth()->user()->image != 'default.jpg')
+                        <img src="{{ asset('/uploads/profile_images/' . auth()->user()->image) }}"
+                            class="rounded-circle" width="40" height="40" alt="{{ auth()->user()->name }}" />
+                    @else
+                        <img src="{{ asset('/assets/images/profile/' . auth()->user()->image) }}"
+                            class="rounded-circle" width="40" height="40" alt="{{ auth()->user()->name }}" />
+                    @endif
                 </div>
                 <div class="john-title">
                     <h6 class="mb-0 fs-4 fw-semibold">{{ auth()->user()->name }}</h6>

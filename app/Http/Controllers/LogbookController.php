@@ -22,6 +22,14 @@ class LogbookController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        
+        // Jika user tidak ditemukan (null), redirect ke halaman login
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        
         $logbooks = Logbook::with('users')->get();
 
         $id = Auth::id(); // Mendapatkan ID pengguna yang sedang login

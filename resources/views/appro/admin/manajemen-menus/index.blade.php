@@ -52,7 +52,9 @@
                                                     <h6 class="fw-semibold mb-1"><i
                                                             class="{{ $menu->menu_icon }} text-primary"></i>&nbsp;
                                                         {{ $menu->menu_label }}</h6>
+
                                                 </div>
+
                                             </div>
                                         </td>
 
@@ -85,6 +87,7 @@
             <div class="col-md-6">
                 <div class="card w-100 position-relative overflow-hidden">
                     <div class="px-4 py-3">
+
                         <button class="btn btn-primary float-end btn-sm" data-bs-toggle="modal"
                             data-bs-target="#modalAddSubmenu"><i class="ti ti-plus"></i></button>
                         <h4 class="card-title mb-0">Submenu</h4>
@@ -100,38 +103,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($submenus as $submenu)
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="ms-3">
-                                                    <h6 class="fw-semibold mb-1"><i
-                                                            class="{{ $submenu->submenu_icon }} text-primary"></i>&nbsp;
-                                                        {{ $submenu->submenu_label }}</h6>
+                                @foreach ($menus as $menu)
+                                    @foreach ($menu->submenus as $submenu)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="ms-3">
+                                                        <h6 class="fw-semibold mb-1"><i
+                                                                class="{{ $submenu->submenu_icon }} text-primary"></i>&nbsp;{{ $submenu->submenu_label }}
+                                                        </h6>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
 
-                                        <td>
+                                            </td>
 
-                                            <div class="d-flex flex-wrap gap-6">
+                                            <td>
 
-                                                <a id="btnDeleteSubmenu"
-                                                    href="{{ route('submenus.delete', ['id' => $submenu->id]) }}"
-                                                    class="text-danger delete ms-2">
-                                                    <i class="ti ti-trash fs-5"></i>
-                                                </a>
-                                                <div class="form-check form-switch">
-                                                    <!-- Checkbox untuk status menu -->
-                                                    <input class="form-check-input secondary checkbox-submenus"
-                                                        type="checkbox" {{ $submenu->is_active ? 'checked' : '' }}
-                                                        id="is_active_{{ $submenu->id }}" name="is_active"
-                                                        data-idsub="{{ $submenu->id }}">
+                                                <div class="d-flex flex-wrap gap-6">
+
+                                                    <a id="btnDeleteSubmenu"
+                                                        href="{{ route('submenus.delete', ['id' => $submenu->id]) }}"
+                                                        class="text-danger delete ms-2">
+                                                        <i class="ti ti-trash fs-5"></i>
+                                                    </a>
+                                                    <div class="form-check form-switch">
+                                                        <!-- Checkbox untuk status menu -->
+                                                        <input class="form-check-input secondary checkbox-submenus"
+                                                            type="checkbox" {{ $submenu->is_active ? 'checked' : '' }}
+                                                            id="is_active_{{ $submenu->id }}" name="is_active"
+                                                            data-idsub="{{ $submenu->id }}"
+                                                            data-idmainmenu="{{ $menu->id }}">
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>

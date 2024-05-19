@@ -23,6 +23,12 @@ class AcController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+
+        // Jika user tidak ditemukan (null), redirect ke halaman login
+        if (!$user) {
+            return redirect()->route('login');
+        }
         // Mendapatkan data ac beserta datasheet_ac-nya
         // $ac = Ac::with('datasheetAc')->find(1);
         // $datasheet = $ac->datasheetAc;

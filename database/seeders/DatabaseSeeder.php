@@ -28,120 +28,111 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $bulan = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
-        ];
+        // $bulan = [
+        //     'January',
+        //     'February',
+        //     'March',
+        //     'April',
+        //     'May',
+        //     'June',
+        //     'July',
+        //     'August',
+        //     'September',
+        //     'October',
+        //     'November',
+        //     'December'
+        // ];
 
-        $tahun = "2021";
+        // $tahun = "2021";
 
-        foreach ($bulan as $indeks => $namaBulan) {
-            ChartAc::create([
-                'tahun' => $tahun,
-                'bulan' => $namaBulan,
-                'total' => mt_rand(15, 35)
-            ]);
-        }
+        // foreach ($bulan as $indeks => $namaBulan) {
+        //     ChartAc::create([
+        //         'tahun' => $tahun,
+        //         'bulan' => $namaBulan,
+        //         'total' => mt_rand(15, 35)
+        //     ]);
+        // }
 
-        $bulan1 = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
-        ];
+        // $bulan1 = [
+        //     'January',
+        //     'February',
+        //     'March',
+        //     'April',
+        //     'May',
+        //     'June',
+        //     'July',
+        //     'August',
+        //     'September',
+        //     'October',
+        //     'November',
+        //     'December'
+        // ];
 
-        $tahun1 = "2022";
+        // $tahun1 = "2022";
 
-        foreach ($bulan1 as $indeks => $namaBulan) {
-            ChartAc::create([
-                'tahun' => $tahun1,
-                'bulan' => $namaBulan,
-                'total' => mt_rand(10, 30)
-            ]);
-        }
+        // foreach ($bulan1 as $indeks => $namaBulan) {
+        //     ChartAc::create([
+        //         'tahun' => $tahun1,
+        //         'bulan' => $namaBulan,
+        //         'total' => mt_rand(10, 30)
+        //     ]);
+        // }
 
-        $bulan2 = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
-        ];
+        // $bulan2 = [
+        //     'January',
+        //     'February',
+        //     'March',
+        //     'April',
+        //     'May',
+        //     'June',
+        //     'July',
+        //     'August',
+        //     'September',
+        //     'October',
+        //     'November',
+        //     'December'
+        // ];
 
-        $tahun2 = "2023";
+        // $tahun2 = "2023";
 
-        foreach ($bulan2 as $indeks => $namaBulan2) {
-            ChartAc::create([
-                'tahun' => $tahun2,
-                'bulan' => $namaBulan2,
-                'total' => mt_rand(7, 30)
-            ]);
-        }
+        // foreach ($bulan2 as $indeks => $namaBulan2) {
+        //     ChartAc::create([
+        //         'tahun' => $tahun2,
+        //         'bulan' => $namaBulan2,
+        //         'total' => mt_rand(7, 30)
+        //     ]);
+        // }
 
-        $bulan3 = [
-            'January',
-            'February',
-            'March',
-            'April',
-        ];
+        // $bulan3 = [
+        //     'January',
+        //     'February',
+        //     'March',
+        //     'April',
+        // ];
 
-        $tahun3 = "2024";
+        // $tahun3 = "2024";
 
-        foreach ($bulan3 as $indeks => $namaBulan3) {
-            ChartAc::create([
-                'tahun' => $tahun3,
-                'bulan' => $namaBulan3,
-                'total' => mt_rand(7, 30)
-            ]);
-        }
+        // foreach ($bulan3 as $indeks => $namaBulan3) {
+        //     ChartAc::create([
+        //         'tahun' => $tahun3,
+        //         'bulan' => $namaBulan3,
+        //         'total' => mt_rand(7, 30)
+        //     ]);
+        // }
 
-        User::insert(
-            [
-                [
-                    'id_jabatan' => 1,
-                    'name' => 'Jon Doe',
-                    'email' => 'jon@doe.com',
-                    'password' => bcrypt('admin123'),
-                    'nik' => 15920011,
-                    'image' => 'default.jpg',
-                    'is_active' => true,
-                ],
-                [
-                    'id_jabatan' => 3,
-                    'name' => 'Jen Doe',
-                    'email' => 'jen@doe.com',
-                    'password' => bcrypt('admin123'),
-                    'nik' => 15920012,
-                    'image' => 'default.jpg',
-                    'is_active' => false,
-                ]
-            ]
-        );
+        // User::insert(
+        //     [
+        //         [
+        //             'id_jabatan' => 1,
+        //             'name' => 'Rinto Harahap',
+        //             'email' => 'engineeringsulsel@gmail.com',
+        //             'password' => bcrypt('admin123'),
+        //             'nik' => 15920011,
+        //             'image' => 'default.jpg',
+        //             'is_active' => true,
+        //         ]
+        //     ]
+        // );
 
 
 
@@ -162,145 +153,145 @@ class DatabaseSeeder extends Seeder
         //     ]
         // );
 
-        // Memulai transaksi
-        DB::beginTransaction();
 
-        try {
-            // Insert data ke tabel Menu
-            $menus = [
-                [
-                    "menu_label" => "Dashboard",
-                    "menu_url" => "/dashboard",
-                    "menu_icon" => "bx bx-home-alt",
-                    "menu_location" => "1"
-                ],
-                [
-                    "menu_label" => "Databases",
-                    "menu_url" => "javascript:void(0)",
-                    "menu_icon" => "bx bx-data",
-                    "menu_location" => "2"
-                ]
-            ];
+        // DB::beginTransaction();
 
-            $menuIds = [];
-            foreach ($menus as $menu) {
-                $menuModel = Menu::create($menu);
-                $menuIds[] = $menuModel->id;
-            }
+        // try {
 
-            // Insert data ke tabel user_menu
-            $userId = 1; // Ganti dengan ID pengguna yang ingin Anda hubungkan dengan menu
-            foreach ($menuIds as $menuId) {
-                UserMenu::create([
-                    'user_id' => $userId,
-                    'menu_id' => $menuId
-                ]);
-            }
+        //     $menus = [
+        //         [
+        //             "menu_label" => "Dashboard",
+        //             "menu_url" => "/dashboard",
+        //             "menu_icon" => "bx bx-home-alt",
+        //             "menu_location" => "1"
+        //         ],
+        //         [
+        //             "menu_label" => "Databases",
+        //             "menu_url" => "javascript:void(0)",
+        //             "menu_icon" => "bx bx-data",
+        //             "menu_location" => "2"
+        //         ]
+        //     ];
 
-            // Commit transaksi jika berhasil
-            DB::commit();
-        } catch (\Exception $e) {
-            // Rollback transaksi jika terjadi kesalahan
-            DB::rollback();
-            throw $e;
-        }
-
-        try {
-            $submenus = [
-                [
-                    "menu_id" => 2,
-                    "submenu_label" => "Data AC",
-                    "submenu_url" => "/data-ac",
-                    "submenu_icon" => "ti ti-circle",
-                    "submenu_location" => "1"
-                ],
-                [
-                    "menu_id" => 2,
-                    "submenu_label" => "Data Logbook",
-                    "submenu_url" => "/data-logbook",
-                    "submenu_icon" => "ti ti-circle",
-                    "submenu_location" => "2"
-                ]
-            ];
-
-            $subMenuIds2 = [];
-            foreach ($submenus as $submenu) {
-                $submenuModel = SubMenu::create($submenu);
-                $subMenuIds2[] = $submenuModel->id;
-            }
+        //     $menuIds = [];
+        //     foreach ($menus as $menu) {
+        //         $menuModel = Menu::create($menu);
+        //         $menuIds[] = $menuModel->id;
+        //     }
 
 
+        //     $userId = 1; 
+        //     foreach ($menuIds as $menuId) {
+        //         UserMenu::create([
+        //             'user_id' => $userId,
+        //             'menu_id' => $menuId
+        //         ]);
+        //     }
 
-            $menu_id = 2;
-            foreach ($subMenuIds2 as $subMenuIds) {
-                MenuSubmenu::create([
-                    'menu_id' => $menu_id,
-                    'submenu_id' => $subMenuIds
-                ]);
-            }
+
+        //     DB::commit();
+        // } catch (\Exception $e) {
+
+        //     DB::rollback();
+        //     throw $e;
+        // }
+
+        // try {
+        //     $submenus = [
+        //         [
+        //             "menu_id" => 2,
+        //             "submenu_label" => "Data AC",
+        //             "submenu_url" => "/data-ac",
+        //             "submenu_icon" => "ti ti-circle",
+        //             "submenu_location" => "1"
+        //         ],
+        //         [
+        //             "menu_id" => 2,
+        //             "submenu_label" => "Data Logbook",
+        //             "submenu_url" => "/data-logbook",
+        //             "submenu_icon" => "ti ti-circle",
+        //             "submenu_location" => "2"
+        //         ]
+        //     ];
+
+        //     $subMenuIds2 = [];
+        //     foreach ($submenus as $submenu) {
+        //         $submenuModel = SubMenu::create($submenu);
+        //         $subMenuIds2[] = $submenuModel->id;
+        //     }
 
 
-            DB::commit();
-        } catch (\Exception $e) {
 
-            DB::rollback();
-            throw $e;
-        }
+        //     $menu_id = 2;
+        //     foreach ($subMenuIds2 as $subMenuIds) {
+        //         MenuSubmenu::create([
+        //             'menu_id' => $menu_id,
+        //             'submenu_id' => $subMenuIds
+        //         ]);
+        //     }
 
-        Jabatan::insert(
-            [
-                [
-                    "nama_jabatan" => "Administrator",
-                ],
-                [
-                    "nama_jabatan" => "Auditor",
-                ],
-                [
-                    "nama_jabatan" => "Petugas",
-                ]
-            ]
-        );
-        $features = [
-            [
-                'submenu_id' => 1,
-                'name' => 'Tambah AC',
-                'is_active' => 1,
-                'icon' => 'bx bx-plus',
-                'location' => '1'
-            ],
-            [
-                'submenu_id' => 1,
-                'name' => 'Edit AC',
-                'is_active' => 1,
-                'icon' => 'bx bx-edit',
-                'location' => '2'
-            ],
-            [
-                'submenu_id' => 1,
-                'name' => 'Detail AC',
-                'is_active' => 1,
-                'icon' => 'bx bx-low-vision',
-                'location' => '3'
-            ],
-            [
-                'submenu_id' => 1,
-                'name' => 'Delete AC',
-                'is_active' => 1,
-                'icon' => 'bx bx-trash',
-                'location' => '4'
-            ],
-        ];
 
-        foreach ($features as $featureData) {
-            $feature = Feature::create($featureData); // Simpan data ke tabel features
+        //     DB::commit();
+        // } catch (\Exception $e) {
 
-            // Tambahkan entri ke tabel pivot_feature menggunakan attach
-            $pivotData = [
-                'user_id' => 1, // Sesuaikan dengan user ID yang sesuai
-                'feature_id' => $feature->id
-            ];
-            DB::table('pivot_feature')->insert($pivotData);
-            DB::table('user_feature')->insert($pivotData);
-        }
+        //     DB::rollback();
+        //     throw $e;
+        // }
+
+        // Jabatan::insert(
+        //     [
+        //         [
+        //             "nama_jabatan" => "Administrator",
+        //         ],
+        //         [
+        //             "nama_jabatan" => "Auditor",
+        //         ],
+        //         [
+        //             "nama_jabatan" => "Petugas",
+        //         ]
+        //     ]
+        // );
+        // $features = [
+        //     [
+        //         'submenu_id' => 1,
+        //         'name' => 'Tambah AC',
+        //         'is_active' => 1,
+        //         'icon' => 'bx bx-plus',
+        //         'location' => '1'
+        //     ],
+        //     [
+        //         'submenu_id' => 1,
+        //         'name' => 'Edit AC',
+        //         'is_active' => 1,
+        //         'icon' => 'bx bx-edit',
+        //         'location' => '2'
+        //     ],
+        //     [
+        //         'submenu_id' => 1,
+        //         'name' => 'Detail AC',
+        //         'is_active' => 1,
+        //         'icon' => 'bx bx-low-vision',
+        //         'location' => '3'
+        //     ],
+        //     [
+        //         'submenu_id' => 1,
+        //         'name' => 'Delete AC',
+        //         'is_active' => 1,
+        //         'icon' => 'bx bx-trash',
+        //         'location' => '4'
+        //     ],
+        // ];
+
+        // foreach ($features as $featureData) {
+        //     $feature = Feature::create($featureData); 
+
+
+        //     $pivotData = [
+        //         'user_id' => 1, 
+        //         'feature_id' => $feature->id
+        //     ];
+        //     DB::table('pivot_feature')->insert($pivotData);
+        //     DB::table('user_feature')->insert($pivotData);
+        // }
     }
 }

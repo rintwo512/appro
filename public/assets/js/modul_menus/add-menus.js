@@ -11,7 +11,7 @@ $(document).ready(function () {
                   icon: "bx bx-data"
             },
             Settings: {
-                  url: "/settings",
+                  url: "javascript:void(0)",
                   location: "3",
                   icon: "bx bx-cog"
             },

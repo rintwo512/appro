@@ -60,8 +60,13 @@
                         <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" aria-expanded="false">
                             <div class="d-flex align-items-center">
                                 <div class="user-profile-img">
-                                    <img src="{{ asset('assets/images/profile/' . auth()->user()->image) }}"
-                                        class="rounded-circle" width="35" height="35" alt="modernize-img" />
+                                    @if (auth()->user()->image != "default.jpg")
+                                        <img src="{{ asset('/uploads/profile_images/' . auth()->user()->image) }}"
+                                            class="rounded-circle" width="35" height="35" alt="modernize-img" />
+                                    @else
+                                        <img src="{{ asset('assets/images/profile/' . auth()->user()->image) }}"
+                                            class="rounded-circle" width="35" height="35" alt="modernize-img" />
+                                    @endif
                                 </div>
                             </div>
                         </a>
@@ -70,8 +75,14 @@
                             <div class="profile-dropdown position-relative" data-simplebar>
 
                                 <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                    <img src="{{ asset('assets/images/profile/' . auth()->user()->image) }}"
-                                        class="rounded-circle" width="80" height="80" alt="modernize-img" />
+                                    @if (auth()->user()->image != "default.jpg")
+                                        <img src="{{ asset('/uploads/profile_images/' . auth()->user()->image) }}"
+                                            class="rounded-circle" width="80" height="80"
+                                            alt="modernize-imgddd" />
+                                    @else
+                                        <img src="{{ asset('assets/images/profile/' . auth()->user()->image) }}"
+                                            class="rounded-circle" width="80" height="80" alt="modernize-img" />
+                                    @endif
                                     <div class="ms-3">
                                         <h5 class="mb-1 fs-3">{{ auth()->user()->name }}</h5>
                                         <span class="mb-1 d-block">{{ auth()->user()->jabatan->nama_jabatan }}</span>

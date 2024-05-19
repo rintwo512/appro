@@ -78,7 +78,8 @@
                 <ul class="mb-0">
                     <li class="pb-7">
                         <div class="message-body">
-                            <a href="../main/app-email.html" class="py-8 px-7 d-flex align-items-center">
+                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modalDetailUsers"
+                                class="py-8 px-7 d-flex align-items-center">
                                 <span
                                     class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
                                     <i class='bx bx-message-square-add fs-7'></i>
@@ -87,7 +88,8 @@
                                     <h6 class="mb-1 fs-3 fw-semibold lh-base">Buat Memo</h6>
                                 </div>
                             </a>
-                            <a href="../main/app-email.html" class="py-8 px-7 d-flex align-items-center">
+                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modalDetailUsers"
+                                class="py-8 px-7 d-flex align-items-center">
                                 <span
                                     class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
                                     <i class='bx bx-message-alt-dots fs-7'></i>
@@ -97,7 +99,8 @@
                                 </div>
                                 <span class="badge bg-info rounded">3</span>
                             </a>
-                            <a href="../main/app-email.html" class="py-8 px-7 d-flex align-items-center">
+                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modalDetailUsers"
+                                class="py-8 px-7 d-flex align-items-center">
                                 <span
                                     class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
                                     <i class='bx bx-message-alt-minus fs-7'></i>
@@ -107,7 +110,8 @@
                                 </div>
                                 <span class="badge bg-warning rounded">3</span>
                             </a>
-                            <a href="../main/app-email.html" class="py-8 px-7 d-flex align-items-center">
+                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modalDetailUsers"
+                                class="py-8 px-7 d-flex align-items-center">
                                 <span
                                     class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
                                     <i class='bx bx-trash fs-7'></i>
@@ -126,6 +130,7 @@
         </div>
     </div>
 
+    @include('components.admin.manajemen-users.modal-detail-users')
 
     <div class="dark-transparent sidebartoggler"></div>
 

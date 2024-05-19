@@ -57,11 +57,19 @@
                         <x-tbody>
                             @foreach ($users as $user)
                                 <!-- start row -->
-                                @if ($user->id != 1)
+                                @if ($user->role != 1)
                                     <tr>
-                                        <td><img src="{{ asset('assets/images/profile/' . $user->image) }}"
-                                                class="rounded-circle" width="40" height="40"
-                                                alt="{{ auth()->user()->name }}" /></td>
+                                        <td>
+                                            @if ($user->image != 'default.jpg')
+                                                <img src="{{ asset('/uploads/profile_images/' . $user->image) }}"
+                                                    class="rounded-circle" width="40" height="40"
+                                                    alt="{{ auth()->user()->name }}" />
+                                            @else
+                                                <img src="{{ asset('assets/images/profile/' . $user->image) }}"
+                                                    class="rounded-circle" width="40" height="40"
+                                                    alt="{{ auth()->user()->name }}" />
+                                            @endif
+                                        </td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->nik }}</td>
                                         <td>{{ $user->email }}</td>
@@ -69,9 +77,8 @@
                                         <td>{!! $user->is_active == 1
                                             ? "<span class='text-success'>Active</span>"
                                             : "<span class='text-danger'>pending</span>" !!}</td>
-                                        <td>{!! $user->status_login == 'online'
-                                            ? "<span class='text-success'>Online</span>"
-                                            : "<span class='text-danger'>Offline</span>" !!}</td>
+                                        <td>{{ $user->user_time_online? Illuminate\Support\Carbon::parse($user->user_time_online)->locale('id')->diffForHumans(): '' }}
+                                        </td>
                                         <td>
 
                                             <div class="btn-group">

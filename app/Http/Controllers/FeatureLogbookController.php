@@ -58,7 +58,7 @@ class FeatureLogbookController extends Controller
                 ->withInput()
                 ->with('error', 'Terjadi kesalahan!');
         }
-
+ 
 
         $submenu = SubMenu::where('submenu_label', 'Data AC')->first();
 

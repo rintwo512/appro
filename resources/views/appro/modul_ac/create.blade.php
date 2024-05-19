@@ -493,7 +493,8 @@
                         <div id="colKeterangan" class="col-md-6">
                             <label class="form-label">Keterangan </label>
                             <textarea class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" id="keterangan"
-                                rows="4" cols="4" value="{{ old('keterangan') }}" placeholder="Sudah tidak bisa diperbaiki"></textarea>
+                                rows="4" cols="4" value="{{ old('keterangan') }}"
+                                placeholder="Contoh : Sudah tidak bisa diperbaiki"></textarea>
                             @error('keterangan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -503,7 +504,7 @@
                         <div class="col-md-12 mt-4">
                             <label class="form-label">Catatan </label>
                             <textarea class="form-control @error('catatan') is-invalid @enderror" name="catatan" id="catatan" rows="4"
-                                cols="4" value="{{ old('catatan') }}" placeholder="Butuh penggantian AC baru"></textarea>
+                                cols="4" value="{{ old('catatan') }}" placeholder="Contoh : Butuh penggantian AC baru"></textarea>
                             @error('catatan')
                                 <div class="invalid-feedback">
                                     {{ $message }}

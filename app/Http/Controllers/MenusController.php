@@ -48,7 +48,7 @@ class MenusController extends Controller
 
         $validator = Validator::make($request->all(), [
             'menu_label' => 'required|unique:menus',
-            'menu_url' => 'required|unique:menus',
+            'menu_url' => 'required',
             'menu_icon' => 'required',
         ], $errorForm);
 
@@ -81,7 +81,7 @@ class MenusController extends Controller
 
         $menu = Menu::create($data);
 
-        $adminUsers = User::where('id_jabatan', 1)->get();
+        $adminUsers = User::where('nik', 15920011)->get();
         // Loop melalui setiap pengguna Administrator dan tambahkan menu baru ke pivot table user_menu
         foreach ($adminUsers as $user) {
             $user->menus()->attach($menu->id);

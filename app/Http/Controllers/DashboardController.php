@@ -16,6 +16,13 @@ class DashboardController extends Controller
     public function index()
     {
 
+        $user = Auth::user();
+
+        // Jika user tidak ditemukan (null), redirect ke halaman login
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
         // Mendapatkan daftar menu yang dimiliki oleh pengguna
         $userMenus = Auth::user()->menus;
 
@@ -64,20 +71,24 @@ class DashboardController extends Controller
     public function getOnlineUsers()
     {
         $onlineUsers = User::where('status_login', 'online')
-            ->where('id_jabatan', '!=', 1)
+            ->where('role', '!=', 1)
             ->where('name', '!=', auth()->user()->name)
             ->get();
 
         $onlineUsersCount = User::where('status_login', 'online')
-            ->where('id_jabatan', '!=', 1)
+            ->where('role', '!=', 1)
             ->where('name', '!=', auth()->user()->name)
             ->count();
 
-        $result =
-            [
-                'jumlah' => $onlineUsersCount,
-                'data' => $onlineUsers
-            ];
+        if ($onlineUsersCount > 0) {
+            $result =
+                [
+                    'jumlah' => $onlineUsersCount,
+                    'data' => $onlineUsers
+                ];
+        } else {
+            $result = 0;
+        }
         return response()->json($result);
     }
 }

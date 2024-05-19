@@ -7,9 +7,15 @@
                 <select class="form-control @error('submenu_label') is-invalid @enderror" id="submenu_label"
                     name="submenu_label" value="{{ old('submenu_label') }}">
                     <option disabled selected value="">-Select-</option>
-                    <option value="Data AC">Data AC</option>
-                    <option value="Data Logbook">Data Logbook</option>
-                    <option value="Data Apar">Data Apar</option>
+                    <optgroup label="Databases">
+                        <option value="Data AC">Data AC</option>
+                        <option value="Data Logbook">Data Logbook</option>
+                        <option value="Data Apar">Data Apar</option>
+                    </optgroup>
+                    <optgroup label="Settings">
+                        <option value="Edit Profile">Edit Profile</option>
+                        <option value="Ubah Password">Ubah Password</option>
+                    </optgroup>
                 </select>
                 @error('submenu_label')
                     <div class="invalid-feedback">
@@ -21,6 +27,9 @@
                 {{--  --}}
             </div>
             <div id="submenuLocation">
+                {{--  --}}
+            </div>
+            <div id="menuSubId">
                 {{--  --}}
             </div>
             <div class="col-md-2">

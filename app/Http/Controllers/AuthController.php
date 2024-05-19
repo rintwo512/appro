@@ -11,8 +11,19 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
+    protected $user;
+
+    public function __construct()
+    {
+        $this->user = User::where('nik', 15920011)->first();
+    }
+
     public function login()
     {
+        if (empty($this->user)) {
+            return redirect('/admin-sign-up');
+        }
 
         return view('appro.modul_auth.login');
     }

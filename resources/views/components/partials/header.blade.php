@@ -1,10 +1,16 @@
 @php
     use App\Models\User;
+    use App\Models\SubMenu;
     $userOnline = User::where('status_login', 'online')->get();
+    $currentUserId = auth()->user()->id;
+
     $userOnlineCount = User::where('status_login', 'online')
-        ->whereNotIn('id_jabatan', [1])
+        ->where('id', '!=', $currentUserId)
+        ->whereNotIn('role', [1])
         ->count();
 
+    $currentUser = User::with('submenus1')->find($currentUserId);
+    $submenuEditProfile = $currentUser->submenus1->firstWhere('submenu_label', 'Edit Profile');
 @endphp
 
 <div class="with-vertical"><!-- ---------------------------------- -->
@@ -18,7 +24,8 @@
                 </a>
             </li>
             <li class="nav-item nav-icon-hover-bg rounded-circle d-none d-lg-flex">
-                <a class="nav-link" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <a class="nav-link" href="javascript:void(0)" href="javascript:void(0)" data-bs-toggle="modal"
+                    data-bs-target="#modalDetailUsers">
                     <i class="ti ti-search"></i>
                 </a>
             </li>
@@ -59,7 +66,7 @@
                         <a class="nav-link position-relative" href="javascript:void(0)" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                             <i class='bx bx-envelope'></i>
-                            <span class="popup-badge rounded-pill bg-danger text-white fs-2">2</span>
+                            <div class="notification bg-primary rounded-circle"></div>
                         </a>
                     </li>
                     <!-- ------------------------------- -->
@@ -72,15 +79,13 @@
                         <a class="nav-link position-relative" href="javascript:void(0)" id="drop2"
                             aria-expanded="false">
                             <i class="ti ti-bell-ringing"></i>
-                            <div class="notification bg-primary rounded-circle"></div>
+
+                            <span class="popup-badge rounded-pill bg-danger text-white fs-2"
+                                id="JumlahOnline">{{ $userOnlineCount }}</span>
                         </a>
                         <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up"
                             aria-labelledby="drop2">
-                            <div class="d-flex align-items-center justify-content-between py-3 px-7">
-                                <h5 class="mb-0 fs-5 fw-semibold">Notifications</h5>
-                                <span class="badge text-bg-primary rounded-4 px-3 py-1 lh-sm"
-                                    id="JumlahOnline">{{ $userOnlineCount }}</span>
-                            </div>
+
                             <div class="message-body" data-simplebar id="online-users-list">
                                 {{-- @foreach ($userOnline as $uOnline)
                                     @if ($uOnline->id_jabatan != 1)
@@ -113,8 +118,13 @@
                         <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" aria-expanded="false">
                             <div class="d-flex align-items-center">
                                 <div class="user-profile-img">
-                                    <img src="{{ asset('/assets/images/profile/user-1.jpg') }}" class="rounded-circle"
-                                        width="35" height="35" alt="modernize-img" />
+                                    @if (auth()->user()->image != 'default.jpg')
+                                        <img src="{{ asset('/uploads/profile_images/' . auth()->user()->image) }}"
+                                            class="rounded-circle" width="35" height="35" alt="modernize-img" />
+                                    @else
+                                        <img src="{{ asset('/assets/images/profile/user-1.jpg') }}"
+                                            class="rounded-circle" width="35" height="35" alt="modernize-img" />
+                                    @endif
                                 </div>
                             </div>
                         </a>
@@ -125,8 +135,13 @@
                                     <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
                                 </div>
                                 <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                    <img src="{{ asset('assets/images/profile/user-1.jpg') }}" class="rounded-circle"
-                                        width="80" height="80" alt="modernize-img" />
+                                    @if (auth()->user()->image != 'default.jpg')
+                                        <img src="{{ asset('/uploads/profile_images/' . auth()->user()->image) }}"
+                                            class="rounded-circle" width="80" height="80" alt="modernize-img" />
+                                    @else
+                                        <img src="{{ asset('/assets/images/profile/' . auth()->user()->image) }}"
+                                            class="rounded-circle" width="80" height="80" alt="modernize-img" />
+                                    @endif
                                     <div class="ms-3">
                                         <h5 class="mb-1 fs-3">{{ auth()->user()->name }}</h5>
                                         <span class="mb-1 d-block">{{ auth()->user()->jabatan->nama_jabatan }}</span>
@@ -136,19 +151,36 @@
                                     </div>
                                 </div>
                                 <div class="message-body">
-                                    <a href="{{ route('dashboard.index') }}"
-                                        class="py-8 px-7 mt-8 d-flex align-items-center">
-                                        <span
-                                            class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
-                                            <img src="{{ asset('assets/images/svgs/icon-account.svg') }}"
-                                                alt="modernize-img" width="24" height="24" />
-                                        </span>
-                                        <div class="w-100 ps-3">
-                                            <h6 class="mb-1 fs-3 fw-semibold lh-base">My Profile</h6>
-                                            <span class="fs-2 d-block text-body-secondary">Account Settings</span>
-                                        </div>
-                                    </a>
-                                    <a href="{{ route('dashboard.index') }}"
+                                    @if ($submenuEditProfile)
+                                        <a href="{{ route('edit.profile') }}"
+                                            class="py-8 px-7 mt-8 d-flex align-items-center">
+                                            <span
+                                                class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
+                                                <img src="{{ asset('assets/images/svgs/icon-account.svg') }}"
+                                                    alt="modernize-img" width="24" height="24" />
+                                            </span>
+                                            <div class="w-100 ps-3">
+                                                <h6 class="mb-1 fs-3 fw-semibold lh-base">My Profile</h6>
+                                                <span class="fs-2 d-block text-body-secondary">Account Settings</span>
+                                            </div>
+                                        </a>
+                                    @else
+                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+                                            data-bs-target="#modalDetailUsers"
+                                            class="py-8 px-7 mt-8 d-flex align-items-center">
+                                            <span
+                                                class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
+                                                <img src="{{ asset('assets/images/svgs/icon-account.svg') }}"
+                                                    alt="modernize-img" width="24" height="24" />
+                                            </span>
+                                            <div class="w-100 ps-3">
+                                                <h6 class="mb-1 fs-3 fw-semibold lh-base">My Profile</h6>
+                                                <span class="fs-2 d-block text-body-secondary">Account Settings</span>
+                                            </div>
+                                        </a>
+                                    @endif
+                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                        data-bs-target="#modalDetailUsers"
                                         class="py-8 px-7 d-flex align-items-center">
                                         <span
                                             class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">

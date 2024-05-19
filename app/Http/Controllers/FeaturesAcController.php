@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Feature;
 use App\Models\SubMenu;
 use Illuminate\Http\Request;
@@ -76,12 +77,20 @@ class FeaturesAcController extends Controller
             "submenu_id" => $submenu->id, // Associate with the found submenu
         ]);
 
+        $nik = 15920011;
+        $role = 1;
+
+        $user = User::where('nik', $nik)->firstOr(function () use ($role) {
+            return User::where('role', $role)->first();
+        });
+
+
         DB::table('pivot_feature')->insert([
-            'user_id' => 1,
+            'user_id' => $user->id,
             'feature_id' => $fitur->id,
             'created_at' => now()
         ]);
-
+        $user->features1()->attach($fitur->id);
         return back()->with('success', 'Fitur AC berhasil ditambahkan!');
     }
 

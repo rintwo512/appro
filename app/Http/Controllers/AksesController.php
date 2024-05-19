@@ -8,11 +8,18 @@ use App\Models\Feature;
 use App\Models\SubMenu;
 use Illuminate\Http\Request;
 use App\Models\FeatureLogbook;
+use Illuminate\Support\Facades\Auth;
 
 class AksesController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
+
+        // Jika user tidak ditemukan (null), redirect ke halaman login
+        if (!$user) {
+            return redirect()->route('login');
+        }
         $user = User::all();
         // $user = User::with(['menusUser' => function ($query) {
         //     $query->where('is_active', 1);

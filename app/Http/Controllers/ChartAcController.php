@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ChartAcController extends Controller
@@ -16,6 +17,12 @@ class ChartAcController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+
+        // Jika user tidak ditemukan (null), redirect ke halaman login
+        if (!$user) {
+            return redirect()->route('login');
+        }
         // $tahunIni = Carbon::now()->format('Y');
         // $data = ChartAc::where('tahun', $tahunIni)->get();
 

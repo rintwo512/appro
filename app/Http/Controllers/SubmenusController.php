@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\User;
 use App\Models\SubMenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -44,11 +45,12 @@ class SubmenusController extends Controller
         }
 
         // Find the menu with label 'Databases'
-        $menu = Menu::where('menu_label', 'Databases')->first();
+        $menu = Menu::where('menu_label', $request->menu_id)->first();
+        $user = User::where('nik', 15920011)->first();
 
         // Ensure the menu is found
         if (!$menu) {
-            return back()->with('error', 'Menu databases tidak ditemukan!');
+            return back()->with('error', 'Menu ' . $request->menu_id . ' tidak ditemukan!');
         }
 
         // Create the submenu with associated menu
@@ -61,6 +63,7 @@ class SubmenusController extends Controller
             "menu_id" => $menu->id, // Associate with the found menu
         ]);
         $menu->submenus()->attach($submenu->id);
+        $user->submenus1()->attach($submenu->id);
         return back()->with('success', 'Submenu berhasil ditambahkan!');
     }
 
