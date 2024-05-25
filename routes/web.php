@@ -39,11 +39,7 @@ Route::get('/manajemen-akses', function () {
 });
 
 
-Route::get('/admin-sign-up', [SignupAdminController::class, 'index'])->name('signup.admin')->middleware('guest');
-Route::post('/admin-sign-up', [SignupAdminController::class, 'signup'])->name('signup.admin.post')->middleware('guest');
 
-
-Route::get('/data-apar', fn () => 'data apar');
 
 
 
@@ -52,6 +48,12 @@ Route::get('/login', [AuthController::class, 'login'])->name('login')->middlewar
 Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
 Route::post('/logout/{id}', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/admin-sign-up', [SignupAdminController::class, 'index'])->name('signup.admin')->middleware('guest');
+Route::post('/admin-sign-up', [SignupAdminController::class, 'signup'])->name('signup.admin.post')->middleware('guest');
+
+
+Route::get('/data-apar', fn () => 'data apar');
+
 
 // DASHBOARD
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
@@ -59,20 +61,23 @@ Route::get('/get-online-users', [DashboardController::class, 'getOnlineUsers'])-
 
 
 // AC
-Route::get('data-ac', [AcController::class, 'index'])->name('index.ac');
-Route::get('create-data-ac', [AcController::class, 'create'])->name('ac.create');
-Route::post('create-data-ac', [AcController::class, 'store'])->name('ac.create.post');
-Route::get('delete/{id}', [AcController::class, 'destroy'])->name('ac.delete');
-Route::get('edit-data-ac/{ac}/edit', [AcController::class, 'edit'])->name('ac.edit');
-Route::post('edit-data-ac/{ac}', [AcController::class, 'update'])->name('ac.update');
-Route::get('data-ac-export', [AcController::class, 'exportDataAc'])->name('ac.export');
-Route::get('data-ac-pdf/{id}', [AcController::class, 'exportDataAcPdf'])->name('ac.export.pdf');
-Route::get('data-ac-recycle', [AcController::class, 'recycelBin'])->name('ac.recycle.bin');
-Route::get('data-ac-restore/{id}', [AcController::class, 'restore'])->name('ac.restore');
-Route::get('data-ac-hapus', [AcController::class, 'hapusPermanent'])->name('ac.hapus.permanent');
-Route::post('data-ac-baru', [AcController::class, 'queryDataAcBaru'])->name('ac.baru');
-Route::get('grafik-ac', [AcController::class, 'getChart'])->name('chart.getchart');
-Route::get('filter-ac', [AcController::class, 'filterData']);
+Route::middleware(['auth'])->group(function () {
+      Route::get('data-ac', [AcController::class, 'index'])->name('index.ac');
+      Route::get('create-data-ac', [AcController::class, 'create'])->name('ac.create');
+      Route::post('create-data-ac', [AcController::class, 'store'])->name('ac.create.post');
+      Route::get('delete/{id}', [AcController::class, 'destroy'])->name('ac.delete');
+      Route::get('edit-data-ac/{ac}/edit', [AcController::class, 'edit'])->name('ac.edit');
+      Route::post('edit-data-ac/{ac}', [AcController::class, 'update'])->name('ac.update');
+      Route::get('data-ac-export', [AcController::class, 'exportDataAc'])->name('ac.export');
+      Route::get('data-ac-pdf/{id}', [AcController::class, 'exportDataAcPdf'])->name('ac.export.pdf');
+      Route::get('data-ac-recycle', [AcController::class, 'recycelBin'])->name('ac.recycle.bin');
+      Route::get('data-ac-restore/{id}', [AcController::class, 'restore'])->name('ac.restore');
+      Route::get('data-ac-hapus', [AcController::class, 'hapusPermanent'])->name('ac.hapus.permanent');
+      Route::post('data-ac-baru', [AcController::class, 'queryDataAcBaru'])->name('ac.baru');
+      Route::get('grafik-ac', [AcController::class, 'getChart'])->name('chart.getchart');
+      Route::get('filter-ac', [AcController::class, 'filterData']);
+});
+
 
 // CHART
 Route::get('chart-ac', [ChartAcController::class, 'index'])->name('chart-ac.index');

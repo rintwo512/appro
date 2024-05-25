@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 19, 2024 at 03:05 PM
+-- Generation Time: May 22, 2024 at 12:32 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -163,6 +163,15 @@ CREATE TABLE `jabatan` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `jabatan`
+--
+
+INSERT INTO `jabatan` (`id`, `nama_jabatan`, `created_at`, `updated_at`) VALUES
+(1, 'Administrator', NULL, NULL),
+(2, 'Auditor', NULL, NULL),
+(3, 'Petugas', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -222,6 +231,15 @@ CREATE TABLE `menus` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `menus`
+--
+
+INSERT INTO `menus` (`id`, `menu_label`, `menu_url`, `menu_icon`, `menu_location`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'Dashboard', '/dashboard', 'bx bx-home-alt', '1', 1, '2024-05-22 12:30:12', '2024-05-22 12:30:12'),
+(2, 'Databases', 'javascript:void(0)', 'bx bx-data', '2', 1, '2024-05-22 12:30:18', '2024-05-22 12:30:18'),
+(3, 'Settings', 'javascript:void(0)', 'bx bx-cog', '3', 1, '2024-05-22 12:30:24', '2024-05-22 12:30:24');
+
 -- --------------------------------------------------------
 
 --
@@ -234,6 +252,16 @@ CREATE TABLE `menu_submenu` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `menu_submenu`
+--
+
+INSERT INTO `menu_submenu` (`menu_id`, `submenu_id`, `created_at`, `updated_at`) VALUES
+(2, 1, NULL, NULL),
+(2, 2, NULL, NULL),
+(3, 3, NULL, NULL),
+(3, 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -336,6 +364,16 @@ CREATE TABLE `submenus` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `submenus`
+--
+
+INSERT INTO `submenus` (`id`, `menu_id`, `submenu_label`, `submenu_url`, `submenu_icon`, `submenu_location`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 2, 'Data AC', '/data-ac', 'ti ti-circle', '1', 1, '2024-05-22 12:30:31', '2024-05-22 12:30:31'),
+(2, 2, 'Data Logbook', '/data-logbook', 'ti ti-circle', '2', 1, '2024-05-22 12:30:36', '2024-05-22 12:30:36'),
+(3, 3, 'Edit Profile', '/settings/edit-profile', 'ti ti-circle', '1', 1, '2024-05-22 12:30:42', '2024-05-22 12:30:42'),
+(4, 3, 'Ubah Password', '/settings/ubah-password', 'ti ti-circle', '2', 1, '2024-05-22 12:30:48', '2024-05-22 12:30:48');
+
 -- --------------------------------------------------------
 
 --
@@ -360,6 +398,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `id_jabatan`, `name`, `email`, `nik`, `image`, `is_active`, `role`, `password`, `status_login`, `user_time_online`, `user_time_offline`, `last_ip`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Rinto Harahap', 'ryntooh@gmail.com', 15920011, 'default.jpg', 1, 1, '$2y$12$US6js4aAoBMpFX0R9p0oTe1ptrd8rKB//0rwWP/JH2ax0bhO6Yfde', 'online', '2024-05-22 12:29:57', '2024-05-22 12:29:21', NULL, NULL, '2024-05-22 12:28:21', '2024-05-22 12:29:57');
 
 -- --------------------------------------------------------
 
@@ -413,6 +458,15 @@ CREATE TABLE `user_menu` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `user_menu`
+--
+
+INSERT INTO `user_menu` (`user_id`, `menu_id`, `created_at`, `updated_at`) VALUES
+(1, 1, NULL, NULL),
+(1, 2, NULL, NULL),
+(1, 3, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -425,6 +479,16 @@ CREATE TABLE `user_submenu` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_submenu`
+--
+
+INSERT INTO `user_submenu` (`user_id`, `sub_menu_id`, `created_at`, `updated_at`) VALUES
+(1, 1, NULL, NULL),
+(1, 2, NULL, NULL),
+(1, 3, NULL, NULL),
+(1, 4, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -624,7 +688,7 @@ ALTER TABLE `features_logbook`
 -- AUTO_INCREMENT for table `jabatan`
 --
 ALTER TABLE `jabatan`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `logbook`
@@ -642,7 +706,7 @@ ALTER TABLE `logbook_evidens`
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -660,13 +724,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `submenus`
 --
 ALTER TABLE `submenus`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

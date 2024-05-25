@@ -13,7 +13,7 @@
     <!-- Core Css -->
     <link rel="stylesheet" href="{{ asset('/assets/css/styles.css') }}" />
 
-    <title>Modernize Bootstrap Admin</title>
+    <title>APPRO - 404</title>
 </head>
 
 <body>

@@ -7,7 +7,7 @@ $(document).ready(function () {
             $.ajax({
                   type: 'GET',
                   url: 'chart-ac/cari',
-                  data: { updateTahun: tahun },
+                  data: { updateTahun: tahun }, 
                   success: function (data) {
                         // Hapus semua baris yang ada di tabel
                         $('#myTable tbody').empty();

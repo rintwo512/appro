@@ -50,7 +50,7 @@
                                                     class="text-danger">*</span></label>
                                             <div class="input-group mb-3">
                                                 <input type="text"
-                                                    class="form-control @error('login') is-invalid @enderror"
+                                                    class="form-control @error('name') is-invalid @enderror"
                                                     id="name" name="name">
                                                 @error('name')
                                                     <div class="invalid-feedback">
@@ -64,7 +64,7 @@
                                                     class="text-danger">*</span></label>
                                             <div class="input-group mb-3">
                                                 <input type="text"
-                                                    class="form-control @error('login') is-invalid @enderror"
+                                                    class="form-control @error('nik') is-invalid @enderror"
                                                     id="nik" name="nik"
                                                     onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                                 @error('nik')
@@ -78,7 +78,7 @@
                                             <label for="email" class="form-label">Email</label>
                                             <div class="input-group mb-3">
                                                 <input type="text"
-                                                    class="form-control @error('login') is-invalid @enderror"
+                                                    class="form-control @error('email') is-invalid @enderror"
                                                     id="email" name="email">
                                                 @error('email')
                                                     <div class="invalid-feedback">

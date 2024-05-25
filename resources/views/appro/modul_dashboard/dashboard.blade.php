@@ -9,7 +9,7 @@
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <h4 class="card-title mb-0" id="chartTitle"> Monthly Earnings </h4>
                                 <div>
-                                    <select class="form-select text-dark" name="tahun" id="tahun">
+                                    <select class="form-select text-dark" name="tahun" id="tahun"> 
                                         @foreach ($list_tahun as $tahun)
                                             <option value="{{ $tahun->tahun }}">{{ $tahun->tahun }}</option>
                                         @endforeach
@@ -54,7 +54,7 @@
                             <div class="ms-auto">
                                 <p class="card-subtitle text-primary">Tidak Aktif</p>
                                 <h4 class="card-title fs-7">{{ $acRusak }} Unit</h4>
-                            </div>
+                            </div>s
                         </div>
                     </div>
                 </div>

@@ -42,6 +42,8 @@ class AuthController extends Controller
         $loginField = $request->input('login');
         $password = $request->input('password');
 
+
+
         $user = User::where(function ($query) use ($loginField) {
             $query->where('nik', $loginField)
                 ->orWhere('email', $loginField);
@@ -67,6 +69,8 @@ class AuthController extends Controller
                         if ($user->id_jabatan == 1) {
                             return to_route('users.index');
                         } else {
+                            $request->session()->invalidate();
+                            $request->session()->regenerateToken();
                             return to_route('page-not-found');
                         }
                     } else {
