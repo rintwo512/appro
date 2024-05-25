@@ -60,16 +60,7 @@
                                 @endif
                             @endforeach
                         </x-tbody>
-                        <x-tfoot>
-                            <!-- start row -->
-                            <tr>
-                                <th>Users</th>
-                                <th>Menu</th>
-                                <th>Submenu</th>
-                                <th>Fitur</th>
-                            </tr>
-                            <!-- end row -->
-                        </x-tfoot>
+                       
                     </x-table>
                 </div>
             </div>

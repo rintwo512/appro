@@ -1,7 +1,8 @@
 <x-main title="{{ $title }}">
     <div class="container-fluid">
         <div class="col-md-4">
-            <h4 class="card-title mb-3">{{ $user->name }} Menu</h4>
+            <h4 class="card-title mb-3"><span class="text-primary fw-bold">{{ $user->name }}</span> | Menu</h4>
+            <hr>
             <div class="card">
                 <div class="card-body">
                     <form id="updateMenuForm" action="{{ route('akses.menu.update', ['id' => $user->id]) }}"

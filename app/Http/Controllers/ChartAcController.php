@@ -128,8 +128,9 @@ class ChartAcController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $id = $request->idUpdateChart;
 
         $validator = Validator::make($request->all(), [
             'tahunUpdateChart' => 'required',
@@ -178,10 +179,7 @@ class ChartAcController extends Controller
         ChartAc::where('id', $id)->delete();
         $count = ChartAc::where('tahun', $tahun)->count();
         $total = ChartAc::where('tahun', $tahun)->sum('total');
-        return response()->json([
-            'count' => $count,
-            'total' => $total
-        ]);
+        return back()->with('success', 'Data berhasil dihapus!');
     }
 
     public function deleteAllChart(Request $request)

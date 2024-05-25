@@ -35,7 +35,8 @@
                     @if ($menu->is_active == 1)
                         <li class="sidebar-item">
                             <a class="sidebar-link {{ !$menu->submenus->isEmpty() ? 'has-arrow' : '' }}"
-                                href="{{ $menu->menu_url }}" aria-expanded="false">
+                                href="{{ $menu->menu_url != 'javascript:void(0)' ? route($menu->menu_url) : 'javascript:void(0)' }}"
+                                aria-expanded="false">
                                 <span class="d-flex">
                                     <i class='{{ $menu->menu_icon }} fs-6'></i>
                                 </span>
@@ -47,7 +48,7 @@
                                         @if ($submenu->is_active === 1)
                                             @if ($user->submenus1->contains('id', $submenu->id))
                                                 <li class="sidebar-item">
-                                                    <a href="{{ $submenu->submenu_url }}" class="sidebar-link">
+                                                    <a href="{{ route($submenu->submenu_url) }}" class="sidebar-link">
                                                         <div
                                                             class="round-16 d-flex align-items-center justify-content-center">
                                                             <i class="{{ $submenu->submenu_icon }}"></i>

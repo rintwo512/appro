@@ -47,10 +47,14 @@
                                 <i class="bx bx-bar-chart-alt-2 fs-4"></i>
                             </a>
 
-                            <a href="{{ route('ac.recycle.bin') }}" class="btn btn-secondary" data-bs-toggle="tooltip"
-                                data-bs-placement="top" data-bs-original-title="Recycle Bin">
-                                <i class="bx bx-trash fs-4"></i>
-                            </a>
+
+                            @if (auth()->user()->role === 1)
+                                <a href="{{ route('ac.recycle.bin') }}" class="btn btn-secondary"
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    data-bs-original-title="Recycle Bin">
+                                    <i class="bx bx-trash fs-4"></i>
+                                </a>
+                            @endif
 
                             <div class="btn-group" role="group">
                                 <button id="btnFilterAc" type="button"
@@ -111,6 +115,7 @@
                                 <th>Wing</th>
                                 <th>Lantai</th>
                                 <th>Ruangan</th>
+                                <th>Type</th>
                                 <th>Tgl Mainten</th>
                                 <th>Status</th>
                                 <th>Opsi</th>
@@ -125,6 +130,7 @@
                                     <td>{{ $ac->wing }}</td>
                                     <td>{{ $ac->lantai }}</td>
                                     <td>{{ $ac->ruangan }}</td>
+                                    <td>{{ $ac->type }}</td>
                                     <td>{{ $ac->tgl_maintenance? Illuminate\Support\Carbon::parse($ac->tgl_maintenance)->locale('id')->diffForHumans(): '' }}
                                     </td>
                                     <td>
@@ -189,7 +195,8 @@
                                                             data-petugasmaintac="{{ str_replace(',', '<br>', $ac->petugas_maint) }}"
                                                             data-petugaspemasanganac="{{ str_replace(',', '<br>', $ac->petugas_pemasangan) }}"
                                                             data-tanggalmaintenanceac="{{ $ac->tgl_maintenance? Illuminate\Support\Carbon::parse($ac->tgl_maintenance)->locale('id')->diffForHumans(): '' }}"
-                                                            data-updatedtimeac="{{ $ac->user_updated ? $ac->user_updated . '/' . Illuminate\Support\Carbon::parse($ac->user_updated_time)->diffForHumans() : '' }}"><i
+                                                            data-updatedtimeac="{{ $ac->user_updated ? $ac->user_updated . '/' . Illuminate\Support\Carbon::parse($ac->user_updated_time)->diffForHumans() : '' }}"
+                                                            data-createdat="{{ $ac->created_at? Illuminate\Support\Carbon::parse($ac->created_at)->locale('id')->isoFormat('dddd, DD MMMM YYYY'): '' }}"><i
                                                                 class="ti ti-eye"></i> Detail</button>
                                                     @endif
                                                 </li>
@@ -222,6 +229,7 @@
                                 <th>Wing</th>
                                 <th>Lantai</th>
                                 <th>Ruangan</th>
+                                <th>Type</th>
                                 <th>Tgl Mainten</th>
                                 <th>Status</th>
                                 <th>Opsi</th>

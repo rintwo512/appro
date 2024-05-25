@@ -9,7 +9,8 @@
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <h4 class="card-title mb-0" id="chartTitle"> Monthly Earnings </h4>
                                 <div>
-                                    <select class="form-select text-dark" name="tahun" id="tahun"> 
+                                    <span id="ruteChart" data-rute="{{ route('chart.getchart') }}"></span>
+                                    <select class="form-select text-dark" name="tahun" id="tahun">
                                         @foreach ($list_tahun as $tahun)
                                             <option value="{{ $tahun->tahun }}">{{ $tahun->tahun }}</option>
                                         @endforeach

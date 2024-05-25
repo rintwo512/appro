@@ -1,32 +1,31 @@
-
 let chart = null;
+const urlChart = $("#ruteChart").data("rute");
 
 function chartAc(year, title) {
-    const url = "/grafik-ac";
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
 
     $.ajax({
-        url: url,
+        url: urlChart,
         data: {
             tahun: year,
-            _token: $('meta[name="csrf-token"]').attr('content')
+            _token: $('meta[name="csrf-token"]').attr("content"),
         },
-        method: 'GET',
-        success: result => {
+        method: "GET",
+        success: (result) => {
             const tahun = result.data;
             if (chart) {
                 chart.destroy();
             }
-            const valTahun = tahun.map(item => parseInt(item.total));
-            const valBulan = tahun.map(item => item.bulan);
+            const valTahun = tahun.map((item) => parseInt(item.total));
+            const valBulan = tahun.map((item) => item.bulan);
             const kalkus = valTahun.reduce((acc, curr) => acc + curr);
             $("#chartTitle").html(`${title} | Total : ${kalkus}`);
             chart = drawChart(valTahun, title, year, valBulan);
-        }
+        },
     });
 }
 
@@ -50,7 +49,20 @@ function drawChart(valTahun, title, year, valBulan) {
             fontFamily: "Plus Jakarta Sans', sans-serif",
             foreColor: "#adb0bb",
         },
-        colors: ["#845EC2", "#D65DB1", "#FF6F91", "#FF9671", "#FFC75F", "#F9F871", "#3DDAB4", "#EB0000", "#3DD9EB", "#EB7900", "#F5BC00", "var(--bs-primary)"],
+        colors: [
+            "#845EC2",
+            "#D65DB1",
+            "#FF6F91",
+            "#FF9671",
+            "#FFC75F",
+            "#F9F871",
+            "#3DDAB4",
+            "#EB0000",
+            "#3DD9EB",
+            "#EB7900",
+            "#F5BC00",
+            "var(--bs-primary)",
+        ],
         plotOptions: {
             bar: {
                 borderRadius: 3,
@@ -92,18 +104,20 @@ function drawChart(valTahun, title, year, valBulan) {
         },
     };
 
-
-    var newChart = new ApexCharts(document.querySelector("#yearly-salary"), options);
+    var newChart = new ApexCharts(
+        document.querySelector("#yearly-salary"),
+        options
+    );
     newChart.render();
 
     return newChart;
 }
 
 $(document).ready(function () {
-    $('#tahun').change(function () {
+    $("#tahun").change(function () {
         var year = $(this).val();
 
-        if (year != '') {
+        if (year != "") {
             chartAc(year, `Maintenance AC : Tahun ${year}`);
         }
     });
@@ -112,24 +126,25 @@ $(document).ready(function () {
     let tahun = d.getFullYear();
     $("#chartTitle").html(`Maintenance AC : Tahun ${tahun}`);
     chartAc(tahun, `Maintenance AC : Tahun ${tahun}`);
-
 });
 
 $(document).ready(function () {
-    $('#totalUpdateChart').on('keyup', function () {
+    $("#totalUpdateChart").on("keyup", function () {
         $("#btnUpdateChart1").removeAttr("disabled");
     });
 });
 
 $(document).on("click", "#btnEditChart", function (e) {
     e.preventDefault();
-    const idChart = $(this).data('idchart');
-    const tahunChart = $(this).data('tahunchart');
-    const bulanChart = $(this).data('bulanchart');
-    const totalChart = $(this).data('totalchart');
+    const ruteChartEdit = $(this).data("routechartedit");
+    const idChart = $(this).data("idchart");
+    const tahunChart = $(this).data("tahunchart");
+    const bulanChart = $(this).data("bulanchart");
+    const totalChart = $(this).data("totalchart");
 
-    var actionUrl = "chart-ac/" + idChart;
-    $("#formUpdateChart").attr('action', actionUrl);
+    var actionUrl = ruteChartEdit;
+    // var actionUrl = "chart-ac/" + idChart;
+    $("#formUpdateChart").attr("action", actionUrl);
 
     $("#titleModalEditChart").text("Update Chart");
 
@@ -143,61 +158,80 @@ $("#btnTambahChartAc").on("click", () => {
     $("#titleModalTambahChart").text("Tambah Data");
 });
 
+// function delDataChart(rute, id) {
+//     console.log("delDataChart ~ id:", id);
+//     console.log("delDataChart ~ rute:", rute);
+//     Swal.fire({
+//         title: "Are you sure?",
+//         text: "You won't be able to revert this!",
+//         icon: "warning",
+//         showCancelButton: true,
+//         confirmButtonColor: "#3085d6",
+//         cancelButtonColor: "#d33",
+//         confirmButtonText: "Yes, delete it!",
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             $.ajax({
+//                 url: rute,
+//                 type: "GET",
+//                 data: {
+//                     _token: $("input[name=_token]").val(),
+//                 },
+//                 success: function (response) {
+//                     setTimeout(location.reload.bind(location), 1000);
+//                     $("#idchart" + id).remove();
+//                     $("#totalData").html(`Akumulasi : ${response.total} Unit`);
+//                 },
+//             });
+//         }
+//     });
+// }
 
-function delDataChart(id, tahun) {
-
+$(document).on("click", "#btnDeleteChartTb", function (e) {
+    const href = $(this).attr("href");
+    e.preventDefault();
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
+        title: "Apa kamu yakin?",
+        text: "Ingin menghapus data ini?",
+        type: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Hapus!",
     }).then((result) => {
         if (result.isConfirmed) {
-            $.ajax({
-                url: "/chart-ac" + "/" + id + "/" + tahun,
-                type: "DELETE",
-                data: {
-                    _token: $("input[name=_token]").val()
-                },
-                success: function (response) {
-                    $("#idchart" + id).remove();
-                    $("#totalData").html(`Akumulasi : ${response.total} Unit`);
-                }
-            });
+            window.location.href = href;
         }
-    })
-}
-
-
-// Menangkap event klik pada tombol "Delete All"
-document.getElementById('btnDeleteAllChart').addEventListener('click', function () {
-    var tahun = document.getElementById('deleteAllChart').value;
-
-    if (!tahun) {
-        Swal.fire({
-            title: 'Oops...',
-            text: 'Anda harus memilih tahun terlebih dahulu!',
-            icon: 'error'
-        });
-        return;
-    }
-
-    Swal.fire({
-        title: `Anda yakin ingin mengapus data tahun ${tahun} ?`,
-        text: 'Data ini tidak dapat dipulihkan.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yakin!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Mengirimkan form saat pengguna mengkonfirmasi
-            document.getElementById('deleteAllChartForm').submit();
-        }
-    })
+    });
 });
 
+// Menangkap event klik pada tombol "Delete All"
+document
+    .getElementById("btnDeleteAllChart")
+    .addEventListener("click", function () {
+        var tahun = document.getElementById("deleteAllChart").value;
+
+        if (!tahun) {
+            Swal.fire({
+                title: "Oops...",
+                text: "Anda harus memilih tahun terlebih dahulu!",
+                icon: "error",
+            });
+            return;
+        }
+
+        Swal.fire({
+            title: `Anda yakin ingin mengapus data tahun ${tahun} ?`,
+            text: "Data ini tidak dapat dipulihkan.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yakin!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Mengirimkan form saat pengguna mengkonfirmasi
+                document.getElementById("deleteAllChartForm").submit();
+            }
+        });
+    });

@@ -1,6 +1,6 @@
 <x-main title="{{ $title }}">
     <div class="container-fluid">
-        <h3>{{ $user->name }}</h3>
+        <h3><span class="text-primary fw-bold">{{ $user->name }}</span></h3>
         <hr>
         <div class="row">
             <div class="col-md-4">

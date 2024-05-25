@@ -81,9 +81,9 @@ Route::middleware(['auth'])->group(function () {
 
 // CHART
 Route::get('chart-ac', [ChartAcController::class, 'index'])->name('chart-ac.index');
-Route::post('chart-ac/{id}', [ChartAcController::class, 'update'])->name('chart-ac.update');
+Route::post('/data-ac/chart-ac', [ChartAcController::class, 'update'])->name('chart-ac.update');
 Route::post('chart-ac', [ChartAcController::class, 'store'])->name('chart-ac.store');
-Route::delete('chart-ac/{id}/{tahun}', [ChartAcController::class, 'destroy']);
+Route::get('/chart-ac/{id}/{tahun}', [ChartAcController::class, 'destroy'])->name('hapus.chart.tahun');
 Route::get('chart-ac/cari', [ChartAcController::class, 'cariTahunChart'])->name('cari.tahun.chart');
 Route::get('chart-ac/delete', [ChartAcController::class, 'deleteAllChart'])->name('chart.delete');
 

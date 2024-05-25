@@ -31,9 +31,8 @@
                             <img src="{{ asset('/assets/images/backgrounds/errorimg.svg') }}" alt="modernize-img"
                                 class="img-fluid" width="500">
                             <h1 class="fw-semibold mb-7 fs-9">Opps!!!</h1>
-                            <h4 class="fw-semibold mb-7">This page you are looking for could not be found.</h4>
-                            <a class="btn btn-primary" href="{{ url('/') }}" role="button">Go Back to Welcome
-                                Page</a>
+                            <h4 class="fw-semibold mb-7">Halaman yang Anda cari ini tidak dapat ditemukan.</h4>
+                            <a class="btn btn-primary" href="{{ url('/') }}" role="button">Kembali</a>
                         </div>
                     </div>
                 </div>

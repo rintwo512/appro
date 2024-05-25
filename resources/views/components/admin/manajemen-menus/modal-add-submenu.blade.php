@@ -10,7 +10,6 @@
                     <optgroup label="Databases">
                         <option value="Data AC">Data AC</option>
                         <option value="Data Logbook">Data Logbook</option>
-                        <option value="Data Apar">Data Apar</option>
                     </optgroup>
                     <optgroup label="Settings">
                         <option value="Edit Profile">Edit Profile</option>

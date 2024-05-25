@@ -71,21 +71,15 @@
                                         @enderror
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input primary" type="checkbox" value=""
-                                                id="flexCheckChecked" checked>
-                                            <label class="form-check-label text-dark fs-3" for="flexCheckChecked">
-                                                Remeber this Device
-                                            </label>
-                                        </div>
-                                        <a class="text-primary fw-medium fs-3" href="#">Forgot Password ?</a>
+                                        <a class="text-primary fw-medium fs-3" href="javascript:void(0)"
+                                            data-bs-toggle="modal" data-bs-target="#modalDetailUsers">Lupa Sandi ?</a>
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign
                                         In</button>
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <p class="fs-4 mb-0 fw-medium">New to Appro?</p>
-                                        <a class="text-primary fw-medium ms-2" href="#">Create an
-                                            account</a>
+                                        <p class="fs-4 mb-0 fw-medium">Belum punya akun?</p>
+                                        <a class="text-primary fw-medium ms-2" href="javascritp:void(0)"
+                                            id="btnRegister">Buat akun</a>
                                     </div>
                                 </form>
                             </div>
@@ -97,9 +91,22 @@
 
     </div>
 
-
     <div class="dark-transparent sidebartoggler"></div>
+
+    @include('components.admin.manajemen-users.modal-detail-users')
     @include('components.auth.script')
+
+    <script>
+        const btnReg = document.getElementById("btnRegister");
+        btnReg.addEventListener("click", () => {
+            Swal.fire({
+                icon: 'error',
+                title: "Oops...",
+                html: "Silahkan hubungi Administrator Anda!!!",
+                footer: '<a href="">www.appro.co.id</a>'
+            })
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const togglePassword = document.querySelector('#togglePassword');

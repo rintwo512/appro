@@ -32,8 +32,8 @@
                     <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group me-2 mb-2" role="group" aria-label="First group">
 
-                            <a href="" class="btn btn-secondary" id="btnCreateAC" data-bs-toggle="modal"
-                                data-bs-target="#modalAddUsers">
+                            <a href="javascript:void(0)" class="btn btn-secondary" id="btnCreateAC"
+                                data-bs-toggle="modal" data-bs-target="#modalAddUsers">
                                 <i class="bx bx-plus fs-4"></i>
                             </a>
                         </div>
