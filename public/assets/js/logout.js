@@ -13,3 +13,4 @@ document.querySelector("#btnLogHeader").onclick = function () {
             }
       });
 };
+

@@ -147,3 +147,49 @@
         setInterval(fetchOnlineUsers, 10000);
     });
 </script>
+
+<script>
+    // Fungsi untuk mengirim permintaan ke server untuk memperbarui status login menjadi offline
+    function setOfflineStatus(userId) {
+        // Kirim permintaan AJAX ke endpoint server
+        $.ajax({
+            url: '{{ route('logout', ['id' => ':userId']) }}'.replace(':userId',
+                userId), // Ganti dengan nama rute logout Anda
+            type: 'POST', // Atau sesuaikan dengan metode HTTP yang digunakan di endpoint Anda
+            success: function(response) {
+                console.log('Status login diperbarui menjadi offline');
+                window.location.href = '{{ route('login') }}'; // Ganti dengan nama rute login Anda
+            },
+            error: function(xhr, status, error) {
+                console.error('Gagal memperbarui status login:', error);
+            }
+        });
+    }
+
+    // Fungsi untuk mendeteksi aksi pengguna (misalnya, menutup browser atau tidak ada aktivitas)
+    function detectUserActivity(userId) {
+        // Deteksi ketika pengguna menutup browser
+        // window.addEventListener('beforeunload', function(event) {
+        //     setOfflineStatus(userId);
+        // });
+
+        // Deteksi ketika tidak ada aktivitas dalam jangka waktu tertentu (misalnya, 5 menit)
+        var inactivityTimeout = setTimeout(function() {
+            setOfflineStatus(userId);
+        }, 15 * 60 * 1000); // Ubah 5 * 60 * 1000 menjadi jangka waktu yang Anda inginkan (dalam milidetik)
+
+        // Reset timer jika ada aktivitas pengguna
+        document.addEventListener('mousemove', function() {
+            clearTimeout(inactivityTimeout);
+            inactivityTimeout = setTimeout(function() {
+                setOfflineStatus(userId);
+            }, 15 * 60 * 1000); // Atur ulang timer ke jangka waktu yang sama
+        });
+    }
+
+    // Panggil fungsi detectUserActivity saat halaman dimuat
+    $(document).ready(function() {
+        var userId = "<?php echo auth()->user()->id; ?>";
+        detectUserActivity(userId);
+    });
+</script>

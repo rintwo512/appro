@@ -67,8 +67,10 @@ class AuthController extends Controller
                     if (!$menu) {
 
                         if ($user->id_jabatan == 1) {
-                            return to_route('users.index');
+                            return to_route('menus.index');
                         } else {
+                            $dataLog = ['user_time_offline' => Carbon::now(), 'status_login' => 'offline'];
+                            User::where('id', $user->id)->update($dataLog);
                             $request->session()->invalidate();
                             $request->session()->regenerateToken();
                             return to_route('page-not-found');
@@ -83,12 +85,14 @@ class AuthController extends Controller
                             //     return redirect(404);
                             // } else {
 
-                            return redirect()->intended($menu->menu_url);
+                            // return redirect()->intended($menu->menu_url);
+                            return redirect()->route($menu->menu_url);
                             // }
                         }
 
                         // Jika ada submenu yang aktif untuk menu aktif, arahkan ke URL submenu tersebut
-                        return redirect()->intended($submenu->submenu_url);
+                        // return redirect()->intended($submenu->submenu_url);
+                        return redirect()->route($submenu->submenu_url);
                     }
 
                     // return redirect()->intended('/dashboard');

@@ -106,9 +106,15 @@
                                                 <a href="javascript:void(0)" data-bs-toggle="tooltip"
                                                     data-bs-placement="top"
                                                     data-bs-original-title="{{ $user->name }}">
-                                                    <img src="{{ asset('assets/images/profile/' . $user->image) }}"
-                                                        class="rounded-circle me-n2 card-hover border border-2 border-white"
-                                                        width="39" height="39">
+                                                    @if ($user->image != 'default.jpg')
+                                                        <img src="{{ asset('/uploads/profile_images/' . $user->image) }}"
+                                                            class="rounded-circle me-n2 card-hover border border-2 border-white"
+                                                            width="39" height="39">
+                                                    @else
+                                                        <img src="{{ asset('assets/images/profile/' . $user->image) }}"
+                                                            class="rounded-circle me-n2 card-hover border border-2 border-white"
+                                                            width="39" height="39">
+                                                    @endif
                                                 </a>
                                             @endforeach
                                         </div>
