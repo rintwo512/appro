@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <div>
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h4 class="card-title mb-0" id="chartTitle"> Monthly Earnings </h4>
+                                <h4 class="card-title mb-0" id="chartTitle"> Maintenance AC </h4>
                                 <div>
                                     <span id="ruteChart" data-rute="{{ route('chart.getchart') }}"></span>
                                     <select class="form-select text-dark" name="tahun" id="tahun">
@@ -17,7 +17,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div id="yearly-salary" class="mx-n7"></div>
+                            <div id="dashboard-chart-ac" class="mx-n7"></div>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                             <div class="ms-auto">
                                 <p class="card-subtitle text-primary">Tidak Aktif</p>
                                 <h4 class="card-title fs-7">{{ $acRusak }} Unit</h4>
-                            </div>s
+                            </div>
                         </div>
                     </div>
                 </div>

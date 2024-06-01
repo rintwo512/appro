@@ -1,9 +1,12 @@
 <!-- Modal -->
 
 <x-modal id="modalDetailLogbook" titleId="modalDetailsTitle" dataFooter="d-none">
+    <h5 class="d-flex justify-content-between align-items-center fs-3">Di tambahkan <strong
+            id="detailCreateddLogbook"></strong>
+    </h5>
     <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">Updated at <strong
-                class="pull-right" id="detailUpdatedLogbook"></strong>
+        <li class="list-group-item d-flex justify-content-between align-items-center">Di update <strong class="pull-right"
+                id="detailUpdatedLogbook"></strong>
         <li class="list-group-item d-flex justify-content-between align-items-center">Judul Tugas <strong
                 class="pull-right" id="detailJudulLogbook" class="text-capitalize"></strong>
         </li>

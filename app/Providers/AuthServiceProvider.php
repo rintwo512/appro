@@ -24,8 +24,12 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('Admin', function (User $user) {
+        Gate::define('admin', function (User $user) {
             return in_array($user->id_jabatan, [1]);
+        });
+
+        Gate::define('super-admin', function (User $user) {
+            return in_array($user->role, [1]);
         });
 
         config(['app.locale' => 'id']);

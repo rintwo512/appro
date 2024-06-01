@@ -62,13 +62,13 @@
                                 @foreach ($datas as $ac)
                                     <!-- start row -->
                                     <tr>
-                                        <td>{{ $ac->id_ac }}</td>
-                                        <td>{{ $ac->wing }}</td>
-                                        <td>{{ $ac->lantai }}</td>
-                                        <td>{{ $ac->ruangan }}</td>
-                                        <td>{{ $ac->type }}</td>
-                                        <td>{{ $ac->jenis }}</td>
-                                        <td>
+                                        <td class="wrap-text">{{ $ac->id_ac }}</td>
+                                        <td class="wrap-text">{{ $ac->wing }}</td>
+                                        <td class="wrap-text">{{ $ac->lantai }}</td>
+                                        <td class="wrap-text">{{ $ac->ruangan }}</td>
+                                        <td class="wrap-text">{{ $ac->type }}</td>
+                                        <td class="wrap-text">{{ $ac->jenis }}</td>
+                                        <td class="wrap-text">
                                             @if ($ac->status == 'Normal')
                                                 <span class="badge bg-success">{{ $ac->status }}</span>
                                             @elseif ($ac->status == 'Progres')
@@ -77,7 +77,7 @@
                                                 <span class="badge bg-danger">{{ $ac->status }}</span>
                                             @endif
                                         </td>
-                                        <td>
+                                        <td class="wrap-text">
 
                                             <button class="btn btn-info btn-sm" id="recycleBin" data-bs-toggle="modal"
                                                 data-bs-target="#modalRecycle" data-id="{{ $ac->id }}"

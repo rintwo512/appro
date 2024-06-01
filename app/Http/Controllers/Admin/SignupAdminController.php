@@ -15,13 +15,13 @@ class SignupAdminController extends Controller
 
     public function __construct()
     {
-        $this->user = User::where('nik', 15920011)->first();
+        $this->user = User::where('role', 1)->first();
     }
     public function index()
     {
 
         if (!empty($this->user)) {
-            return redirect('/login');
+            return to_route('login');
         }
         return view('appro.admin.auth.sign_up');
     }
@@ -30,12 +30,14 @@ class SignupAdminController extends Controller
 
         $errorForm =
             [
-                'required' => 'Kolom ini tidak boleh kosong!'
+                'required' => 'Kolom ini tidak boleh kosong!',
+                'numeric' => 'NIK harus berupa angka!',
+                'digits_between' => 'NIK minimal 8 angka & maximal 9 angka!'
             ];
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3',
-            'nik' => 'required|digits:8|numeric|unique:users',
+            'nik' => 'required|numeric|unique:users|digits_between:8,9',
             'password' => 'required|min:3|confirmed',
             'password_confirmation' => 'required'
         ], $errorForm);
@@ -78,6 +80,6 @@ class SignupAdminController extends Controller
             ]
         );
 
-        return redirect('/login')->with('successLogin', 'Silahkan login!');
+        return to_route('login')->with('successLogin', 'Silahkan login!');
     }
 }

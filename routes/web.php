@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AcController;
-use App\Http\Controllers\Admin\SignupAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AksesController;
 use App\Http\Controllers\MenusController;
+use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ChartAcController;
 use App\Http\Controllers\LogbookController;
@@ -14,6 +14,7 @@ use App\Http\Controllers\SubmenusController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeaturesAcController;
 use App\Http\Controllers\FeatureLogbookController;
+use App\Http\Controllers\Admin\SignupAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +58,7 @@ Route::get('/data-apar', fn () => 'data apar');
 
 // DASHBOARD
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
-Route::get('/get-online-users', [DashboardController::class, 'getOnlineUsers'])->name('get.Online.Users');
+Route::get('/get-online-users', [DashboardController::class, 'getOnlineUsers'])->name('get.online.users');
 
 
 // AC
@@ -75,7 +76,7 @@ Route::middleware(['auth'])->group(function () {
       Route::get('data-ac-hapus', [AcController::class, 'hapusPermanent'])->name('ac.hapus.permanent');
       Route::post('data-ac-baru', [AcController::class, 'queryDataAcBaru'])->name('ac.baru');
       Route::get('grafik-ac', [AcController::class, 'getChart'])->name('chart.getchart');
-      Route::get('filter-ac', [AcController::class, 'filterData']);
+      Route::get('filter-ac', [AcController::class, 'filterData'])->name('filter.data-ac');
 });
 
 
@@ -99,7 +100,7 @@ Route::get('data-logbook-trash', [LogbookController::class, 'trash'])->name('dat
 Route::get('data-logbook-restore/{id}', [LogbookController::class, 'restore'])->name('data-logbook.restore');
 Route::get('data-logbook-export-excel', [LogbookController::class, 'exportDataLogbook'])->name('data-logbook.export.excel');
 Route::post('logbook/filter', [LogbookController::class, 'filterLogbook']);
-Route::get('logbook-filter-kategori', [LogbookController::class, 'filterKategoriLogbook']);
+Route::get('logbook-filter-kategori', [LogbookController::class, 'filterKategoriLogbook'])->name('logbook.filter.kategori');
 Route::get('logbook-export-pdf/{id}', [LogbookController::class, 'exportDataLogbookPdf'])->name('logbook.export.pdf');
 
 
@@ -145,3 +146,10 @@ Route::get('/settings/edit-profile', [SettingsController::class, 'index'])->name
 Route::post('/settings/edit-profile', [SettingsController::class, 'editProfile'])->name('edit.profile.post');
 Route::get('/settings/ubah-password', [SettingsController::class, 'ubahPass'])->name('ubah.pass');
 Route::post('/settings/ubah-password', [SettingsController::class, 'ubahPassPost'])->name('ubah.pass.post');
+
+
+// TOOLS
+Route::get('/tools/amper-to-va', [ToolsController::class, 'amperToVa'])->name('amper.va');
+Route::get('/tools/amper-to-watt', [ToolsController::class, 'amperToWatt'])->name('amper.watt');
+Route::get('/tools/btu-to-watt', [ToolsController::class, 'btuToWatt'])->name('btu.watt');
+Route::get('/tools/ac-kalkulator', [ToolsController::class, 'acKalkulator'])->name('ac.kalkulator');

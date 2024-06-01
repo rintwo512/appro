@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    
+
     <!-- Preloader -->
     <div class="preloader">
         <img src="{{ asset('/assets/images/logos/avicon.png') }}" alt="loader" class="lds-ripple img-fluid" />
@@ -51,7 +51,7 @@
                                             <div class="input-group mb-3">
                                                 <input type="text"
                                                     class="form-control @error('name') is-invalid @enderror"
-                                                    id="name" name="name">
+                                                    id="name" name="name" value="{{ old('name') }}">
                                                 @error('name')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -66,7 +66,8 @@
                                                 <input type="text"
                                                     class="form-control @error('nik') is-invalid @enderror"
                                                     id="nik" name="nik"
-                                                    onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                                    onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                    value="{{ old('nik') }}">
                                                 @error('nik')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -79,7 +80,7 @@
                                             <div class="input-group mb-3">
                                                 <input type="text"
                                                     class="form-control @error('email') is-invalid @enderror"
-                                                    id="email" name="email">
+                                                    id="email" name="email" value="{{ old('email') }}">
                                                 @error('email')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}

@@ -15,6 +15,11 @@ $(document).ready(function () {
             location: "3",
             icon: "bx bx-cog",
         },
+        Tools: {
+            url: "javascript:void(0)",
+            location: "4",
+            icon: "bx bx-wrench",
+        },
 
         // Tambahkan pilihan menu lain jika diperlukan
     };

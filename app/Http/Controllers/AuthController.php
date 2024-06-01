@@ -16,13 +16,13 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->user = User::where('nik', 15920011)->first();
+        $this->user = User::where('role', 1)->first();
     }
 
     public function login()
     {
         if (empty($this->user)) {
-            return redirect('/admin-sign-up');
+            return to_route('signup.admin');
         }
 
         return view('appro.modul_auth.login');

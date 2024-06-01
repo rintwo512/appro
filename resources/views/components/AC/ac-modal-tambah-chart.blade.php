@@ -24,8 +24,14 @@
         </div>
         <div class="col-md-4">
             <label for="totalUpdateChart" class="form-label">Jumlah </label>
-            <input type="text" class="form-control" id="total" name="total"
-                onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
+            <input type="text" class="form-control @error('total') is-invalid @enderror" id="total"
+                name="total" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required
+                value="{{ old('total') }}">
+            @error('total')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <button type="submit" class="btn btn-primary col-md-2">Submit</button>
 

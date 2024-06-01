@@ -33,6 +33,7 @@
                             <!-- start row -->
                             <tr>
                                 <th class="text-center">Users</th>
+                                <th class="text-center">Role</th>
                                 <th class="text-center">Menu</th>
                                 <th class="text-center">Submenu</th>
                                 <th class="text-center">Fitur</th>
@@ -44,6 +45,7 @@
                                 @if ($user->nik != '15920019' && $user->is_active != 0)
                                     <tr class="text-center">
                                         <td class="fs-4 ">{{ $user->name }}</td>
+                                        <td class="fs-4 ">{{ $user->jabatan->nama_jabatan }}</td>
                                         <td><a href="{{ route('akses.menu.edit', ['id' => $user->id]) }}"
                                                 class="justify-content-center mb-1 btn-primary">
                                                 <i class="bx bx-edit fs-6 text-primary"></i>
@@ -60,7 +62,7 @@
                                 @endif
                             @endforeach
                         </x-tbody>
-                       
+
                     </x-table>
                 </div>
             </div>

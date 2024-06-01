@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('chart_ac', function (Blueprint $table) {
             $table->id();
-            $table->string('tahun');
+            $table->integer('tahun');
             $table->string('bulan');
-            $table->string('total');
+            $table->integer('total');
             $table->timestamps();
         });
     }

@@ -20,6 +20,26 @@ $(document).ready(function () {
             location: "2",
             menu_id: "Settings",
         },
+        "Amper To VA": {
+            url: "amper.va",
+            location: "1",
+            menu_id: "Tools",
+        },
+        "Amper To Watt": {
+            url: "amper.watt",
+            location: "2",
+            menu_id: "Tools",
+        },
+        "AC Kalkulator": {
+            url: "ac.kalkulator",
+            location: "3",
+            menu_id: "Tools",
+        },
+        "Btu To Watt": {
+            url: "btu.watt",
+            location: "4",
+            menu_id: "Tools",
+        },
 
         // Tambahkan pilihan menu lain jika diperlukan
     };

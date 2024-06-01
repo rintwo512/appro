@@ -72,7 +72,7 @@
             <span class="hide-menu">Disabled</span>
           </a>
         </li> --}}
-                @can('Admin')
+                @can('admin')
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">ADMIN NAVIGATION</span>
@@ -86,14 +86,6 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('menus.index') }}" aria-expanded="false">
-                            <span>
-                                <i class='bx bxs-grid fs-6'></i>
-                            </span>
-                            <span class="hide-menu">Manejemen Menus</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ url('manajemen-akses') }}" aria-expanded="false">
                             <span>
                                 <i class='bx bx-folder-plus fs-6'></i>
@@ -102,6 +94,18 @@
                         </a>
                     </li>
                 @endcan
+                
+                @can('super-admin')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('menus.index') }}" aria-expanded="false">
+                            <span>
+                                <i class='bx bxs-grid fs-6'></i>
+                            </span>
+                            <span class="hide-menu">Manejemen Menus</span>
+                        </a>
+                    </li>
+                @endcan
+
 
             </ul>
         </nav>

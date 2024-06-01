@@ -15,6 +15,12 @@
                         <option value="Edit Profile">Edit Profile</option>
                         <option value="Ubah Password">Ubah Password</option>
                     </optgroup>
+                    <optgroup label="Tools">
+                        <option value="Amper To VA">Amper To VA</option>
+                        <option value="Amper To Watt">Amper To Watt</option>
+                        <option value="Btu To Watt">Btu To Watt</option>
+                        <option value="AC Kalkulator">AC Kalkulator</option>
+                    </optgroup>
                 </select>
                 @error('submenu_label')
                     <div class="invalid-feedback">

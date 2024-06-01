@@ -468,22 +468,34 @@ class AcController extends Controller
 
     public function filterData(Request $request)
     {
-        $attribute = $request->attribute;
-        $value = $request->value;
+        $wing = $request->wing;
         $lantai = $request->lantai;
+        $type = $request->type;
+        $jenis = $request->jenis;
 
         $dataAc = Ac::with('datasheetAc')
-            ->where(function ($query) use ($attribute, $value) {
-                // Periksa apakah $attribute dan $value sudah terdefinisi
-                if ($attribute && $value) {
-                    $query->where($attribute, $value);
+            ->where(function ($query) use ($wing, $lantai, $type, $jenis) {
+                if ($wing && $lantai && $type) {
+                    $query->where('wing', $wing)
+                        ->where('lantai', $lantai)
+                        ->where('type', $type);
+                    if ($jenis) {
+                        $query->where('jenis', $jenis);
+                    }
+                } elseif ($wing && $lantai) {
+                    $query->where('wing', $wing)
+                        ->where('lantai', $lantai);
+                } elseif ($type) {
+                    $query->where('type', $type);
+                    if ($jenis) {
+                        $query->where('jenis', $jenis);
+                    }
+                } elseif ($jenis) {
+                    $query->where('jenis', $jenis);
                 }
             })
-            ->orWhere(function ($query) use ($value, $lantai) {
-                $query->where('wing', $value)
-                    ->where('lantai', $lantai);
-            })
             ->get();
+
         $count = $dataAc->count();
         if ($count === 0) {
             return response()->json([
@@ -491,6 +503,7 @@ class AcController extends Controller
                 'message' => 'Data tidak ditemukan!'
             ], 404);
         }
+
         $result = ['ac' => $dataAc, 'jumlah' => $count];
         return response()->json($result);
     }

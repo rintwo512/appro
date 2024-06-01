@@ -79,11 +79,18 @@ class ChartAcController extends Controller
      */
     public function store(Request $request)
     {
+        $errorForm =
+            [
+                'required' => 'Kolom ini tidak boleh kosong!',
+                'numeric' => 'Jumlah harus berupa angka!',
+                'min' => 'Jumlah minimal 1!',
+                'max' => 'Jumlah maximal 150!'
+            ];
         $validator = Validator::make($request->all(), [
-            'tahun' => 'required',
+            'tahun' => 'required|numeric',
             'bulan' => 'required',
-            'total' => 'required'
-        ]);
+            'total' => 'required|numeric|max:250|min:1'
+        ], $errorForm);
 
         if ($validator->fails()) {
             return back()
@@ -109,21 +116,7 @@ class ChartAcController extends Controller
         return back()->with('success', 'Berhasil tambah data!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ChartAc $chartAc)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ChartAc $chartAc)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -132,17 +125,25 @@ class ChartAcController extends Controller
     {
         $id = $request->idUpdateChart;
 
+        $errorForm =
+            [
+                'required' => 'Kolom ini tidak boleh kosong!',
+                'numeric' => 'Jumlah harus berupa angka!',
+                'min' => 'Jumlah minimal 1!',
+                'max' => 'Jumlah maximal 150!'
+            ];
+
         $validator = Validator::make($request->all(), [
-            'tahunUpdateChart' => 'required',
+            'tahunUpdateChart' => 'required|numeric',
             'monthUpdateChart' => 'required',
-            'totalUpdateChart' => 'required',
-        ]);
+            'totalUpdateChart' => 'required|numeric|max:250|min:1',
+        ], $errorForm);
 
         if ($validator->fails()) {
             return back()
                 ->withErrors($validator)
                 ->withInput()
-                ->with('error', 'Gagal menambahkan data!');
+                ->with('error', 'Gagal update data!');
         }
 
         $tahun = $request->tahunUpdateChart;
@@ -155,8 +156,17 @@ class ChartAcController extends Controller
             ->where('id', '!=', $id) // Memastikan data yang dicek bukan data yang sedang diupdate
             ->first();
 
+
         if ($existingData) {
             return back()->withInput()->with('error', 'Data dengan tahun dan bulan yang sama sudah ada!');
+        }
+
+        // Mendapatkan data lama
+        $oldData = ChartAc::find($id);
+
+        // Memeriksa apakah total baru sama dengan total lama
+        if ($oldData->total == $total) {
+            return back()->withInput()->with('error', 'Data baru tidak boleh sama dengan data lama!');
         }
 
         // Jika tidak ada data dengan tahun dan bulan yang sama, lakukan pembaruan data

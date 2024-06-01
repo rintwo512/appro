@@ -10,6 +10,7 @@
                     <option value="Dashboard">Dashboard</option>
                     <option value="Databases">Databases</option>
                     <option value="Settings">Settings</option>
+                    <option value="Tools">Tools</option>
                 </select>
                 @error('menu_label')
                     <div class="invalid-feedback">

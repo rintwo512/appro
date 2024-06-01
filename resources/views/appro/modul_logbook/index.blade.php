@@ -1,4 +1,6 @@
 <x-main title="{{ $title }}">
+
+    <span id="spanIdFilterLogbook" data-url-filter-logbook="{{ route('logbook.filter.kategori') }}"></span>
     <div class="container-fluid">
         <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
             <div class="card-body px-4 py-3">
@@ -65,6 +67,8 @@
                                             data-attribute="kategori" data-value="ME">Ketegori ME</a>
                                         <a class="dropdown-item filter-data-logbook" href="javascript:void(0)"
                                             data-attribute="kategori" data-value="CIVIL">Ketegori Civil</a>
+                                        <a class="dropdown-item filter-data-logbook" href="javascript:void(0)"
+                                            data-attribute="type" data-value="Project">Project</a>
                                     </div>
                                 </button>
                             </div>
@@ -98,9 +102,9 @@
                             @foreach ($logbooks as $logbook)
                                 <!-- start row -->
                                 <tr>
-                                    <td>{{ $logbook->nama_tugas }}</td>
-                                    <td>{{ $logbook->lokasi }}</td>
-                                    <td>
+                                    <td class="wrap-text">{{ $logbook->nama_tugas }}</td>
+                                    <td class="wrap-text">{{ $logbook->lokasi }}</td>
+                                    <td class="wrap-text">
                                         <div class="d-flex align-items-center">
                                             @foreach ($logbook->users as $user)
                                                 <a href="javascript:void(0)" data-bs-toggle="tooltip"
@@ -119,9 +123,10 @@
                                             @endforeach
                                         </div>
                                     </td>
-                                    <td>{{ Illuminate\Support\Carbon::parse($logbook->tanggal)->format('Y-m-d') }}
+                                    <td class="wrap-text">
+                                        {{ Illuminate\Support\Carbon::parse($logbook->tanggal)->format('Y-m-d') }}
                                     </td>
-                                    <td>
+                                    <td class="wrap-text">
                                         @if ($logbook->status == 'Done')
                                             <span class="mb-1 badge rounded-pill text-bg-primary">
                                                 {{ $logbook->status }}
@@ -136,7 +141,7 @@
                                             </span>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="wrap-text">
 
                                         <div class="btn-group">
                                             <button type="button"
@@ -171,7 +176,8 @@
                                                             data-petugas="{{ $logbook->users->implode('name', ', ') }}"
                                                             data-evidens="{{ $logbook->evidens }}"
                                                             data-kategori="{{ $logbook->kategori }}"
-                                                            data-jenispekerjaan="{{ $logbook->jenis_pekerjaan }}"><i
+                                                            data-jenispekerjaan="{{ $logbook->jenis_pekerjaan }}"
+                                                            data-createdat="{{ $logbook->created_at? Illuminate\Support\Carbon::parse($logbook->created_at)->locale('id')->isoFormat('dddd, DD MMMM YYYY'): '' }}"><i
                                                                 class="ti ti-eye"></i> Detail</button>
                                                     </li>
                                                 @endif

@@ -49,7 +49,6 @@
                                     <select class="form-select" name="updateTahun" id="updateTahun"
                                         data-urlcarichart="{{ route('cari.tahun.chart') }}"
                                         data-hapussemua="{{ route('chart.delete') }}"
-                                        data-urlhapuschartajax="{{ url('/chart-ac') }}"
                                         data-urlcaricart="{{ route('cari.tahun.chart') }}">
                                         <option value="">Pilih Tahun</option>
                                         @foreach ($listUpdateTahun as $list)
@@ -62,23 +61,25 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-3">
-                            <form action="{{ route('chart.delete') }}" id="deleteAllChartForm" method="get">
-                                @csrf
-                                <div class="input-group margin">
-                                    <select class="form-select" name="deleteAllChart" id="deleteAllChart">
-                                        <option value="">Pilih Tahun</option>
-                                        @foreach ($listUpdateTahun as $list)
-                                            <option value="{{ $list->tahun }}">{{ $list->tahun }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <button type="button" id="btnDeleteAllChart"
-                                        class="btn btn-danger btn-flat">Hapus</button>
+                        @can('super-admin')
+                            <div class="col-md-3">
+                                <form action="{{ route('chart.delete') }}" id="deleteAllChartForm" method="get">
+                                    @csrf
+                                    <div class="input-group margin">
+                                        <select class="form-select" name="deleteAllChart" id="deleteAllChart">
+                                            <option value="">Pilih Tahun</option>
+                                            @foreach ($listUpdateTahun as $list)
+                                                <option value="{{ $list->tahun }}">{{ $list->tahun }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <button type="button" id="btnDeleteAllChart"
+                                            class="btn btn-danger btn-flat">Hapus</button>
 
-                                </div>
-                            </form>
-                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        @endcan
                     </div>
 
                     <x-table id="myTable" class="table table-striped table-bordered display text-nowrap">
@@ -106,16 +107,16 @@
                                             data-totalchart="{{ $chart->total }}"
                                             data-routechartedit="{{ route('chart-ac.update') }}"><i
                                                 class='bx bx-edit fs-6 text-info'></i></button>
-                                        {{-- $chart->id }}, {{ $chart->tahun --}}
-                                        {{-- <a href="javascript:void(0)" id="btnDeleteChart"
-                                            onclick="delDataChart('{{ route('hapus.chart.tahun', ['id' => $chart->id, 'tahun' => $chart->tahun]) }}, {{ $chart->id }}')">
-                                            <i class='bx bx-trash fs-6 text-danger'></i>
-                                        </a> --}}
 
-                                        <a href="{{ route('hapus.chart.tahun', ['id' => $chart->id, 'tahun' => $chart->tahun]) }}"
-                                            id="btnDeleteChartTb">
-                                            <i class='bx bx-trash fs-6 text-danger'></i>
-                                        </a>
+                                        @can('admin')
+                                            <span id="superAdminStatus"
+                                                data-super-admin="{{ auth()->user()->can('super-admin') }}">
+                                            </span>
+                                            <a href="{{ route('hapus.chart.tahun', ['id' => $chart->id, 'tahun' => $chart->tahun]) }}"
+                                                id="btnDeleteChartTb">
+                                                <i class='bx bx-trash fs-6 text-danger'></i>
+                                            </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

@@ -82,10 +82,12 @@
 <script src="{{ asset('assets/js/modul_fitur_logbook/edit-fitur-logbook.js') }}"></script>
 <script src="{{ asset('assets/js/modul_fitur_logbook/delete-fitur-logbook.js') }}"></script>
 
+<script src="{{ asset('assets/js/modul_dashboard/chart-ac.js') }}"></script>
 
 <script src="{{ asset('assets/js/my-script/alert.js') }}"></script>
 <script src="{{ asset('assets/js/settings-theme.js') }}"></script>
 <script src="{{ asset('assets/js/logout.js') }}"></script>
+
 
 
 <script>
@@ -94,7 +96,7 @@
 
         function fetchOnlineUsers() {
             $.ajax({
-                url: "{{ url('/get-online-users') }}",
+                url: "{{ route('get.online.users') }}",
                 type: "GET",
                 dataType: "json",
                 success: function(response) {

@@ -1,4 +1,7 @@
 <x-main title="{{ $title }}">
+
+
+    <span id="spanIdFilter" data-url-filter-ac="{{ route('filter.data-ac') }}"></span>
     <div class="container-fluid">
         <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
             <div class="card-body px-4 py-3">
@@ -48,13 +51,12 @@
                             </a>
 
 
-                            @if (auth()->user()->role === 1)
-                                <a href="{{ route('ac.recycle.bin') }}" class="btn btn-secondary"
-                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                    data-bs-original-title="Recycle Bin">
+                            @can('super-admin')
+                                <a href="{{ route('ac.recycle.bin') }}" class="btn btn-secondary" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" data-bs-original-title="Recycle Bin">
                                     <i class="bx bx-trash fs-4"></i>
                                 </a>
-                            @endif
+                            @endcan
 
                             <div class="btn-group" role="group">
                                 <button id="btnFilterAc" type="button"
@@ -63,33 +65,173 @@
                                     <i class='bx bx-search-alt-2'></i>
                                     <div class="dropdown-menu" aria-labelledby="btnFilterAc">
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-attribute="jenis" data-value="Inverter">Jumlah AC Inverter</a>
+                                            data-jenis="Inverter">Jumlah AC Inverter</a>
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-attribute="type" data-value="Cassete">Jumlah AC Cassete</a>
+                                            data-type="Cassete">Jumlah AC Cassete</a>
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-attribute="type" data-value="Wall Mounted">Jumlah AC Split</a>
+                                            data-type="Wall Mounted">Jumlah AC Split</a>
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-attribute="type" data-value="Standing Floor">Jumlah AC Standing</a>
+                                            data-type="Standing Floor">Jumlah AC Standing</a>
+                                        <hr>
+                                        <a class="dropdown-item sidebar-link link-disabled text-primary fw-bold"
+                                            href="#disabled">WING A</a>
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-lantai="1" data-value="WA">Jumlah AC Wing A 1</a>
+                                            data-lantai="1" data-wing="WA">Jumlah AC Wing A 1</a>
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-lantai="2" data-value="WA">Jumlah AC Wing A 2</a>
+                                            data-lantai="2" data-wing="WA">Jumlah AC Wing A 2</a>
+                                        <a class="dropdown-item filter-data-ac mb-3" href="javascript:void(0)"
+                                            data-lantai="3" data-wing="WA">Jumlah AC Wing A 3</a>
+                                        {{--  --}}
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-lantai="3" data-value="WA">Jumlah AC Wing A 3</a>
+                                            data-lantai="1" data-wing="WA" data-type="Cassete">Jumlah AC Cassete Wing
+                                            A 1</a>
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-lantai="1" data-value="WB">Jumlah AC Wing B 1</a>
+                                            data-lantai="2" data-wing="WA" data-type="Cassete">Jumlah AC Cassete Wing
+                                            A 2</a>
+                                        <a class="dropdown-item filter-data-ac mb-3" href="javascript:void(0)"
+                                            data-lantai="3" data-wing="WA" data-type="Cassete">Jumlah AC Cassete
+                                            Wing
+                                            A 3</a>
+                                        {{--  --}}
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-lantai="2" data-value="WB">Jumlah AC Wing B 2</a>
+                                            data-lantai="1" data-wing="WA" data-jenis="Inverter">Jumlah AC Inverter
+                                            Wing
+                                            A 1</a>
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-lantai="3" data-value="WB">Jumlah AC Wing B 3</a>
+                                            data-lantai="2" data-wing="WA" data-jenis="Inverter">Jumlah AC Inverter
+                                            Wing
+                                            A 2</a>
+                                        <a class="dropdown-item filter-data-ac mb-3" href="javascript:void(0)"
+                                            data-lantai="3" data-wing="WA" data-jenis="Inverter">Jumlah AC Inverter
+                                            Wing
+                                            A 3</a>
+                                        {{--  --}}
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-lantai="1" data-value="WC">Jumlah AC Wing C 1</a>
+                                            data-lantai="1" data-wing="WA" data-type="Wall Mounted">Jumlah AC Split
+                                            Wing
+                                            A 1</a>
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-lantai="2" data-value="WC">Jumlah AC Wing C 2</a>
+                                            data-lantai="2" data-wing="WA" data-type="Wall Mounted">Jumlah AC Split
+                                            Wing
+                                            A 2</a>
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-lantai="1" data-value="WD">Jumlah AC Wing D 1</a>
+                                            data-lantai="3" data-wing="WA" data-type="Wall Mounted">Jumlah AC Split
+                                            Wing
+                                            A 3</a>
+                                        <hr>
+
+                                        <a class="dropdown-item sidebar-link link-disabled text-primary fw-bold"
+                                            href="#disabled">WING B</a>
                                         <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
-                                            data-lantai="2" data-value="WD">Jumlah AC Wing D 2</a>
+                                            data-lantai="1" data-wing="WB">Jumlah AC Wing B 1</a>
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="2" data-wing="WB">Jumlah AC Wing B 2</a>
+                                        <a class="dropdown-item filter-data-ac mb-3" href="javascript:void(0)"
+                                            data-lantai="3" data-wing="WB">Jumlah AC Wing B 3</a>
+                                        {{--  --}}
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="1" data-wing="WB" data-type="Cassete">Jumlah AC Cassete Wing
+                                            B 1</a>
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="2" data-wing="WB" data-type="Cassete">Jumlah AC Cassete Wing
+                                            B 2</a>
+                                        <a class="dropdown-item filter-data-ac mb-3" href="javascript:void(0)"
+                                            data-lantai="3" data-wing="WB" data-type="Cassete">Jumlah AC Cassete
+                                            Wing
+                                            B 3</a>
+                                        {{--  --}}
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="1" data-wing="WB" data-jenis="Inverter">Jumlah AC Inverter
+                                            Wing
+                                            B 1</a>
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="2" data-wing="WB" data-jenis="Inverter">Jumlah AC Inverter
+                                            Wing
+                                            B 2</a>
+                                        <a class="dropdown-item filter-data-ac mb-3" href="javascript:void(0)"
+                                            data-lantai="3" data-wing="WB" data-jenis="Inverter">Jumlah AC Inverter
+                                            Wing
+                                            B 3</a>
+                                        {{--  --}}
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="1" data-wing="WB" data-type="Wall Mounted">Jumlah AC Split
+                                            Wing
+                                            B 1</a>
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="2" data-wing="WB" data-type="Wall Mounted">Jumlah AC Split
+                                            Wing
+                                            B 2</a>
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="3" data-wing="WB" data-type="Wall Mounted">Jumlah AC Split
+                                            Wing
+                                            B 3</a>
+                                        {{--  --}}
+                                        <hr>
+                                        <a class="dropdown-item sidebar-link link-disabled text-primary fw-bold"
+                                            href="#disabled">WING C</a>
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="1" data-wing="WC">Jumlah AC Wing C 1</a>
+                                        <a class="dropdown-item filter-data-ac mb-3" href="javascript:void(0)"
+                                            data-lantai="2" data-wing="WC">Jumlah AC Wing C 2</a>
+                                        {{--  --}}
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="1" data-wing="WC" data-type="Cassete">Jumlah AC Cassete Wing
+                                            C 1</a>
+                                        <a class="dropdown-item filter-data-ac mb-3" href="javascript:void(0)"
+                                            data-lantai="2" data-wing="WC" data-type="Cassete">Jumlah AC Cassete Wing
+                                            C 2</a>
+                                        {{--  --}}
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="1" data-wing="WC" data-jenis="Inverter">Jumlah AC Inverter
+                                            Wing
+                                            C 1</a>
+                                        <a class="dropdown-item filter-data-ac mb-3" href="javascript:void(0)"
+                                            data-lantai="2" data-wing="WC" data-jenis="Inverter">Jumlah AC Inverter
+                                            Wing
+                                            C 2</a>
+                                        {{--  --}}
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="1" data-wing="WC" data-type="Wall Mounted">Jumlah AC Split
+                                            Wing
+                                            C 1</a>
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="2" data-wing="WC" data-type="Wall Mounted">Jumlah AC Split
+                                            Wing
+                                            C 2</a>
+                                        {{--  --}}
+                                        <hr>
+                                        <a class="dropdown-item sidebar-link link-disabled text-primary fw-bold"
+                                            href="#disabled">WING D</a>
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="1" data-wing="WD">Jumlah AC Wing D 1</a>
+                                        <a class="dropdown-item filter-data-ac mb-3" href="javascript:void(0)"
+                                            data-lantai="2" data-wing="WD">Jumlah AC Wing D 2</a>
+                                        {{--  --}}
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="1" data-wing="WD" data-type="Cassete">Jumlah AC Cassete Wing
+                                            D 1</a>
+                                        <a class="dropdown-item filter-data-ac mb-3" href="javascript:void(0)"
+                                            data-lantai="2" data-wing="WD" data-type="Cassete">Jumlah AC Cassete Wing
+                                            D 2</a>
+                                        {{--  --}}
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="1" data-wing="WD" data-jenis="Inverter">Jumlah AC Inverter
+                                            Wing
+                                            D 1</a>
+                                        <a class="dropdown-item filter-data-ac mb-3" href="javascript:void(0)"
+                                            data-lantai="2" data-wing="WD" data-jenis="Inverter">Jumlah AC Inverter
+                                            Wing
+                                            D 2</a>
+                                        {{--  --}}
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="1" data-wing="WD" data-type="Wall Mounted">Jumlah AC Split
+                                            Wing
+                                            D 1</a>
+                                        <a class="dropdown-item filter-data-ac" href="javascript:void(0)"
+                                            data-lantai="2" data-wing="WD" data-type="Wall Mounted">Jumlah AC Split
+                                            Wing
+                                            D 2</a>
+                                        {{--  --}}
                                     </div>
                                 </button>
                             </div>
@@ -126,14 +268,15 @@
                             @foreach ($datas as $ac)
                                 <!-- start row -->
                                 <tr>
-                                    <td>{{ $ac->id_ac }}</td>
-                                    <td>{{ $ac->wing }}</td>
-                                    <td>{{ $ac->lantai }}</td>
-                                    <td>{{ $ac->ruangan }}</td>
-                                    <td>{{ $ac->type }}</td>
-                                    <td>{{ $ac->tgl_maintenance? Illuminate\Support\Carbon::parse($ac->tgl_maintenance)->locale('id')->diffForHumans(): '' }}
+                                    <td class="wrap-text">{{ $ac->id_ac }}</td>
+                                    <td class="wrap-text">{{ $ac->wing }}</td>
+                                    <td class="wrap-text">{{ $ac->lantai }}</td>
+                                    <td class="wrap-text">{{ $ac->ruangan }}</td>
+                                    <td class="wrap-text">{{ $ac->type }}</td>
+                                    <td class="wrap-text">
+                                        {{ $ac->tgl_maintenance? Illuminate\Support\Carbon::parse($ac->tgl_maintenance)->locale('id')->diffForHumans(): '' }}
                                     </td>
-                                    <td>
+                                    <td class="wrap-text">
                                         @if ($ac->status == 'Normal')
                                             <span class="badge bg-success">{{ $ac->status }}</span>
                                         @elseif ($ac->status == 'Progres')
@@ -142,7 +285,7 @@
                                             <span class="badge bg-danger">{{ $ac->status }}</span>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="wrap-text">
 
                                         <div class="btn-group">
                                             <button type="button"
@@ -201,11 +344,13 @@
                                                     @endif
                                                 </li>
                                                 <li>
-                                                    @if ($btnDelete?->is_active == 1)
-                                                        <a class="dropdown-item" id="btnDeleteAC"
-                                                            href="{{ route('ac.delete', ['id' => $ac->id]) }}"><i
-                                                                class="bx bx-trash"></i> Delete</a>
-                                                    @endif
+                                                    @can('admin')
+                                                        @if ($btnDelete?->is_active == 1)
+                                                            <a class="dropdown-item" id="btnDeleteAC"
+                                                                href="{{ route('ac.delete', ['id' => $ac->id]) }}"><i
+                                                                    class="bx bx-trash"></i> Delete</a>
+                                                        @endif
+                                                    @endcan
                                                 </li>
                                                 <li>
                                                     <hr class="dropdown-divider">
