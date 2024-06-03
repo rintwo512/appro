@@ -37,7 +37,7 @@ class DashboardController extends Controller
         // Mendapatkan tanggal awal dan akhir bulan ini
         $startOfMonth = Carbon::now()->startOfMonth()->toDateString();
         $endOfMonth = Carbon::now()->endOfMonth()->toDateString();
-
+       
         // Menggunakan Eloquent untuk mengambil data bulan ini
         $dataLogBookBulanIni = Logbook::whereBetween('tanggal', [$startOfMonth, $endOfMonth])->count();
 

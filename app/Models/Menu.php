@@ -36,7 +36,7 @@ class Menu extends Model
 
     public function submenus1()
     {
-        return $this->hasMany(Submenu::class);
+        return $this->hasMany(Submenu::class, 'menu_id');
     }
 
     public function users1()

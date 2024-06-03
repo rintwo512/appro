@@ -20,7 +20,7 @@
                                 <button type="button" title="Calculate" class="btn btn-primary" onclick="calc()">
                                     <i class="bx bx-calculator fs-4"></i>
                                 </button>
-                                <button type="reset" class="btn btn-danger" nclick="setfocus()">
+                                <button type="reset" class="btn btn-danger" onclick="setfocus()">
                                     <i class="bx bx-refresh fs-6"></i>
                                 </button>
                             </div>

@@ -15,6 +15,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeaturesAcController;
 use App\Http\Controllers\FeatureLogbookController;
 use App\Http\Controllers\Admin\SignupAdminController;
+use App\Http\Controllers\PerangkatController;
+use App\Http\Controllers\RuanganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -131,6 +133,7 @@ Route::get('manajemen-akses-fitur/{id}', [AksesController::class, 'fitur'])->nam
 Route::post('manajemen-akses-fitur-update/{id}', [AksesController::class, 'updateFitur'])->name('akses.fitur.update');
 Route::post('manajemen-akses-fitur-logbook-update/{id}', [AksesController::class, 'updateFiturLogbook'])->name('akses.fitur.logbook.update');
 
+
 Route::post('manajemen-fitur-ac-add', [FeaturesAcController::class, 'store'])->name('fitur.ac.store');
 Route::get('manajemen-fitur-ac-delete/{id}', [FeaturesAcController::class, 'destroy'])->name('fitur.ac.delete');
 Route::post('manajemen-fitur-ac-update', [FeaturesAcController::class, 'update'])->name('fitur.ac.update');
@@ -153,3 +156,13 @@ Route::get('/tools/amper-to-va', [ToolsController::class, 'amperToVa'])->name('a
 Route::get('/tools/amper-to-watt', [ToolsController::class, 'amperToWatt'])->name('amper.watt');
 Route::get('/tools/btu-to-watt', [ToolsController::class, 'btuToWatt'])->name('btu.watt');
 Route::get('/tools/ac-kalkulator', [ToolsController::class, 'acKalkulator'])->name('ac.kalkulator');
+Route::get('/tools/kva-to-ampere', [ToolsController::class, 'kvaAmpere'])->name('kva.ampere');
+Route::get('/tools/energy-kalkulator', [ToolsController::class, 'energyKalkulator'])->name('energy.kalkulator');
+
+
+// PERANGKAT
+Route::get('/data-perangkat', [PerangkatController::class, 'index'])->name('perangkat.index');
+
+
+// RUANGAN
+Route::get('/data-ruangan', [RuanganController::class, 'index'])->name('ruangan.index');

@@ -10,6 +10,16 @@ $(document).ready(function () {
             location: "2",
             menu_id: "Databases",
         },
+        "Data Perangkat": {
+            url: "perangkat.index",
+            location: "3",
+            menu_id: "Databases",
+        },
+        "Data Ruangan": {
+            url: "ruangan.index",
+            location: "4",
+            menu_id: "Databases",
+        },
         "Edit Profile": {
             url: "edit.profile",
             location: "1",
@@ -38,6 +48,16 @@ $(document).ready(function () {
         "Btu To Watt": {
             url: "btu.watt",
             location: "4",
+            menu_id: "Tools",
+        },
+        "kVa to Ampere": {
+            url: "kva.ampere",
+            location: "5",
+            menu_id: "Tools",
+        },
+        "Energy Kalkulator": {
+            url: "energy.kalkulator",
+            location: "6",
             menu_id: "Tools",
         },
 

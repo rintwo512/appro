@@ -1,6 +1,6 @@
 <x-main title="{{ $title }}">
     @once
-    <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
+        <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
         <script src="{{ asset('assets/js/modul_tools/ac-kal.js') }}"></script>
     @endonce
 
@@ -209,32 +209,40 @@
                     <div class="card-body">
                         <h6>Rumus : Panjang(p) x Lebar(L) x Tinggi(t) x 200 atau 500</h6>
                         <h6>Contoh :</h6>
-                        <small>Sebuah kamar dengan panjang 4m, lebar 3m, tinggi 3m dan di huni oleh 2 orang. Kapasitas AC yang
+                        <small>Sebuah kamar dengan panjang 4m, lebar 3m, tinggi 3m dan di huni oleh 2 orang. Kapasitas
+                            AC yang
                             ideal untuk kamar tersebut adalah : 4 x 3 x 3 x 200 = 7200 Btu/h = 1pk</small>
                         <hr>
 
                         <h6>Keterangan :</h6>
-                        <span>Satuan 200 digunakan apabila ruangan terisi dengan sedikit orang misalnya saja kurang dari 5 orang
-                        didalamnya. Bila lebih, dan dalam kamar tersebut banyak barang elektronik yang menghasilkan panas
-                        kamu harus mengkalikan jumlah tersebut dengan 500.</span>
+                        <span>Satuan 200 digunakan apabila ruangan terisi dengan sedikit orang misalnya saja kurang dari
+                            5 orang
+                            didalamnya. Bila lebih, dan dalam kamar tersebut banyak barang elektronik yang menghasilkan
+                            panas
+                            kamu harus mengkalikan jumlah tersebut dengan 500.</span>
                         <hr>
                         <h6>Contoh akurat :</h6>
-                        <span>Untuk menghitung kapasitas AC yang dibutuhkan untuk kamar dengan panjang 2 meter, lebar 3 meter,
-                        dan tinggi 3 meter, kita perlu mengikuti langkah-langkah berikut:</span><br><br>
+                        <span>Untuk menghitung kapasitas AC yang dibutuhkan untuk kamar dengan panjang 2 meter, lebar 3
+                            meter,
+                            dan tinggi 3 meter, kita perlu mengikuti langkah-langkah berikut:</span><br><br>
                         <p>1. Hitung volume ruangan (V) dalam satuan kaki kubik (ft³) atau meter kubik (m³):
                             <br>
                             Volume (V) = Panjang × Lebar × Tinggi <br>
                             V = 2 m × 3 m × 3 m = 18 m³
                         </p>
-                        <p>2. Konversi volume ruangan ke dalam satuan kaki kubik (ft³) jika perlu. (1 meter kubik = 35.315 ft³)
+                        <p>2. Konversi volume ruangan ke dalam satuan kaki kubik (ft³) jika perlu. (1 meter kubik =
+                            35.315 ft³)
                             <br>
                             V ≈ 18 m³ × 35.315 ft³/m³ ≈ 635.77 ft³<br>
                         </p>
-                        <p>3. Tentukan faktor konversi. Faktor konversi ini bergantung pada berbagai faktor, tetapi kita bisa menggunakan nilai umum, seperti 1 hingga 1,5.
+                        <p>3. Tentukan faktor konversi. Faktor konversi ini bergantung pada berbagai faktor, tetapi kita
+                            bisa menggunakan nilai umum, seperti 1 hingga 1,5.
                             <br>
                             Misalnya, kita gunakan faktor konversi = 1,2.<br>
                         </p>
-                        <p>4. Tentukan perbedaan suhu antara suhu di dalam ruangan dengan suhu yang diinginkan. Misalnya, perbedaan suhu yang umum adalah 20°F hingga 25°F (atau sekitar 10°C hingga 14°C).<br>
+                        <p>4. Tentukan perbedaan suhu antara suhu di dalam ruangan dengan suhu yang diinginkan.
+                            Misalnya, perbedaan suhu yang umum adalah 20°F hingga 25°F (atau sekitar 10°C hingga
+                            14°C).<br>
 
                             Misalnya, kita gunakan perbedaan suhu = 20°F.<br>
                         </p>
@@ -246,13 +254,18 @@
 
                             Kapasitas AC ≈ 15266.48 Btu/h<br>
                         </p><br><br>
-                        <p>Jadi, untuk kamar dengan panjang 2 meter, lebar 3 meter, dan tinggi 3 meter, kapasitas AC yang dibutuhkan adalah sekitar 15266.48 Btu/h.</p>
+                        <p>Jadi, untuk kamar dengan panjang 2 meter, lebar 3 meter, dan tinggi 3 meter, kapasitas AC
+                            yang dibutuhkan adalah sekitar 15266.48 Btu/h.</p>
                         <hr>
                         <h6>Kesimpulan :</h6>
-                        <span>Selain cara menghitung BTU AC, ada beberapa poin yang dipertimbangkan ketika membeli AC. Sebagai
-                        contoh, posisi rumah perlu dilihat, apakah menghadap ke utara atau ke barat. Pasalnya, rumah yang
-                        menghadap ke barat akan jauh lebih panas. Semakin banyak kaca, maka sinar matahari semakin mudah
-                        masuk ke dalam ruangan. Alhasil, AC bekerja lebih keras untuk mendinginkan ruangan tersebut.</span>
+                        <span>Selain cara menghitung BTU AC, ada beberapa poin yang dipertimbangkan ketika membeli AC.
+                            Sebagai
+                            contoh, posisi rumah perlu dilihat, apakah menghadap ke utara atau ke barat. Pasalnya, rumah
+                            yang
+                            menghadap ke barat akan jauh lebih panas. Semakin banyak kaca, maka sinar matahari semakin
+                            mudah
+                            masuk ke dalam ruangan. Alhasil, AC bekerja lebih keras untuk mendinginkan ruangan
+                            tersebut.</span>
                     </div>
                 </div>
             </div>
@@ -260,4 +273,3 @@
 
 
 </x-main>
-

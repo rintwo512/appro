@@ -10,6 +10,8 @@
                     <optgroup label="Databases">
                         <option value="Data AC">Data AC</option>
                         <option value="Data Logbook">Data Logbook</option>
+                        <option value="Data Perangkat">Data Perangkat</option>
+                        <option value="Data Ruangan">Data Ruangan</option>
                     </optgroup>
                     <optgroup label="Settings">
                         <option value="Edit Profile">Edit Profile</option>
@@ -20,6 +22,8 @@
                         <option value="Amper To Watt">Amper To Watt</option>
                         <option value="Btu To Watt">Btu To Watt</option>
                         <option value="AC Kalkulator">AC Kalkulator</option>
+                        <option value="kVa to Ampere">kVa to Ampere</option>
+                        <option value="Energy Kalkulator">Energy Kalkulator</option>
                     </optgroup>
                 </select>
                 @error('submenu_label')

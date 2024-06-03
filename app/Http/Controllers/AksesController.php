@@ -78,28 +78,18 @@ class AksesController extends Controller
         // Dapatkan user berdasarkan ID
         $user = User::find($id);
         // Ambil semua menu
-        $allSubmenus = SubMenu::all();
+        $allSubmenus = Menu::with("submenus1")->orderBy('menu_location')->get();
+
+
 
         return view('appro.admin.manajemen-akses.user-submenu-view', [
             'title' => 'APPRO - Submenu ' . $user->name,
-            'allSubmenus' => $allSubmenus,
+            'menus' => $allSubmenus,
             'user' => $user,
         ]);
     }
 
-    public function updateSubmenu(Request $request, $id)
-    {
-        // Temukan user berdasarkan ID
-        $user = User::find($id);
 
-        // Ambil ID-menu yang dipilih dari form
-        $selectedSubmenus = $request->input('submenus', []);
-
-        // Update menu untuk user
-        $user->submenus1()->sync($selectedSubmenus);
-
-        return back()->with('successtoast', 'Submenu berhasil diperbaruhi');
-    }
 
     public function fitur($id)
     {
@@ -146,4 +136,90 @@ class AksesController extends Controller
 
         return back()->with('successtoast', 'Fitur Logbook berhasil diperbaruhi');
     }
+
+    public function updateSubmenu(Request $request, $id)
+    {
+        // Temukan user berdasarkan ID
+        $user = User::find($id);
+
+        // Ambil ID-menu yang dipilih dari form
+        $selectedSubmenus = $request->input('submenus', []);
+
+        // Update menu untuk user
+        $user->submenus1()->sync($selectedSubmenus);
+
+        return back()->with('successtoast', 'Submenu berhasil diperbaruhi');
+    }
+
+    // public function updateSubmenu(Request $request, $id)
+    // {
+    //     // Temukan user berdasarkan ID
+    //     $user = User::find($id);
+
+    //     // Ambil ID-menu yang dipilih dari form
+    //     $selectedSubmenus = $request->input('submenus', []);
+
+    //     // Ambil submenu yang sudah ada untuk user tertentu
+    //     $existingSubmenus = $user->submenus1()->pluck('id')->toArray();
+
+    //     // Tambahkan submenu baru tanpa menghapus yang sudah ada
+    //     $user->submenus1()->syncWithoutDetaching($selectedSubmenus);
+
+    //     // Cek submenu yang sudah ada tetapi tidak dipilih
+    //     $submenusToRemove = array_diff($existingSubmenus, $selectedSubmenus);
+
+    //     // Jika ada submenu yang perlu dihapus
+    //     if (!empty($submenusToRemove)) {
+    //         // Hapus submenu yang sudah ada tetapi tidak dipilih
+    //         $user->submenus1()->detach($submenusToRemove);
+    //     }
+
+    //     return back()->with('successtoast', 'Submenu berhasil diperbaruhi');
+    // }
+
+    // public function updateSubmenuSettings(Request $request, $id)
+    // {
+    //     // Temukan user berdasarkan ID
+    //     $user = User::find($id);
+
+    //     // Ambil ID-menu yang dipilih dari form
+    //     $selectedSubmenusSettings = $request->input('submenus_settings', []);
+
+    //     // Ambil submenu yang sudah ada untuk user tertentu     
+    //     $existingSubmenusEt = $user->submenus1()->pluck('id')->toArray();
+
+    //     // Tambahkan submenu baru tanpa menghapus yang sudah ada
+    //     $user->submenus1()->syncWithoutDetaching($selectedSubmenusSettings);
+
+    //     // Cek submenu yang sudah ada tetapi tidak dipilih
+    //     $submenusToRemove = array_diff($existingSubmenusEt, $selectedSubmenusSettings);
+
+    //     // Jika ada submenu yang perlu dihapus
+    //     if (!empty($submenusToRemove)) {
+    //         // Hapus submenu yang sudah ada tetapi tidak dipilih
+    //         $user->submenus1()->detach($submenusToRemove);
+    //     }
+
+    //     return back()->with('successtoast', 'Submenu berhasil diperbaruhi');
+    // }
+
+    // public function supdateSubmenuSettings(Request $request, $id)
+    // {
+    //     // Temukan user berdasarkan ID
+    //     $user = User::find($id);
+
+    //     // Ambil ID-menu yang dipilih dari form
+    //     $selectedSubmenusSettings = $request->input('submenus_settings', []);
+
+    //     // Ambil submenu yang sudah ada untuk user tertentu
+    //     $existingSubmenusEt = $user->submenus1()->pluck('id')->toArray();
+
+    //     // Tambahkan submenu baru tanpa menghapus yang sudah ada
+    //     $user->submenus1()->syncWithoutDetaching($selectedSubmenusSettings);
+
+    //     // Hapus submenu yang sudah ada tetapi tidak dipilih
+    //     $user->submenus1()->sync(array_diff($existingSubmenusEt, $selectedSubmenusSettings));
+
+    //     return back()->with('successtoast', 'Submenu berhasil diperbaruhi');
+    // }
 }

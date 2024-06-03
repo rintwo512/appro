@@ -39,7 +39,7 @@ class SubMenu extends Model
 
     public function menu1()
     {
-        return $this->belongsTo(Menu::class);
+        return $this->belongsTo(Menu::class, 'menu_id');
     }
 
     public function features1()
