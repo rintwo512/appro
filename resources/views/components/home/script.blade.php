@@ -84,6 +84,8 @@
 
 <script src="{{ asset('assets/js/modul_dashboard/chart-ac.js') }}"></script>
 
+<script src="{{ asset('assets/js/modul_documents/delete-docs.js') }}"></script>
+
 <script src="{{ asset('assets/js/my-script/alert.js') }}"></script>
 <script src="{{ asset('assets/js/settings-theme.js') }}"></script>
 <script src="{{ asset('assets/js/logout.js') }}"></script>

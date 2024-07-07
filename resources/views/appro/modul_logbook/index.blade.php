@@ -160,6 +160,7 @@
 
                                                 @if ($btnDetailLogbook?->is_active == 1)
                                                     <li>
+                                                       
                                                         <button class="dropdown-item" id="btnDetailLogbook"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#modalDetailLogbook"
@@ -177,7 +178,8 @@
                                                             data-evidens="{{ $logbook->evidens }}"
                                                             data-kategori="{{ $logbook->kategori }}"
                                                             data-jenispekerjaan="{{ $logbook->jenis_pekerjaan }}"
-                                                            data-createdat="{{ $logbook->created_at? Illuminate\Support\Carbon::parse($logbook->created_at)->locale('id')->isoFormat('dddd, DD MMMM YYYY'): '' }}"><i
+                                                            data-createdat="{{ $logbook->created_at? Illuminate\Support\Carbon::parse($logbook->created_at)->locale('id')->isoFormat('dddd, DD MMMM YYYY'): '' }}"
+                                                            data-baseurl="{{ asset('/') }}"><i
                                                                 class="ti ti-eye"></i> Detail</button>
                                                     </li>
                                                 @endif

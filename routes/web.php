@@ -9,14 +9,15 @@ use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ChartAcController;
 use App\Http\Controllers\LogbookController;
+use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubmenusController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PerangkatController;
 use App\Http\Controllers\FeaturesAcController;
 use App\Http\Controllers\FeatureLogbookController;
 use App\Http\Controllers\Admin\SignupAdminController;
-use App\Http\Controllers\PerangkatController;
-use App\Http\Controllers\RuanganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -166,3 +167,10 @@ Route::get('/data-perangkat', [PerangkatController::class, 'index'])->name('pera
 
 // RUANGAN
 Route::get('/data-ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
+
+
+
+//DOCUMENT
+Route::get('/document', [DocumentController::class, 'index'])->name('document.index');
+Route::post('/document', [DocumentController::class, 'store'])->name('document.store');
+Route::get('/document/{id}', [DocumentController::class, 'destroy'])->name('document.destroy');

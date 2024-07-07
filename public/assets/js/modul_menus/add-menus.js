@@ -10,14 +10,19 @@ $(document).ready(function () {
             location: "2",
             icon: "bx bx-data",
         },
+        Document: {
+            url: "document.index",
+            location: "3",
+            icon: "bx bx-folder-open",
+        },
         Settings: {
             url: "javascript:void(0)",
-            location: "3",
+            location: "4",
             icon: "bx bx-cog",
         },
         Tools: {
             url: "javascript:void(0)",
-            location: "4",
+            location: "5",
             icon: "bx bx-wrench",
         },
 

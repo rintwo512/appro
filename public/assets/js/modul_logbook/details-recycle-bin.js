@@ -1,5 +1,6 @@
 $(document).on("click", "#recycleBinLogbook", function () {
     const evidenstrash = $(this).data("evidenstrash");
+    const urlEvidensTrash = $(this).data("baseurlbin");
     const userdeleted = $(this).data("userdeleted");
     const namatugas = $(this).data("namatugas");
     const wing = $(this).data("wing");
@@ -48,14 +49,13 @@ $(document).on("click", "#recycleBinLogbook", function () {
 
     // Append new evidens
 
-    console.log("evidenstrash:", evidenstrash);
     evidenstrash.forEach(function (eviden) {
-        console.log("eviden:", eviden.path);
+        const imgUrlTrash = `${urlEvidensTrash}/${eviden.path}`;
         $(
             "#detailEvidensLogbookTrash"
         ).append(`<div class="col-4 d-flex flex-wrap">
-            <a href="${eviden.path}" data-lightbox="photos" class="py-3 d-block mx-2">
-                <img src="${eviden.path}" class="img-fluid img-thumbnail" width="200" alt="${eviden.path}">
+            <a href="${imgUrlTrash}" data-lightbox="photos" class="py-3 d-block mx-2">
+                <img src="${imgUrlTrash}" class="img-fluid img-thumbnail" width="200" alt="${imgUrlTrash}">
             </a>
         </div>`);
     });

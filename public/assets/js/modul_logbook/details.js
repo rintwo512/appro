@@ -1,5 +1,6 @@
 $(document).on("click", "#btnDetailLogbook", function () {
     const evidens = $(this).data("evidens");
+    const baseUrl = $(this).data("baseurl");
     const userupdated = $(this).data("userupdated");
     const namatugas = $(this).data("namatugas");
     const wing = $(this).data("wing");
@@ -48,11 +49,15 @@ $(document).on("click", "#btnDetailLogbook", function () {
     $("#detailEvidensLogbook").html("");
 
     // Append new evidens
+
     evidens.forEach(function (eviden) {
-        $("#detailEvidensLogbook").append(`<div class="col-4 d-flex flex-wrap">
-        <a href="${eviden.path}" data-lightbox="photos" class="py-3 d-block mx-2">
-        <img src="${eviden.path}" class="img-fluid img-thumbnail" width="200">
-        </a>
-      </div>`);
+        const imgUrl = `${baseUrl}/${eviden.path}`;
+        $("#detailEvidensLogbook").append(`
+            <div class="col-4 d-flex flex-wrap">
+                <a href="${imgUrl}" data-lightbox="photos" class="py-3 d-block mx-2">
+                    <img src="${imgUrl}" class="img-fluid img-thumbnail" width="200">
+                </a>
+            </div>
+        `);
     });
 });

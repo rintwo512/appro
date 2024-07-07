@@ -9,6 +9,7 @@
                     <option disabled selected value="">-Select-</option>
                     <option value="Dashboard">Dashboard</option>
                     <option value="Databases">Databases</option>
+                    <option value="Document">Document</option>
                     <option value="Settings">Settings</option>
                     <option value="Tools">Tools</option>
                 </select>
