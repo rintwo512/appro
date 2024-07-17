@@ -116,13 +116,16 @@
             if (users != 0) {
                 $('#online-users-list')
                     .empty(); // Kosongkan daftar pengguna online sebelum menambahkan yang baru
+                const urlAsset = "{{ asset('/assets/images/profile/') }}";
+                const urlAssetFolder = "{{ asset('/uploads/profile_images/') }}";
 
                 users.forEach(function(user) {
-
+                    var imageUrls = user.image == 'default.jpg' ? `${urlAsset}/${user.image}` :
+                        `${urlAssetFolder}/${user.image}`;
                     var userHtml = `
                         <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
                             <span class="me-3">
-                                <img src="{{ asset('assets/images/profile/user-2.jpg') }}" alt="user" class="rounded-circle" width="48" height="48" />
+                                <img src="${imageUrls}" alt="user" class="rounded-circle" width="48" height="48" />
                             </span>
                             <div class="w-100">
                                 <h6 class="mb-1 fw-semibold lh-base">${user.name}</h6>

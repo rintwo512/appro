@@ -1,6 +1,7 @@
 <x-main title="{{ $title }}">
 
     <span id="spanIdFilterLogbook" data-url-filter-logbook="{{ route('logbook.filter.kategori') }}"></span>
+    <span id="spanIdFilterKategoriLogbook" data-url-kategori-logbook="{{ asset('/uploads/logbook-evidens/') }}"></span>
     <div class="container-fluid">
         <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
             <div class="card-body px-4 py-3">
@@ -160,7 +161,7 @@
 
                                                 @if ($btnDetailLogbook?->is_active == 1)
                                                     <li>
-                                                       
+
                                                         <button class="dropdown-item" id="btnDetailLogbook"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#modalDetailLogbook"

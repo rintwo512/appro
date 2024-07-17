@@ -106,7 +106,7 @@ Route::post('logbook/filter', [LogbookController::class, 'filterLogbook']);
 Route::get('logbook-filter-kategori', [LogbookController::class, 'filterKategoriLogbook'])->name('logbook.filter.kategori');
 Route::get('logbook-export-pdf/{id}', [LogbookController::class, 'exportDataLogbookPdf'])->name('logbook.export.pdf');
 
-
+ 
 // USER
 Route::get('manajemen-users', [UsersController::class, 'index'])->name('users.index');
 Route::post('manajemen-users-create', [UsersController::class, 'store'])->name('user.create');
@@ -174,3 +174,11 @@ Route::get('/data-ruangan', [RuanganController::class, 'index'])->name('ruangan.
 Route::get('/document', [DocumentController::class, 'index'])->name('document.index');
 Route::post('/document', [DocumentController::class, 'store'])->name('document.store');
 Route::get('/document/{id}', [DocumentController::class, 'destroy'])->name('document.destroy');
+
+
+// FORGOT PASSWORD
+Route::get('/forgot-password', [AuthController::class, 'forgotPass'])->name('auth.forgot-password')->middleware('guest');
+Route::post('/forgot-password', [AuthController::class, 'forgotPassPost'])->name('auth.forgot-password.post')->middleware('guest');
+Route::get('/reset-password/{token}/{email}', [AuthController::class, 'resetPassword'])->name('reset.password')->middleware('guest');
+Route::post('/reset-password', [AuthController::class, 'resetPasswordPost'])->name('reset.password.post')->middleware('guest');
+Route::post('/reset-password', [AuthController::class, 'resetPasswordPost'])->name('reset.password.post')->middleware('guest');

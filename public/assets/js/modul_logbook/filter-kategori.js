@@ -19,6 +19,7 @@ $(document).ready(function () {
                 const logbook = response.logbook;
                 const jumlah = response.jumlah;
                 let card = "";
+
                 logbook.map((item) => {
                     $("#modalFilterLogbookKategori").modal("show");
                     $("#titleModalFilterLogbookKategori").text(
@@ -42,8 +43,20 @@ $(document).ready(function () {
 });
 
 function updateCardFilterLogbookKategori(e) {
-    const tanggalAwal = e.tanggal;
+    const urlKategori = $("#spanIdFilterKategoriLogbook").data(
+        "url-kategori-logbook"
+    );
+    const evid = e.evidens;
+    let imgElements = ""; // Buat string untuk menyimpan elemen gambar
 
+    evid.forEach((el) => {
+        const pathImg = `${urlKategori}/${el.filename}`;
+        imgElements += `
+        <a href="${pathImg}" data-lightbox="photos" class="py-3 d-block mx-2">
+            <img src="${pathImg}" class="img-fluid img-thumbnail" width="200">
+        </a>`;
+    });
+    const tanggalAwal = e.tanggal;
     // Buat objek Date dari tanggal awal
     const date = new Date(tanggalAwal);
 
@@ -55,11 +68,15 @@ function updateCardFilterLogbookKategori(e) {
     // Format tanggal sesuai kebutuhan: YYYY-MM-DD
     const tanggalAkhir = tahun + "-" + bulan + "-" + tanggal;
     return `<tr>
-                  <td>${e.nama_tugas}</td>
-                  <td>${e.lokasi}</td>
-                  <td>${e.users.map((user) => user.name)}</td>
-                  <td>${tanggalAkhir}</td>
-                  <td>${e.status}</td>
-                  <td id="image-container"></td>
+                  <td class="wrap-text">${e.nama_tugas}</td>
+                  <td class="wrap-text">${e.lokasi}</td>
+                  <td class="wrap-text">${e.users.map((user) => user.name)}</td>
+                  <td class="wrap-text">${tanggalAkhir}</td>
+                  <td class="wrap-text">${e.status}</td>
+                  <td><div>
+              ${imgElements}
+            </div></td>
+                  
+                  
               </tr>`;
 }

@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Jabatan;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -119,5 +124,91 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return to_route('login');
+    }
+
+    public function forgotPass()
+    {
+        return view('appro.modul_auth.forgot-pass');
+    }
+
+    public function forgotPassPost(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users'
+        ]);
+
+        $email = $request->email;
+        $user = User::where('email', $email)->first();
+        $token = Str::random(64);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('errorLogin', 'Email ' . $request->email . ' tidak terdaftar!');
+        }
+
+        if ($user->is_active == 0) {
+            return redirect()->to(route('auth.forgot-password'))->with('errorLogin', 'Akun Anda tidak aktif!');
+        }
+
+        // Hapus token yang sudah kadaluwarsa sebelum memasukkan yang baru
+        DB::table('password_reset_tokens')
+            ->where('created_at', '<=', Carbon::now()->subMinutes(30))
+            ->delete();
+
+        Mail::send('appro.modul_auth.emails.reset-password', ['token' => $token, "email" => $request->email], function ($message) use ($request) {
+            $message->to($request->email);
+            $message->subject("Reset Password");
+        });
+
+        // Tambahkan token dengan waktu kadaluwarsa 1 menit
+        DB::table('password_reset_tokens')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'expires_at' => Carbon::now()->addMinutes(1),
+            'created_at' => Carbon::now()
+        ]);
+
+        return redirect()->to(route('login'))->with('successLogin', 'Silahkan buka email Anda!');
+    }
+
+    public function resetPassword($token, $email)
+    {
+        return view('appro.modul_auth.new-password', compact('token', 'email'));
+    }
+
+    public function resetPasswordPost(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users',
+            'password' => 'required|string|min:3|confirmed',
+            'password_confirmation' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('errorLogin', 'Gagal mengubah password!');
+        }
+
+        $updatePassword = DB::table('password_reset_tokens')
+            ->where('email', $request->email)
+            ->where('token', $request->token)
+            ->where('expires_at', '>', Carbon::now())
+            ->first();
+
+        if (!$updatePassword) {
+            return redirect()->to(route('reset.password', ['token' => $request->token, 'email' => $request->email]))
+                ->with('errorLogin', 'Token reset password tidak valid atau sudah kadaluwarsa!');
+        }
+
+        User::where("email", $request->email)->update(["password" => Hash::make($request->password)]);
+
+        DB::table("password_reset_tokens")->where(["email" => $request->email])->delete();
+
+        return redirect()->to(route('login'))->with('successLogin', 'Password berhasil diubah!');
     }
 }

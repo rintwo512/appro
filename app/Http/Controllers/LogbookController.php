@@ -23,7 +23,7 @@ class LogbookController extends Controller
     public function index()
     {
 
-        
+
         $user = Auth::user();
 
         // Jika user tidak ditemukan (null), redirect ke halaman login
@@ -469,8 +469,8 @@ class LogbookController extends Controller
         $attribute = $request->attribute;
         $value = $request->value;
 
-        $logbook = Logbook::with('users')->where(function ($query) use ($attribute, $value) {
-            // Periksa apakah $attribute dan $value sudah terdefinisi
+        $logbook = Logbook::with(['evidens', 'users'])->where(function ($query) use ($attribute, $value) {
+            // Periksa apakah $attribute dan $value sudah terdefinisi 
             if ($attribute && $value) {
                 $query->where($attribute, $value);
             }

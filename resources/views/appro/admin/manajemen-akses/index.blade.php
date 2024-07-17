@@ -42,23 +42,28 @@
                         </x-thead>
                         <x-tbody>
                             @foreach ($users as $user)
-                                @if ($user->nik != '15920019' && $user->is_active != 0)
-                                    <tr class="text-center">
-                                        <td class="fs-4 ">{{ $user->name }}</td>
-                                        <td class="fs-4 ">{{ $user->jabatan->nama_jabatan }}</td>
-                                        <td><a href="{{ route('akses.menu.edit', ['id' => $user->id]) }}"
-                                                class="justify-content-center mb-1 btn-primary">
-                                                <i class="bx bx-edit fs-6 text-primary"></i>
-                                            </a></td>
-                                        <td><a href="{{ route('akses.submenu.edit', ['id' => $user->id]) }}"
-                                                class="justify-content-center mb-1 btn-warning">
-                                                <i class="bx bx-edit fs-6 text-warning"></i>
-                                            </a></td>
-                                        <td><a href="{{ route('akses.fitur.edit', ['id' => $user->id]) }}"
-                                                class="justify-content-center mb-1 btn-danger">
-                                                <i class="bx bx-edit fs-6 text-danger"></i>
-                                            </a></td>
-                                    </tr>
+                                @if ($user->role != 1)
+                                    @if (auth()->user()->name != $user->name || $user->status_login != 'online')
+                                        <tr class="text-center">
+                                            <td class="fs-4 ">{{ $user->name }}</td>
+                                            <td class="fs-4 ">{{ $user->jabatan->nama_jabatan }}</td>
+                                            <td><a href="{{ auth()->user()->role == 1 ? route('akses.menu.edit', ['id' => $user->id]) : 'javascript:void(0)' }}"
+                                                    class="justify-content-center mb-1 btn-primary"
+                                                    {{ auth()->user()->role != 1 ? 'data-bs-toggle=tooltip data-bs-placement=top data-bs-original-title=Disable' : '' }}>
+                                                    <i class="bx bx-edit fs-6 text-primary"></i>
+                                                </a></td>
+                                            <td><a href="{{ auth()->user()->role == 1 ? route('akses.submenu.edit', ['id' => $user->id]) : 'javascript:void(0)' }}"
+                                                    class="justify-content-center mb-1 btn-warning"
+                                                    {{ auth()->user()->role != 1 ? 'data-bs-toggle=tooltip data-bs-placement=top data-bs-original-title=Disable' : '' }}>
+                                                    <i class="bx bx-edit fs-6 text-warning"></i>
+                                                </a></td>
+                                            <td><a href="{{ auth()->user()->role == 1 ? route('akses.fitur.edit', ['id' => $user->id]) : 'javascript:void(0)' }}"
+                                                    class="justify-content-center mb-1 btn-danger"
+                                                    {{ auth()->user()->role != 1 ? 'data-bs-toggle=tooltip data-bs-placement=top data-bs-original-title=Disable' : '' }}>
+                                                    <i class="bx bx-edit fs-6 text-danger"></i>
+                                                </a></td>
+                                        </tr>
+                                    @endif
                                 @endif
                             @endforeach
                         </x-tbody>

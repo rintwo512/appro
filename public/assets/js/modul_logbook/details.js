@@ -11,7 +11,7 @@ $(document).on("click", "#btnDetailLogbook", function () {
     const prioritas = $(this).data("prioritas");
     const type = $(this).data("type");
     const keterangan = $(this).data("keterangan");
-    const petugas = $(this).data("petugas");
+    const petugas = $(this).data("petugas"); 
     const kategori = $(this).data("kategori");
     const jenispekerjaan = $(this).data("jenispekerjaan");
     const createdAt = $(this).data("createdat");

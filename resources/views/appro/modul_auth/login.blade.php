@@ -71,8 +71,8 @@
                                         @enderror
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-4">
-                                        <a class="text-primary fw-medium fs-3" href="javascript:void(0)"
-                                            data-bs-toggle="modal" data-bs-target="#modalDetailUsers">Lupa Sandi ?</a>
+                                        <a class="text-primary fw-medium fs-3"
+                                            href="{{ route('auth.forgot-password') }}">Lupa Sandi ?</a>
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign
                                         In</button>

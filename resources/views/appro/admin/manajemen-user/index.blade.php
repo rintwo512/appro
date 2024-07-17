@@ -32,10 +32,12 @@
                     <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group me-2 mb-2" role="group" aria-label="First group">
 
-                            <a href="javascript:void(0)" class="btn btn-secondary" id="btnCreateAC"
-                                data-bs-toggle="modal" data-bs-target="#modalAddUsers">
-                                <i class="bx bx-plus fs-4"></i>
-                            </a>
+                            @can('super-admin')
+                                <a href="javascript:void(0)" class="btn btn-secondary" data-bs-toggle="modal"
+                                    data-bs-target="#modalAddUsers">
+                                    <i class="bx bx-plus fs-4"></i>
+                                </a>
+                            @endcan
                         </div>
                     </div>
                     {{-- BTN --}}
@@ -47,7 +49,7 @@
                                 <th>Nama</th>
                                 <th>Nik</th>
                                 <th>Email</th>
-                                <th>Jabatan</th>
+                                <th>Role</th>
                                 <th>Status</th>
                                 <th>Login</th>
                                 <th>Opsi</th>
@@ -58,66 +60,79 @@
                             @foreach ($users as $user)
                                 <!-- start row -->
                                 @if ($user->role != 1)
-                                    <tr>
-                                        <td>
-                                            @if ($user->image != 'default.jpg')
-                                                <img src="{{ asset('/uploads/profile_images/' . $user->image) }}"
-                                                    class="rounded-circle" width="40" height="40"
-                                                    alt="{{ auth()->user()->name }}" />
+                                    @if (auth()->user()->name != $user->name)
+                                        <tr>
+                                            <td>
+                                                @if ($user->image != 'default.jpg')
+                                                    <img src="{{ asset('/uploads/profile_images/' . $user->image) }}"
+                                                        class="rounded-circle" width="40" height="40"
+                                                        alt="{{ auth()->user()->name }}" />
+                                                @else
+                                                    <img src="{{ asset('assets/images/profile/' . $user->image) }}"
+                                                        class="rounded-circle" width="40" height="40"
+                                                        alt="{{ auth()->user()->name }}" />
+                                                @endif
+                                            </td>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->nik }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->jabatan->nama_jabatan }}</td>
+                                            <td>{!! $user->is_active == 1
+                                                ? "<span class='text-success'>Active</span>"
+                                                : "<span class='text-danger'>pending</span>" !!}</td>
+                                            @if ($user->status_login == 'online')
+                                                <td>{{ $user->user_time_online? Illuminate\Support\Carbon::parse($user->user_time_online)->locale('id')->diffForHumans(): 'Off' }}
+                                                </td>
                                             @else
-                                                <img src="{{ asset('assets/images/profile/' . $user->image) }}"
-                                                    class="rounded-circle" width="40" height="40"
-                                                    alt="{{ auth()->user()->name }}" />
+                                                <td>OFFLINE</td>
                                             @endif
-                                        </td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->nik }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->jabatan->nama_jabatan }}</td>
-                                        <td>{!! $user->is_active == 1
-                                            ? "<span class='text-success'>Active</span>"
-                                            : "<span class='text-danger'>pending</span>" !!}</td>
-                                        <td>{{ $user->user_time_online? Illuminate\Support\Carbon::parse($user->user_time_online)->locale('id')->diffForHumans(): '' }}
-                                        </td>
-                                        <td>
+                                            <td>
 
-                                            <div class="btn-group">
-                                                <button type="button"
-                                                    class="btn bg-info-subtle text-danger dropdown-toggle"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                    <i class="bx bx-dots-vertical-rounded fs-4"></i>
-                                                </button>
-                                                <ul class="dropdown-menu animated flipInX" style="">
-                                                    <li>
-                                                        <a class="dropdown-item" href="javascript:void(0)"
-                                                            data-bs-toggle="modal" data-bs-target="#modalEditUsers"
-                                                            id="btnEditUser" data-idedit="{{ $user->id }}"
-                                                            data-nameedit="{{ $user->name }}"
-                                                            data-jabatanedit="{{ $user->id_jabatan }}"
-                                                            data-nikedit="{{ $user->nik }}"
-                                                            data-emailedit="{{ $user->email }}"
-                                                            data-isactiveedit="{{ $user->is_active }}"><i
-                                                                class="bx bx-edit"></i> Update</a>
-                                                    </li>
+                                                <div class="btn-group">
+                                                    <button type="button"
+                                                        class="btn bg-info-subtle text-danger dropdown-toggle"
+                                                        data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <i class="bx bx-dots-vertical-rounded fs-4"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu animated flipInX" style="">
+                                                        @if ($user->status_login != 'online')
+                                                            <li>
+                                                                <a class="dropdown-item" href="javascript:void(0)"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#modalEditUsers" id="btnEditUser"
+                                                                    data-idedit="{{ $user->id }}"
+                                                                    data-nameedit="{{ $user->name }}"
+                                                                    data-jabatanedit="{{ $user->id_jabatan }}"
+                                                                    data-nikedit="{{ $user->nik }}"
+                                                                    data-emailedit="{{ $user->email }}"
+                                                                    data-isactiveedit="{{ $user->is_active }}"><i
+                                                                        class="bx bx-edit"></i> Update</a>
+                                                            </li>
+                                                        @endif
 
-                                                    <li>
-                                                        <button class="dropdown-item" data-bs-toggle="modal"
-                                                            data-bs-target="#modalDetailUsers" id="btnDetailUser"><i
-                                                                class="bx bx-low-vision"></i>
-                                                            Detail</button>
-                                                    </li>
+                                                        <li>
+                                                            <button class="dropdown-item" data-bs-toggle="modal"
+                                                                data-bs-target="#modalDetailUsers" id="btnDetailUser"><i
+                                                                    class="bx bx-low-vision"></i>
+                                                                Detail</button>
+                                                        </li>
+                                                        @can('super-admin')
+                                                            @if ($user->status_login != 'online')
+                                                                <li>
+                                                                    <a id="btnDeleteUser"
+                                                                        href="{{ route('user.delete', ['id' => $user->id]) }}"
+                                                                        class="dropdown-item"><i class="bx bx-trash"></i>
+                                                                        Delete</a>
+                                                                </li>
+                                                            @endif
+                                                        @endcan
 
-                                                    <li>
-                                                        <a id="btnDeleteUser"
-                                                            href="{{ route('user.delete', ['id' => $user->id]) }}"
-                                                            class="dropdown-item"><i class="bx bx-trash"></i> Delete</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endif
                             @endforeach
                         </x-tbody>
